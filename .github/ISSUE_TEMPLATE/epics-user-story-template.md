@@ -1,6 +1,6 @@
 ---
 name: Epics User Story template
-about: template to store user stories
+about: template to store Epics
 title: ''
 labels: Epic
 assignees: ValerioS05
