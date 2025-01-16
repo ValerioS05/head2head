@@ -1,0 +1,55 @@
+.Button {
+  font-size: 0.8rem;
+  align-self: center;
+  border-radius: 100px;
+  border-color: #333333;
+  padding: 4px 10px;
+  margin-left: 2px;
+  margin-right: 2px;
+  min-width: 75px;
+  background-color: black;
+  color: white;
+  border: 1px solid #333333;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  outline: none;
+}
+
+.Button:hover,
+.Button:focus,
+.Button:active {
+  background-color: #2f2f2f;
+  color: orangered !important;
+  border-color: orangered !important;
+}
+
+.Wide {
+  padding: 10px 50px;
+  width: 100%;
+}
+
+.Black,
+.BlackOutline:hover {
+  background-color: #242a3d;
+  color: rgb(175, 177, 180);
+  border: 1px solid black;
+}
+
+.Black:hover,
+.BlackOutline {
+  background-color: grey;
+  color: white;
+  border: 1px solid black;
+}
+
+.Bright {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
+
+.Button.react-bootstrap-btn {
+  /* Make sure custom styles are applied to react-bootstrap button */
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
