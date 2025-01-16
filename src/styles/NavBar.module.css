@@ -1,3 +1,7 @@
 .NavBar {
     border: 1px solid white;
 }
+
+.Active i {
+    color: orangered;
+}
