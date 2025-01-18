@@ -1,12 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
-
-import styles from "../../styles/SignForm.module.css";
-import btnStyles from "../../styles/Button.module.css";
-import appStyles from "../../App.module.css";
-
-import myImage from "../../assets/defaulth2h.jpg";
-
 import {
   Form,
   Button,
@@ -17,11 +11,16 @@ import {
   Alert,
 } from "react-bootstrap";
 
-import axios from "axios";
+import styles from "../../styles/SignForm.module.css";
+import btnStyles from "../../styles/Button.module.css";
+import appStyles from "../../App.module.css";
+
+import myImage from "../../assets/defaulth2h.jpg";
+
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 function SignInForm() {
-    const setCurrentUser = useSetCurrentUser();
+  const setCurrentUser = useSetCurrentUser();
   const [signInData, setSignInData] = useState({
     username: "",
     password: "",
@@ -34,8 +33,8 @@ function SignInForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-        const {data} = await axios.post("/dj-rest-auth/login/", signInData);
-        setCurrentUser(data.user)
+      const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+      setCurrentUser(data.user);
       await axios.post("/dj-rest-auth/login/", signInData);
       history.push("/");
     } catch (err) {
