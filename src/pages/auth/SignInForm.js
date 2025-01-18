@@ -18,8 +18,10 @@ import {
 } from "react-bootstrap";
 
 import axios from "axios";
+import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 function SignInForm() {
+    const setCurrentUser = useSetCurrentUser();
   const [signInData, setSignInData] = useState({
     username: "",
     password: "",
@@ -32,9 +34,12 @@ function SignInForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+        const {data} = await axios.post("/dj-rest-auth/login/", signInData);
+        setCurrentUser(data.user)
       await axios.post("/dj-rest-auth/login/", signInData);
       history.push("/");
     } catch (err) {
+      console.log(err.response);
       setErrors(err.response?.data);
     }
   };
