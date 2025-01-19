@@ -1,0 +1,13 @@
+.Asset {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+  max-width: 100%;
+}
+
+.Asset img {
+  max-width: 100%;
+  height: auto;
+}
