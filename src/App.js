@@ -6,14 +6,10 @@ import "./api/axiosDefaults";
 import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
 import ProductCreateForm from "./pages/products/ProductsForms";
-
-
-
+import ProductPage from "./pages/products/ProductPage";
 
 function App() {
-
   return (
-    
     <div className={styles.App}>
       <NavBar />
       <Container className={styles.Main}>
@@ -21,7 +17,12 @@ function App() {
           <Route exact path="/" render={() => <h1>Home page</h1>} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
-          <Route exact path="/product/create" render={() => <ProductCreateForm />} />
+          <Route
+            exact
+            path="/product/create"
+            render={() => <ProductCreateForm />}
+          />
+          <Route exact path="/products/:id" render={() => <ProductPage />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>

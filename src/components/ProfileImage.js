@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../styles/ProfileImage.module.css";
-
+// profile image component
 const ProfileImage = ({ src, height = 45, text = "Profile image" }) => {
   console.log("Profile image source:", src);
   return (
