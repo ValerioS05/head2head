@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -14,6 +14,8 @@ import btnStyles from "../../styles/Button.module.css";
 
 import Asset from "../../components/Asset";
 import useCategories from "../../hooks/useCategories";
+import { useHistory } from "react-router-dom";
+import { axiosReq } from "../../api/axiosDefaults";
 
 function ProductCreateForm() {
   const [errors, setErrors] = useState({});
@@ -40,6 +42,9 @@ function ProductCreateForm() {
     features,
   } = productData;
 
+  const imageInput = useRef(null);
+  const history = useHistory();
+
   const handleChange = (event) => {
     setProductData({
       ...productData,
@@ -58,7 +63,33 @@ function ProductCreateForm() {
   };
   const { categories, loading, error } = useCategories();
 
-  const textFields = (
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+
+    formData.append("name", productName);
+    formData.append("category", category);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("location", location);
+    formData.append("image", imageInput.current.files[0]);
+    formData.append("keywords", keywords);
+    formData.append("features", features);
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
+    try {
+      const { data } = await axiosReq.post("/products/", formData);
+      history.push(`/products/${data.id}`);
+    } catch (err) {
+      console.log(err);
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+      }
+    }
+  };
+
+  const productFields = (
     <div className="text-center">
       <Form.Group>
         <Form.Label>Product Name</Form.Label>
@@ -143,7 +174,7 @@ function ProductCreateForm() {
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => {}}
+        onClick={() => {history.goBack()}}
       >
         Cancel
       </Button>
@@ -154,7 +185,7 @@ function ProductCreateForm() {
   );
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Row>
         <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
           <Container
@@ -195,13 +226,14 @@ function ProductCreateForm() {
                 id="image-upload"
                 accept="image/*"
                 onChange={handleChangeImage}
+                ref={imageInput}
               />
             </Form.Group>
-            <div className="d-md-none">{textFields}</div>
+            <div className="d-md-none">{productFields}</div>
           </Container>
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
-          <Container className={appStyles.Content}>{textFields}</Container>
+          <Container className={appStyles.Content}>{productFields}</Container>
         </Col>
       </Row>
     </Form>
