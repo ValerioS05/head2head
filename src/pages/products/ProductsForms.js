@@ -11,7 +11,9 @@ import Upload from "../../assets/upload.jpeg";
 import styles from "../../styles/ProductsForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
+
 import Asset from "../../components/Asset";
+import useCategories from "../../hooks/useCategories";
 
 function ProductCreateForm() {
   const [errors, setErrors] = useState({});
@@ -54,6 +56,7 @@ function ProductCreateForm() {
       });
     }
   };
+  const { categories, loading, error } = useCategories();
 
   const textFields = (
     <div className="text-center">
@@ -68,13 +71,27 @@ function ProductCreateForm() {
       </Form.Group>
       <Form.Group>
         <Form.Label>Category</Form.Label>
-        <Form.Control
-          as="select"
-          name="category"
-          value={category}
-          onChange={handleChange}
-        ></Form.Control>
+        {loading ? (
+          <Asset loading message="Loading categories..." />
+        ) : error ? (
+          <Asset message="Failed to load categories. Please try again." />
+        ) : (
+          <Form.Control
+            as="select"
+            name="category"
+            value={category}
+            onChange={handleChange}
+          >
+            <option value="">Select a Category</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </Form.Control>
+        )}
       </Form.Group>
+
       <Form.Group>
         <Form.Label>Description</Form.Label>
         <Form.Control
