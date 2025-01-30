@@ -61,6 +61,7 @@ function ProductCreateForm() {
       });
     }
   };
+
   const { categories, loading, error } = useCategories();
 
   const handleSubmit = async (event) => {
@@ -72,9 +73,10 @@ function ProductCreateForm() {
     formData.append("description", description);
     formData.append("price", price);
     formData.append("location", location);
-    formData.append("image", imageInput.current.files[0]);
+    formData.append("image", imageInput.current.files[0] || "default_h2h"); 
     formData.append("keywords", keywords);
     formData.append("features", features);
+
     try {
       const { data } = await axiosReq.post("/products/", formData);
       history.push(`/products/${data.id}`);
@@ -171,7 +173,7 @@ function ProductCreateForm() {
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => {history.goBack()}}
+        onClick={() => history.goBack()}
       >
         Cancel
       </Button>
@@ -192,11 +194,7 @@ function ProductCreateForm() {
               {image ? (
                 <>
                   <figure>
-                    <Image
-                      className={`${appStyles.Image}`}
-                      src={image}
-                      rounded
-                    />
+                    <Image className={`${appStyles.Image}`} src={image} rounded />
                   </figure>
                   <div>
                     <Form.Label
