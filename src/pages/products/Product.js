@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Card, Media } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Card, Media } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import ProfileImage from "../../components/ProfileImage";
+import useCloudinaryImageUrl from "../../hooks/useCloudinaryImageUrl";
+import useCategories from "../../hooks/useCategories";
+import VoteForm from "../../components/VoteForm";
+import { axiosReq } from "../../api/axiosDefaults";
+import styles from "../../styles/Product.module.css";
 
-import ProfileImage from '../../components/ProfileImage';
-import useCloudinaryImageUrl from '../../hooks/useCloudinaryImageUrl';
-import useCategories from '../../hooks/useCategories';
-
-import styles from '../../styles/Product.module.css';
-
-// Func Component to display  a product
 const Product = (props) => {
-  // Destructured props 
   const {
     id,
     name,
@@ -24,84 +22,136 @@ const Product = (props) => {
     owner,
     location,
     created_at,
-    keywords,
-    productPage,
     profile_id,
     profile_picture,
+    vote_id,
+    productPage,
   } = props;
 
+  const [product, setProduct] = useState({
+    ...props,
+    average_rating: average_rating || 0,
+  });
+
   const currentUser = useCurrentUser();
-  const is_owner = currentUser?.username === owner;
   const cloudinaryUrl = useCloudinaryImageUrl(image);
   const { categories } = useCategories();
 
   const categoryName = categories.find((cat) => cat.id === category)?.name;
 
+  const fetchUpdatedProduct = async () => {
+    try {
+      const { data } = await axiosReq.get(`/products/${id}/`);
+      setProduct(data);
+    } catch (err) {
+      console.error("Error fetching updated product:", err);
+    }
+  };
+
+  useEffect(() => {
+    if (props.average_rating) {
+      setProduct((prevProduct) => ({
+        ...prevProduct,
+        average_rating: props.average_rating,
+      }));
+    }
+  }, [props.average_rating]);
+
   return (
     <Card className={styles.card}>
-      <Card.Body>
+      <Card.Body className={styles.cardBody}>
         <Media className="align-items-center justify-content-between">
-          <Link to={`/profiles/${profile_id}`}>
-            <ProfileImage src={profile_picture} height={55} />
+          <Link to={`/profiles/${profile_id}`} className={styles.profileLink}>
+            <ProfileImage
+              src={profile_picture}
+              height={55}
+              className={styles.profileImage}
+            />
             {owner}
           </Link>
           <div className="d-flex align-items-center">
             <span>{created_at}</span>
-            {is_owner && productPage && "asdfasdfasdfasdf."}
           </div>
         </Media>
-      </Card.Body>
 
-      <Link to={`/products/${id}`}>
-        <Card.Img src={cloudinaryUrl} alt={name} />
-      </Link>
-
-      <Card.Body className={styles.cardBody}>
-        {average_rating && (
-          <div className={styles.ratingContainer}>
-            {[...Array(5)].map((_, index) => (
-              <i
-                key={index}
-                className={`fa fa-star ${
-                  index < average_rating ? "text-warning" : "text-muted"
-                }`}
-                style={{ fontSize: "20px" }}
-              ></i>
-            ))}
-            <span className={styles.ratingNumber}>{average_rating}</span>
-          </div>
-        )}
-        <div className={styles.bottomContent}>
+        <div className={styles.cardContent}>
           <div className={styles.leftColumn}>
-            {name && <Card.Title className={styles.cardTitle}>{name}</Card.Title>}
-            {categoryName && (
-              <Card.Text className={styles.cardText}>
-                <strong>Category:</strong> {categoryName}
-              </Card.Text>
-            )}
-            {price && (
-              <Card.Text className={styles.cardText}>
-                <strong>Price:</strong> {price}£
-              </Card.Text>
-            )}
-            {location && (
-              <Card.Text className={styles.cardText}>
-                <strong>Location:</strong> {location}
-              </Card.Text>
-            )}
-            {features && (
-              <Card.Text className={styles.cardText}>
-                <strong>Features:</strong> {features}
-              </Card.Text>
-            )}
+            <div className={styles.cardImgContainer}>
+              <Link to={`/products/${id}`}>
+                <Card.Img
+                  src={cloudinaryUrl}
+                  alt={name}
+                  className={styles.cardImg}
+                />
+              </Link>
+            </div>
+
+            <div className={styles.descriptionContainer}>
+              {description && (
+                <Card.Text className={styles.descriptionText}>
+                  <strong>Description:</strong>
+                  <span>{description}</span>
+                </Card.Text>
+              )}
+            </div>
           </div>
+
           <div className={styles.rightColumn}>
-            {description && (
-              <Card.Text className={styles.descriptionText}>
-                <strong>Description:</strong>
-                <span>{description}</span>
-              </Card.Text>
-            )}
+            <Card.Body className={styles.cardBody}>
+              {product.average_rating !== undefined && (
+                <div className={styles.ratingContainer}>
+                  {[...Array(5)].map((_, index) => (
+                    <i
+                      key={index}
+                      className={`fa fa-star ${
+                        index < Math.floor(product.average_rating)
+                          ? "text-warning"
+                          : "text-muted"
+                      }`}
+                      style={{ fontSize: "10px" }}
+                    ></i>
+                  ))}
+                  <span className={styles.ratingNumber}>
+                    {product.average_rating}
+                  </span>
+                </div>
+              )}
+              {currentUser && productPage && (
+                <VoteForm
+                  productId={id}
+                  existingVote={vote_id}
+                  setProduct={setProduct}
+                  fetchUpdatedProduct={fetchUpdatedProduct}
+                />
+              )}
+              <div className={styles.bottomContent}>
+                <div className={styles.leftColumnDetails}>
+                  {name && (
+                    <Card.Title className={styles.cardTitle}>{name}</Card.Title>
+                  )}
+                  {categoryName && (
+                    <Card.Text className={styles.cardText}>
+                      <strong>Category:</strong> {categoryName}
+                    </Card.Text>
+                  )}
+                  {price && (
+                    <Card.Text className={styles.cardText}>
+                      <strong>Price:</strong> {price}£
+                    </Card.Text>
+                  )}
+                  {location && (
+                    <Card.Text className={styles.cardText}>
+                      <strong>Location:</strong> {location}
+                    </Card.Text>
+                  )}
+                  {features && (
+                    <Card.Text className={styles.cardText}>
+                      <strong>Features:</strong> {features}
+                    </Card.Text>
+                  )}
+                </div>
+              </div>
+            </Card.Body>
           </div>
         </div>
       </Card.Body>
