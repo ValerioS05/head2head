@@ -7,6 +7,7 @@ import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
 import ProductCreateForm from "./pages/products/ProductsForms";
 import ProductPage from "./pages/products/ProductPage";
+import ProductsPage from "./pages/products/ProductsPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/" render={() => <h1>Home page</h1>} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
+          <Route exact path="/products" render={() => <ProductsPage message="No results for your search,try other keywords."/>} />
           <Route
             exact
             path="/product/create"
