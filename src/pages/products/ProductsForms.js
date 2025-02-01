@@ -19,7 +19,6 @@ import { axiosReq } from "../../api/axiosDefaults";
 
 function ProductCreateForm() {
   const [errors, setErrors] = useState({});
-
   const [productData, setProductData] = useState({
     productName: "",
     category: "",
@@ -73,7 +72,7 @@ function ProductCreateForm() {
     formData.append("description", description);
     formData.append("price", price);
     formData.append("location", location);
-    formData.append("image", imageInput.current.files[0] || "default_h2h"); 
+    formData.append("image", imageInput.current.files[0] || "default_h2h");
     formData.append("keywords", keywords);
     formData.append("features", features);
 
@@ -89,7 +88,7 @@ function ProductCreateForm() {
   };
 
   const productFields = (
-    <div className="text-center">
+    <div>
       <Form.Group>
         <Form.Label>Product Name</Form.Label>
         <Form.Control
@@ -99,6 +98,7 @@ function ProductCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
+
       <Form.Group>
         <Form.Label>Category</Form.Label>
         {loading ? (
@@ -132,6 +132,7 @@ function ProductCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
+
       <Form.Group>
         <Form.Label>Price</Form.Label>
         <Form.Control
@@ -141,6 +142,7 @@ function ProductCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
+
       <Form.Group>
         <Form.Label>Location</Form.Label>
         <Form.Control
@@ -150,6 +152,7 @@ function ProductCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
+
       <Form.Group>
         <Form.Label>Keywords</Form.Label>
         <Form.Control
@@ -160,6 +163,7 @@ function ProductCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
+
       <Form.Group>
         <Form.Label>Features</Form.Label>
         <Form.Control
@@ -170,23 +174,13 @@ function ProductCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
-
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => history.goBack()}
-      >
-        Cancel
-      </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        Create
-      </Button>
     </div>
   );
 
   return (
     <Form onSubmit={handleSubmit}>
       <Row>
-        <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
+        <Col xs={12} md={12} className="py-2">
           <Container
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
@@ -194,7 +188,11 @@ function ProductCreateForm() {
               {image ? (
                 <>
                   <figure>
-                    <Image className={`${appStyles.Image}`} src={image} rounded />
+                    <Image
+                      className={`${appStyles.Image}`}
+                      src={image}
+                      rounded
+                    />
                   </figure>
                   <div>
                     <Form.Label
@@ -217,20 +215,35 @@ function ProductCreateForm() {
                 </Form.Label>
               )}
 
-              <Form.File
-                id="image-upload"
-                accept="image/*"
-                onChange={handleChangeImage}
-                ref={imageInput}
-              />
+              <div className="d-flex justify-content-center mt-2">
+                <Form.File
+                  id="image-upload"
+                  accept="image/*"
+                  onChange={handleChangeImage}
+                  ref={imageInput}
+                  className="text-center"
+                />
+              </div>
             </Form.Group>
-            <div className="d-md-none">{productFields}</div>
+            {productFields}
           </Container>
         </Col>
-        <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
-          <Container className={appStyles.Content}>{productFields}</Container>
-        </Col>
       </Row>
+
+      <div className="text-center">
+        <Button
+          className={`${btnStyles.Button} ${btnStyles.Blue}`}
+          onClick={() => history.goBack()}
+        >
+          Cancel
+        </Button>
+        <Button
+          className={`${btnStyles.Button} ${btnStyles.Blue}`}
+          type="submit"
+        >
+          Create
+        </Button>
+      </div>
     </Form>
   );
 }

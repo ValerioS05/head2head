@@ -1,6 +1,9 @@
-* {
-  color: black;
-}
 .Container {
-    min-height: 343px;
-  }
+  min-height: 343px;
+  color: black;
+  text-align: center;
+}
+
+.productFields .form-control {
+  text-align: center;
+}

@@ -1,11 +1,22 @@
 /*card content wrapper */
+.card {
+  color: black;
+}
+
+.profileLink {
+  color: black;
+}
+
 .cardContent {
   justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
   width: 100%;
   margin-bottom: 1rem;
+  color: black;
 }
+
+
 
 /* image column */
 .cardImgContainer {
