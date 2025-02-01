@@ -39,13 +39,16 @@ const NavBar = () => {
   }, [currentUser]);
 
   const addProductIcon = (
-    <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/product/create">
-      <i className="fas fa-plus-square"></i>Add product
-    </NavLink>
+    profileData?.is_staff && (
+      <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/product/create">
+        <i className="fas fa-plus-square"></i>Add product
+      </NavLink>
+    )
   );
 
   const loggedInIcons = (
     <>
+      {addProductIcon}
       <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/products">
         <i className="fas fa-cogs"></i>Products
       </NavLink>
