@@ -30,7 +30,7 @@ function ProductPage() {
       }, [id]);
   return (
     <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
+      <Col className="py-2 p-0 p-lg-2" lg={12}>
         <Product {...product.results[0]} setProducts={setProduct} productPage />
         <Container className={appStyles.Content}>
           Comments

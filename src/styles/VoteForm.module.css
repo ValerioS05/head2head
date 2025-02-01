@@ -1,0 +1,60 @@
+.voteForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.labelContainer {
+  margin-bottom: 10px;
+}
+
+.formGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+}
+
+.Vote {
+  background-color: black;
+  color: white;
+  text-align: center;
+  max-width: 140px;
+  width: 100%;
+}
+
+.Vote:focus {
+  background-color: orangered;
+  box-shadow: 0 0 5px orangered;
+  color: black;
+  border: 1px solid black;
+}
+
+.Vote option {
+  background-color: black;
+  color: white;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.SubmitButton {
+  background-color: black;
+  border: 1px solid orangered;
+  width: 140px;
+}
+
+.SubmitButton:hover,
+.SubmitButton:focus {
+  background-color: orangered;
+  box-shadow: 0 0 5px orangered;
+  color: black;
+  border: 1px solid black;
+}

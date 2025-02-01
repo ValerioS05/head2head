@@ -1,61 +1,120 @@
-.cardBody {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1.25rem;
-}
-
-.ratingContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/*card content wrapper */
+.cardContent {
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
   margin-bottom: 1rem;
 }
 
-.ratingNumber {
-  margin-left: 0.5rem;
-  font-size: 18px;
-  color: #000;
-}
-
-.bottomContent {
+/* image column */
+.cardImgContainer {
+  flex: 2;
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 1rem;
-}
-
-.leftColumn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
+  text-align: center;
 }
 
-.rightColumn {
-  flex: 1;
+/* Description column */
+.descriptionContainer {
+  flex: 2;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: flex-start;
+  text-align: center;
+  margin-left: 1rem;
+}
+
+/* Middle column for details (name, price, category, etc...) */
+.productDetailsContainer {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+/* Card image */
+.cardImg {
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Description label and text */
+.descriptionLabel {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
 }
 
 .descriptionText {
-  text-align: center;
-  strong {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  span {
-    display: block;
-  }
+  margin-bottom: 1rem;
 }
 
-.cardTitle {
-  margin-bottom: 0.5rem;
-}
-
-.cardText {
+.cardTitle, .cardText {
   margin-bottom: 0.25rem;
+  text-align: center;
+}
+
+/* Rating stars */
+.ratingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.productDetailsContainer .cardText {
+  text-align: center;
+}
+
+/* Large screen */
+@media (min-width: 1024px) {
+  .cardContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+
+  .cardText {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cardText strong {
+    margin-bottom: 5px;
+  }
+}
+
+/* smaller screens */
+@media (max-width: 768px) {
+  .cardContent {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cardImgContainer, .productDetailsContainer, .descriptionContainer {
+    flex: 1 1 100%;
+    margin-bottom: 1rem;
+  }
+
+  .productDetailsContainer, .descriptionContainer {
+    text-align: center;
+  }
+
+  .cardImg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .cardTitle, .cardText {
+    text-align: center;
+  }
 }

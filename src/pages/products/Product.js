@@ -58,13 +58,13 @@ const Product = (props) => {
   }, [props.average_rating]);
 
   return (
+    
     <Card className={styles.card}>
-      <Card.Body className={styles.cardBody}>
-        <Media className="align-items-center justify-content-between">
+      <Media className="align-items-center justify-content-between">
           <Link to={`/profiles/${profile_id}`} className={styles.profileLink}>
             <ProfileImage
               src={profile_picture}
-              height={55}
+              height={40}
               className={styles.profileImage}
             />
             {owner}
@@ -73,87 +73,80 @@ const Product = (props) => {
             <span>{created_at}</span>
           </div>
         </Media>
-
+      <Card.Body className={styles.cardBody}>
         <div className={styles.cardContent}>
-          <div className={styles.leftColumn}>
-            <div className={styles.cardImgContainer}>
-              <Link to={`/products/${id}`}>
-                <Card.Img
-                  src={cloudinaryUrl}
-                  alt={name}
-                  className={styles.cardImg}
-                />
-              </Link>
-            </div>
-
-            <div className={styles.descriptionContainer}>
-              {description && (
-                <Card.Text className={styles.descriptionText}>
-                  <strong>Description:</strong>
-                  <span>{description}</span>
-                </Card.Text>
-              )}
-            </div>
+          <div className={styles.cardImgContainer}>
+            <Link to={`/products/${id}`}>
+              <Card.Img
+                src={cloudinaryUrl}
+                alt={name}
+                className={styles.cardImg}
+              />
+            </Link>
           </div>
 
-          <div className={styles.rightColumn}>
-            <Card.Body className={styles.cardBody}>
-              {product.average_rating !== undefined && (
-                <div className={styles.ratingContainer}>
-                  {[...Array(5)].map((_, index) => (
-                    <i
-                      key={index}
-                      className={`fa fa-star ${
-                        index < Math.floor(product.average_rating)
-                          ? "text-warning"
-                          : "text-muted"
-                      }`}
-                      style={{ fontSize: "10px" }}
-                    ></i>
-                  ))}
-                  <span className={styles.ratingNumber}>
-                    {product.average_rating}
-                  </span>
-                </div>
-              )}
-              {currentUser && productPage && (
-                <VoteForm
-                  productId={id}
-                  existingVote={vote_id}
-                  setProduct={setProduct}
-                  fetchUpdatedProduct={fetchUpdatedProduct}
-                />
-              )}
-              <div className={styles.bottomContent}>
-                <div className={styles.leftColumnDetails}>
-                  {name && (
-                    <Card.Title className={styles.cardTitle}>{name}</Card.Title>
-                  )}
-                  {categoryName && (
-                    <Card.Text className={styles.cardText}>
-                      <strong>Category:</strong> {categoryName}
-                    </Card.Text>
-                  )}
-                  {price && (
-                    <Card.Text className={styles.cardText}>
-                      <strong>Price:</strong> {price}£
-                    </Card.Text>
-                  )}
-                  {location && (
-                    <Card.Text className={styles.cardText}>
-                      <strong>Location:</strong> {location}
-                    </Card.Text>
-                  )}
-                  {features && (
-                    <Card.Text className={styles.cardText}>
-                      <strong>Features:</strong> {features}
-                    </Card.Text>
-                  )}
-                </div>
+          <div className={styles.productDetailsContainer}>
+            <Card.Title className={styles.cardTitle}>{name}</Card.Title>
+            {categoryName && (
+              <Card.Text className={styles.cardText}>
+                <strong>Category:</strong> {categoryName}
+              </Card.Text>
+            )}
+            {price && (
+              <Card.Text className={styles.cardText}>
+                <strong>Price:</strong> {price}£
+              </Card.Text>
+            )}
+            {location && (
+              <Card.Text className={styles.cardText}>
+                <strong>Location:</strong> {location}
+              </Card.Text>
+            )}
+            {features && (
+              <Card.Text className={styles.cardText}>
+                <strong>Features:</strong> {features}
+              </Card.Text>
+            )}
+            {product.average_rating !== undefined && (
+              <div className={styles.ratingContainer}>
+                {[...Array(5)].map((_, index) => (
+                  <i
+                    key={index}
+                    className={`fa fa-star ${
+                      index < Math.floor(product.average_rating)
+                        ? "text-warning"
+                        : "text-muted"
+                    }`}
+                    style={{ fontSize: "10px" }}
+                  ></i>
+                ))}
+                <span className={styles.ratingNumber}>
+                  {product.average_rating}
+                </span>
               </div>
-            </Card.Body>
+            )}
           </div>
+
+          {description && (
+            <div className={styles.descriptionContainer}>
+              <Card.Text className={styles.descriptionLabel}>
+                <strong>Description:</strong>
+              </Card.Text>
+              <Card.Text className={styles.descriptionText}>
+                {description}
+              </Card.Text>
+            </div>
+          )}
         </div>
+
+        {currentUser && productPage && (
+          <VoteForm
+            productId={id}
+            existingVote={vote_id}
+            setProduct={setProduct}
+            fetchUpdatedProduct={fetchUpdatedProduct}
+          />
+        )}
       </Card.Body>
     </Card>
   );

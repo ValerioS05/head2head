@@ -83,7 +83,7 @@ const NavBar = () => {
           </Navbar.Brand>
         </NavLink>
         {currentUser && addProductIcon}
-        <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" className={styles.NavToggle} />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-left">
             <NavLink exact className={styles.NavLink} activeClassName={styles.Active} to="/">
