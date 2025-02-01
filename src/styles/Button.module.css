@@ -46,10 +46,3 @@
   color: white;
   border: 1px solid white;
 }
-
-.Button.react-bootstrap-btn {
-  /* Make sure custom styles are applied to react-bootstrap button */
-  background-color: black;
-  color: white;
-  border: 1px solid white;
-}

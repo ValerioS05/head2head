@@ -1,7 +1,22 @@
 .NavBar {
-    border: 1px solid white;
+    border: 1px solid orangered;
+    background-color: black;
+    box-shadow: 0 0 15px orangered;
 }
+
 
 .Active i {
     color: orangered;
+}
+
+.NavBarLogo {
+    border-radius: 20px;
+    box-shadow: 0 0 4px white;
+    padding: 2px 10px;
+    transition: box-shadow 0.5s;
+  }
+
+.NavBarLogo:hover {
+    box-shadow: 0 0 4px orangered;
+    transition: box-shadow 0.5s;
 }

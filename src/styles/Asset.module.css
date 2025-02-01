@@ -5,9 +5,15 @@
   align-items: center;
   min-height: 120px;
   max-width: 100%;
+  box-shadow: 0 0 5px;
+  background-color: black;
+  border-radius: 50px;
 }
 
 .Asset img {
   max-width: 100%;
-  height: auto;
+  height:auto;
+  max-height: 200px;
+  border-radius: 50px;
+  box-shadow: 0 0 5px;
 }

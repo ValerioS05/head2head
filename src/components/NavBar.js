@@ -55,7 +55,7 @@ const NavBar = () => {
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out
       </NavLink>
-      <NavLink className={styles.NavLink} to={`/profiles/${currentUser?.profile_id}`}>
+      <NavLink className={styles.ProfilePicture} to={`/profiles/${currentUser?.profile_id}`}>
         <ProfileImage src={profileData?.profile_picture} text="" height={40} />
       </NavLink>
     </>
@@ -77,7 +77,7 @@ const NavBar = () => {
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
-            <img src={logo} alt="logo" height="45" />
+            <img src={logo} alt="logo" height="40"  className={styles.NavBarLogo}/>
           </Navbar.Brand>
         </NavLink>
         {currentUser && addProductIcon}
