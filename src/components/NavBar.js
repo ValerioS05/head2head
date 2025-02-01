@@ -48,7 +48,6 @@ const NavBar = () => {
 
   const loggedInIcons = (
     <>
-      {addProductIcon}
       <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/products">
         <i className="fas fa-cogs"></i>Products
       </NavLink>
