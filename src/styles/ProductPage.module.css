@@ -1,0 +1,8 @@
+.Product {
+    box-shadow: 0 0 10px orangered;
+}
+
+.Product #card-img {
+    border: 10px double black;
+    margin-top: 30%;
+}

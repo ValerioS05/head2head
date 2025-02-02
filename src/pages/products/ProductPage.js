@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
 import appStyles from "../../App.module.css";
+import styles from "../../styles/ProductPage.module.css"
 import { useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import Product from "./Product";
@@ -29,8 +30,8 @@ function ProductPage() {
         handleMount();
       }, [id]);
   return (
-    <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={12}>
+    <Row>
+      <Col className={`"py-2 p-0 p-lg-2" lg={12} ${styles.Product}`}>
         <Product {...product.results[0]} setProducts={setProduct} productPage />
         <Container className={appStyles.Content}>
           Comments
