@@ -1,0 +1,41 @@
+.WelcomeContainer {
+  padding-top: 50px;
+}
+
+.WelcomeTitle {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.WelcomeText {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.ButtonContainer {
+  margin-top: 20px;
+}
+
+.WelcomeImage {
+  max-width: 80%;
+  height: auto;
+  margin-top: 20px;
+}
+
+.ImageContainer {
+  margin-top: 20px;
+}
+
+.StartButton {
+  background-color: black;
+  border: 1px solid orangered;
+  width: 120px;
+  margin: 10px;
+}
+
+.StartButton:hover {
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 0 0 10px orangered;
+    color: black;
+  }
