@@ -184,7 +184,7 @@ function ProductCreateForm() {
           <Container
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
-            <Form.Group className="text-center">
+            <Form.Group className={styles.CenterText}>
               {image ? (
                 <>
                   <figure>
@@ -196,7 +196,7 @@ function ProductCreateForm() {
                   </figure>
                   <div>
                     <Form.Label
-                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                      className={`${btnStyles.Button} ${styles.Btn}`}
                       htmlFor="image-upload"
                     >
                       Change the image
@@ -205,7 +205,7 @@ function ProductCreateForm() {
                 </>
               ) : (
                 <Form.Label
-                  className="d-flex justify-content-center"
+                  className={`d-flex justify-content-center ${styles.ImgContainer}`}
                   htmlFor="image-upload"
                 >
                   <Asset
@@ -221,7 +221,7 @@ function ProductCreateForm() {
                   accept="image/*"
                   onChange={handleChangeImage}
                   ref={imageInput}
-                  className="text-center"
+                  className={styles.ImgInput}
                 />
               </div>
             </Form.Group>
@@ -232,15 +232,12 @@ function ProductCreateForm() {
 
       <div className="text-center">
         <Button
-          className={`${btnStyles.Button} ${btnStyles.Blue}`}
+          className={`${btnStyles.Button} ${styles.Btn}`}
           onClick={() => history.goBack()}
         >
           Cancel
         </Button>
-        <Button
-          className={`${btnStyles.Button} ${btnStyles.Blue}`}
-          type="submit"
-        >
+        <Button className={`${btnStyles.Button} ${styles.Btn}`} type="submit">
           Create
         </Button>
       </div>

@@ -2,8 +2,50 @@
   min-height: 343px;
   color: black;
   text-align: center;
+  border: 8px double black;
+  box-shadow: 0 0 50px orangered;
+}
+.ImgContainer {
+  color: white;
+}
+.ImgInput {
+  margin-left: 16%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color:darkblue;
+}
+/* Targeting all form controls to align text in the center */
+:global(.form-control) {
+  text-align: center;
+  background-color: black;
+  color: white;
 }
 
-.productFields .form-control {
-  text-align: center;
+:global(.form-control):focus {
+  border: 1px solid orangered;
+  box-shadow: 0 0 10px blue;
+}
+.Btn {
+  margin: 40px;
+  font-size: 1.5rem;
+  border: 3px solid white;
+  box-shadow: 0 0 15px orangered;
+}
+
+.Btn:hover {
+  background-color: white;
+  box-shadow: 0 0 15px blue;
+}
+/* Tablets */
+@media (min-width: 768px) {
+  .Container {
+    width: 60%;
+  }
+}
+
+/* Desktops */
+@media (min-width: 1024px) {
+  .Container {
+    width: 80%;
+  }
 }
