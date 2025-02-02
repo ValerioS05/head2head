@@ -6,25 +6,32 @@ import Product from "./Product";
 import NoRes from "../../assets/nores.jpg.jpg";
 import Asset from "../../components/Asset";
 import styles from "../../styles/ProductsPage.module.css";
+import useCategories from "../../hooks/useCategories";
 
 function ProductsPage({ message, filter = "" }) {
   const [products, setProducts] = useState({ results: [] });
   const [loaded, setLoaded] = useState(false);
   const [query, setQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [sortOption, setSortOption] = useState("");
+
+  const { categories, loading: categoriesLoading, error: categoriesError } = useCategories();
 
   // Fetch products when filter or query changes
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        const sortQuery = sortOption ? `&ordering=${sortOption}` : '';
         const { data } = await axiosReq.get(
-          `/products/?${filter}search=${query}`
+          `/products/?${filter}search=${query}&category=${selectedCategory}${sortQuery}`
         );
         setProducts(data);
         setLoaded(true);
       } catch (err) {
-        console.log(err);
+        console.log("Error fetching products", err);
       }
     };
+
     setLoaded(false);
 
     const timer = setTimeout(() => {
@@ -34,27 +41,80 @@ function ProductsPage({ message, filter = "" }) {
     return () => {
       clearTimeout(timer);
     };
-  }, [filter, query]);
-
+  }, [filter, query, selectedCategory, sortOption]);
 
   const handleSearchChange = (e) => {
     setQuery(e.target.value);
   };
 
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  const handleSortChange = (e) => {
+    setSortOption(e.target.value);
+  };
+
   return (
     <Container className={appStyles.Content}>
-      <i className={`fas fa-search ${styles.SearchIcon}`} />
-      <Form
-        className={styles.SearchBar}
-        onSubmit={(event) => event.preventDefault()}
-      >
-        <Form.Control
-          type="text"
-          placeholder="Search"
-          value={query}
-          onChange={handleSearchChange}
-        />
-      </Form>
+      <Row className="mb-3 align-items-center">
+        <Col xs={12} sm={12} md={4} lg={4} className="d-flex align-items-center">
+          <i className={`fas fa-search ${styles.SearchIcon}`} />
+          <Form
+            className={styles.SearchBar}
+            onSubmit={(event) => event.preventDefault()}
+          >
+            <Form.Control
+              type="text"
+              placeholder="Search"
+              value={query}
+              onChange={handleSearchChange}
+            />
+          </Form>
+        </Col>
+
+        <Col xs={12} sm={12} md={4} lg={4}>
+          <Form className={styles.SearchBar}>
+            <Form.Control
+              as="select"
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+              aria-label="Category filter"
+            >
+              <option value="">All Categories</option>
+              {categoriesLoading ? (
+                <option>Loading categories...</option>
+              ) : categoriesError ? (
+                <option>Error loading categories</option>
+              ) : (
+                categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))
+              )}
+            </Form.Control>
+          </Form>
+        </Col>
+
+        <Col xs={12} sm={12} md={4} lg={4}>
+          <Form className={styles.SearchBar}>
+            <Form.Control
+              as="select"
+              value={sortOption}
+              onChange={handleSortChange}
+              aria-label="Sort by"
+            >
+              <option value="">Sort by</option>
+              <option value="price">Price (low to high)</option>
+              <option value="-price">Price (high to low)</option>
+              <option value="created_at">Date (newest first)</option>
+              <option value="-created_at">Date (oldest first)</option>
+            </Form.Control>
+          </Form>
+        </Col>
+      </Row>
+
       {loaded ? (
         products.results.length ? (
           <Row className="g-4">
