@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import ProfileImage from "../../components/ProfileImage";
 import useCloudinaryImageUrl from "../../hooks/useCloudinaryImageUrl";
 import useCategories from "../../hooks/useCategories";
+import useUserProfile from "../../hooks/useUserProfile";
 import VoteForm from "../../components/VoteForm";
 import { axiosReq } from "../../api/axiosDefaults";
 import styles from "../../styles/Product.module.css";
+import { EditMenu } from "../../components/EditMenu";
 
 const Product = (props) => {
   const {
@@ -34,6 +36,8 @@ const Product = (props) => {
   });
 
   const currentUser = useCurrentUser();
+  const { isStaff: isCurrentUserStaff, loading: loadingCurrentUser } =
+    useUserProfile(currentUser?.profile_id);
   const cloudinaryUrl = useCloudinaryImageUrl(image);
   const { categories } = useCategories();
 
@@ -68,7 +72,11 @@ const Product = (props) => {
           />
           {owner}
         </Link>
+        <div className={styles.EditMenu}>
+          {!loadingCurrentUser && isCurrentUserStaff && <EditMenu />}
+        </div>
       </Media>
+
       <Card.Body className={styles.cardBody}>
         <div className={styles.cardContent}>
           <div className={styles.cardImgContainer}>
@@ -131,7 +139,7 @@ const Product = (props) => {
               <Card.Text className={styles.descriptionText}>
                 {description}
               </Card.Text>
-              <i class="fas fa-calendar-alt"></i>
+              <i className="fas fa-calendar-alt"></i>
               <span>{created_at}</span>
             </div>
           )}
