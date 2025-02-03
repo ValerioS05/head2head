@@ -13,20 +13,24 @@ const MenuToggle = React.forwardRef(({ onClick }, ref) => (
   ></i>
 ));
 
-export const EditMenu = () => {
+export const EditMenu = ({ handleEdit, handleDelete }) => {
   return (
-    <Dropdown>
-      <Dropdown.Toggle as={MenuToggle} id="dropdown-custom-components">
-        Custom toggle
-      </Dropdown.Toggle>
+    <Dropdown drop="left">
+      <Dropdown.Toggle as={MenuToggle}></Dropdown.Toggle>
 
-      <Dropdown.Menu>
-        <Dropdown.Item eventKey="1">Red</Dropdown.Item>
-        <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
-        <Dropdown.Item eventKey="3" active>
-          Orange
+      <Dropdown.Menu className="text-center">
+        <Dropdown.Item
+          onClick={handleEdit}
+          aria-label="edit"
+        >
+          <i className="fas fa-edit" />
         </Dropdown.Item>
-        <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
+        <Dropdown.Item
+          onClick={handleDelete}
+          aria-label="delete"
+        >
+          <i className="fas fa-trash" />
+        </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );

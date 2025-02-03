@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ProfileImage from "../../components/ProfileImage";
 import useCloudinaryImageUrl from "../../hooks/useCloudinaryImageUrl";
 import useCategories from "../../hooks/useCategories";
 import useUserProfile from "../../hooks/useUserProfile";
 import VoteForm from "../../components/VoteForm";
-import { axiosReq } from "../../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import styles from "../../styles/Product.module.css";
 import { EditMenu } from "../../components/EditMenu";
 
@@ -40,8 +40,21 @@ const Product = (props) => {
     useUserProfile(currentUser?.profile_id);
   const cloudinaryUrl = useCloudinaryImageUrl(image);
   const { categories } = useCategories();
-
   const categoryName = categories.find((cat) => cat.id === category)?.name;
+  const history = useHistory();
+
+  const handleEdit = () => {
+    history.push(`/products/${id}/edit`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/products/${id}/`);
+      history.push("/products/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const fetchUpdatedProduct = async () => {
     try {
@@ -73,7 +86,12 @@ const Product = (props) => {
           {owner}
         </Link>
         <div className={styles.EditMenu}>
-          {!loadingCurrentUser && isCurrentUserStaff && <EditMenu />}
+          {!loadingCurrentUser && isCurrentUserStaff && productPage && (
+            <EditMenu
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+           />
+          )}
         </div>
       </Media>
 
