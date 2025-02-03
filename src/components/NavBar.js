@@ -49,16 +49,16 @@ const NavBar = () => {
   const loggedInIcons = (
     <>
       <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/products">
-        <i className="fas fa-cogs"></i>Products
+        <i className="fas fa-box-open"></i>Products
       </NavLink>
       <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/comparisons">
-        <i className="fas fa-exchange-alt"></i>Compare Products
+        <i className="fas fa-exchange-alt"></i>Compare
       </NavLink>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out
       </NavLink>
       <NavLink className={styles.ProfilePicture} to={`/profiles/${currentUser?.profile_id}`}>
-        <ProfileImage src={profileData?.profile_picture} text="" height={40} />
+        <ProfileImage src={profileData?.profile_picture} text="Profile" height={40} />
       </NavLink>
     </>
   );

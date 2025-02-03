@@ -50,6 +50,10 @@
   margin-left: 1rem;
 }
 
+.descriptionContainer i{
+  color: black;
+}
+
 /* Middle column for details (name, price, category, etc...) */
 .productDetailsContainer {
   flex: 2;

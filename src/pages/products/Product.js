@@ -58,21 +58,17 @@ const Product = (props) => {
   }, [props.average_rating]);
 
   return (
-    
     <Card className={styles.card}>
       <Media className="align-items-center justify-content-between">
-          <Link to={`/profiles/${profile_id}`} className={styles.profileLink}>
-            <ProfileImage
-              src={profile_picture}
-              height={40}
-              className={styles.profileImage}
-            />
-            {owner}
-          </Link>
-          <div className="d-flex align-items-center">
-            <span>{created_at}</span>
-          </div>
-        </Media>
+        <Link to={`/profiles/${profile_id}`} className={styles.profileLink}>
+          <ProfileImage
+            src={profile_picture}
+            height={40}
+            className={styles.profileImage}
+          />
+          {owner}
+        </Link>
+      </Media>
       <Card.Body className={styles.cardBody}>
         <div className={styles.cardContent}>
           <div className={styles.cardImgContainer}>
@@ -135,6 +131,8 @@ const Product = (props) => {
               <Card.Text className={styles.descriptionText}>
                 {description}
               </Card.Text>
+              <i class="fas fa-calendar-alt"></i>
+              <span>{created_at}</span>
             </div>
           )}
         </div>
