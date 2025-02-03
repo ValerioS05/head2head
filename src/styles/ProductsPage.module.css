@@ -9,3 +9,13 @@
   cursor: default;
   color: #cfced3;
 }
+
+.SearchBar {
+  width: 100%;
+}
+.SearchBar input::placeholder {
+    color: white;
+  }
+.SearchBar input::placeholder:focus {
+    color: black;
+  }

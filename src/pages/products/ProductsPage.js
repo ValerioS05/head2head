@@ -7,6 +7,8 @@ import NoRes from "../../assets/nores.jpg.jpg";
 import Asset from "../../components/Asset";
 import styles from "../../styles/ProductsPage.module.css";
 import useCategories from "../../hooks/useCategories";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/FetchNext";
 
 function ProductsPage({ message, filter = "" }) {
   const [products, setProducts] = useState({ results: [] });
@@ -15,7 +17,11 @@ function ProductsPage({ message, filter = "" }) {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sortOption, setSortOption] = useState("");
 
-  const { categories, loading: categoriesLoading, error: categoriesError } = useCategories();
+  const {
+    categories,
+    loading: categoriesLoading,
+    error: categoriesError,
+  } = useCategories();
 
   // Fetch products when filter or query changes
   useEffect(() => {
@@ -57,8 +63,14 @@ function ProductsPage({ message, filter = "" }) {
 
   return (
     <Container className={appStyles.Content}>
-      <Row className="mb-3 align-items-center">
-        <Col xs={12} sm={12} md={4} lg={4} className="d-flex align-items-center">
+      <Row className="mb-3 align-items-center mx-0">
+        <Col
+          xs={12}
+          sm={12}
+          md={4}
+          lg={4}
+          className="d-flex align-items-center"
+        >
           <i className={`fas fa-search ${styles.SearchIcon}`} />
           <Form
             className={styles.SearchBar}
@@ -118,13 +130,23 @@ function ProductsPage({ message, filter = "" }) {
       {loaded ? (
         products.results.length ? (
           <Row className="g-4">
-            {products.results.map(
-              ({ description, features, location, ...rest }) => (
-                <Col key={rest.id} xs={12} sm={6} lg={4}>
-                  <Product {...rest} setProducts={setProducts} />
-                </Col>
-              )
-            )}
+            <InfiniteScroll
+              dataLength={products.results.length}
+              next={() => fetchMoreData(products, setProducts)}
+              hasMore={!!products.next}
+              loader={<Asset spinner />}
+              className="w-100"
+            >
+              <Row className="g-4 mx-0">
+                {products.results.map(
+                  ({ description, features, location, ...rest }) => (
+                    <Col key={rest.id} xs={12} sm={6} lg={4}>
+                      <Product {...rest} setProducts={setProducts} />
+                    </Col>
+                  )
+                )}
+              </Row>
+            </InfiniteScroll>
           </Row>
         ) : (
           <Container className="text-center">
