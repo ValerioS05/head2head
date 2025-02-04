@@ -56,6 +56,7 @@ function ProductPage() {
             <Comment key={comment.id} {...comment}
             setProduct={setProduct}
             setComments={setComments}
+            product_id={id} 
             />
           ))
         ) : <span>Comments here</span>}

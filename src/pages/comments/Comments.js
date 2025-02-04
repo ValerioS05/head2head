@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Media } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ProfileImage from "../../components/ProfileImage";
 import styles from "../../styles/Comment.module.css";
+import CommentsEditForm from "./CommentsEditForm";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import { EditMenu } from "../../components/EditMenu";
@@ -19,32 +20,32 @@ const Comment = (props) => {
     id,
     setProduct,
     setComments,
+    product_id,
   } = props;
 
   const currentUser = useCurrentUser();
   const { isStaff } = useUserProfile(currentUser?.profile_id);
   const is_owner = currentUser?.username === owner;
-  
-  
+  const [showEditForm, setShowEditForm] = useState(false);
+
   const handleDelete = async () => {
     try {
-        await axiosRes.delete(`/comments/${id}/`)
-        setProduct(prevProduct => ({
-            results: [{
-                ...prevProduct.results[0],
-                comments_count: prevProduct.results[0].comments_count - 1
-            },
+      await axiosRes.delete(`/comments/${id}/`);
+      setProduct((prevProduct) => ({
+        results: [
+          {
+            ...prevProduct.results[0],
+            comments_count: prevProduct.results[0].comments_count - 1,
+          },
         ],
-        }));
+      }));
 
-        setComments((prevComments) => ({
-            ...prevComments,
-            results:prevComments.results.filter((comment) => comment.id !== id),
-        }));
-    } catch(err) {
-
-    }
-  }
+      setComments((prevComments) => ({
+        ...prevComments,
+        results: prevComments.results.filter((comment) => comment.id !== id),
+      }));
+    } catch (err) {}
+  };
 
   return (
     <div className={styles.Comment}>
@@ -59,11 +60,26 @@ const Comment = (props) => {
         <Media.Body className="align-self-center ml-2">
           <span className={styles.Owner}>{owner}</span>
           <span className={styles.Date}>{created_at}</span>
-          <p>{content}</p>
+          {showEditForm ? (
+            <CommentsEditForm
+              id={id}
+              profile_id={profile_id}
+              content={content}
+              profileImage={profile_picture}
+              setComments={setComments}
+              setShowEditForm={setShowEditForm}
+              product_id={product_id}
+            />
+          ) : (
+            <p>{content}</p>
+          )}
         </Media.Body>
-        {(is_owner || isStaff) && (
+        {(is_owner || isStaff) && !showEditForm && (
           <div className={styles.Edit}>
-            <EditMenu handleEdit={() => {}} handleDelete={handleDelete} />
+            <EditMenu
+              handleEdit={() => setShowEditForm(true)}
+              handleDelete={handleDelete}
+            />
           </div>
         )}
       </Media>
