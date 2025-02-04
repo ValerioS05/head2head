@@ -25,7 +25,7 @@ function ProductPage() {
       try {
         const [{ data: product }, { data: comments}] = await Promise.all([
           axiosReq.get(`/products/${id}`),
-          axiosReq.get(`/comments/?products=${id}`)
+          axiosReq.get(`/comments/?product=${id}`)
         ]);
         setProduct({ results: [product] });
         setComments(comments);
