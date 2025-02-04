@@ -4,6 +4,7 @@ import axios from "axios";
 // Fetch profile id hook
 const useUserProfile = (profileId) => {
   const [isStaff, setIsStaff] = useState(false);
+  const [profilePicture, setProfilePicture] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -17,11 +18,11 @@ const useUserProfile = (profileId) => {
           const { data } = await axios.get(`/profiles/${profileId}/`); // api request
           if (isMounted) {
             setIsStaff(data.is_staff);
+            setProfilePicture(data.profile_picture);
           }
         } catch (err) {
           if (isMounted) {
             setError(err);
-            console.log(err);
           }
         } finally {
           if (isMounted) {
@@ -42,7 +43,8 @@ const useUserProfile = (profileId) => {
     };
   }, [profileId]);
 
-  return { isStaff, loading, error };
+  return { isStaff, profilePicture, loading, error };
 };
 
 export default useUserProfile;
+
