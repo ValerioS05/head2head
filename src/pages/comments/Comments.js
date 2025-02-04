@@ -4,12 +4,47 @@ import { Link } from "react-router-dom";
 import ProfileImage from "../../components/ProfileImage";
 import styles from "../../styles/Comment.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+
 import { EditMenu } from "../../components/EditMenu";
+import { axiosRes } from "../../api/axiosDefaults";
+import useUserProfile from "../../hooks/useUserProfile";
 
 const Comment = (props) => {
-  const { profile_id, profile_picture, owner, created_at, content } = props;
+  const {
+    profile_id,
+    profile_picture,
+    owner,
+    created_at,
+    content,
+    id,
+    setProduct,
+    setComments,
+  } = props;
+
   const currentUser = useCurrentUser();
+  const { isStaff } = useUserProfile(currentUser?.profile_id);
   const is_owner = currentUser?.username === owner;
+  
+  
+  const handleDelete = async () => {
+    try {
+        await axiosRes.delete(`/comments/${id}/`)
+        setProduct(prevProduct => ({
+            results: [{
+                ...prevProduct.results[0],
+                comments_count: prevProduct.results[0].comments_count - 1
+            },
+        ],
+        }));
+
+        setComments((prevComments) => ({
+            ...prevComments,
+            results:prevComments.results.filter((comment) => comment.id !== id),
+        }));
+    } catch(err) {
+
+    }
+  }
 
   return (
     <div className={styles.Comment}>
@@ -26,9 +61,9 @@ const Comment = (props) => {
           <span className={styles.Date}>{created_at}</span>
           <p>{content}</p>
         </Media.Body>
-        {is_owner && (
+        {(is_owner || isStaff) && (
           <div className={styles.Edit}>
-            <EditMenu handleEdit={() => {}} handleDelete={() => {}} />
+            <EditMenu handleEdit={() => {}} handleDelete={handleDelete} />
           </div>
         )}
       </Media>

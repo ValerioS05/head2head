@@ -53,7 +53,10 @@ function ProductPage() {
         ) : null}
         {comments.results.length ? (
           comments.results.map(comment => (
-            <Comment key={comment.id} {...comment}/>
+            <Comment key={comment.id} {...comment}
+            setProduct={setProduct}
+            setComments={setComments}
+            />
           ))
         ) : <span>Comments here</span>}
       </Col>
