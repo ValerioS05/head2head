@@ -14,6 +14,7 @@
   margin-bottom: 10px;
   color:darkblue;
 }
+
 /* Targeting all form controls to align text in the center */
 :global(.form-control) {
   text-align: center;

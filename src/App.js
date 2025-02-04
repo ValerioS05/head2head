@@ -12,6 +12,7 @@ import ProductPage from "./pages/products/ProductPage";
 import ProductsPage from "./pages/products/ProductsPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import useUserProfile from "./hooks/useUserProfile";
+import ProductsEditForm from "./pages/products/ProductsEditForm";
 
 function App() {
   const currentUser = useCurrentUser(); // Get current user
@@ -28,20 +29,19 @@ function App() {
           <Route
             exact
             path="/products"
-            render={() => <ProductsPage message="No results for your search, try other keywords." />}
+            render={() => (
+              <ProductsPage message="No results for your search, try other keywords." />
+            )}
           />
           <Route
             exact
             path="/product/create"
             render={() =>
-              isStaff ? (
-                <ProductCreateForm />
-              ) : (
-                <Redirect to="/" />
-              )
+              isStaff ? <ProductCreateForm /> : <Redirect to="/" />
             }
           />
           <Route exact path="/products/:id" render={() => <ProductPage />} />
+          <Route exact path="/products/:id/edit" render={() => isStaff ? <ProductsEditForm /> : <Redirect to="/" /> } />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>
