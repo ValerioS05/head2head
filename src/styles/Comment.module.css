@@ -1,10 +1,30 @@
+.Comment {
+  border-bottom: 1px solid orangered;
+  box-shadow: 0 0 15px orangered;
+  margin: 10px auto;
+  max-width: 80%;
+  border-radius: 10px;
+  padding: 5px;
+}
+
 .Owner {
-    font-weight: bold;
-    color: white;
-    margin-right: 10px;
+  font-weight: bold;
+  color: white;
+  margin-right: 10px;
 }
 
 .Date {
-    font-weight: lighter;
-    color: orangered;
+  color: rgb(1, 139, 251);
+  font-size: 0.7rem;
 }
+
+.Edit {
+  color: orangered;
+  padding-top: 0.1rem;
+  border: 1px solid orangered;
+  border-radius: 50%;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+

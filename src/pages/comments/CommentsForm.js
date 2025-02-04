@@ -42,14 +42,14 @@ function CommentsForm({ product, setProduct, setComments, profile_id }) {
   };
 
   return (
-    <Form className="mt-2" onSubmit={handleSubmit}>
+    <Form className={`${styles.Form} mt-2`} onSubmit={handleSubmit}>
       <Form.Group>
         <InputGroup>
           <Link to={`/profiles/${profile_id}`}>
             <ProfileImage src={profilePicture} className={styles2.ProfileImage} />
           </Link>
           <Form.Control
-            className={styles.Form}
+            className={styles.FormControl}
             placeholder="Write a comment..."
             as="textarea"
             value={content}
@@ -59,7 +59,7 @@ function CommentsForm({ product, setProduct, setComments, profile_id }) {
         </InputGroup>
       </Form.Group>
       <button
-        className={`${styles.Button} btn d-block ml-auto`}
+        className={`${styles.Button} d-block ml-auto`}
         disabled={!content.trim()}
         type="submit"
       >
