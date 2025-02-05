@@ -129,7 +129,7 @@ function ProductsPage({ message, filter = "" }) {
 
       {loaded ? (
         products.results.length ? (
-          <Row className="g-4">
+          <Row className={`g-4 mx-0 ${styles.ProductRow}`}>
             <InfiniteScroll
               dataLength={products.results.length}
               next={() => fetchMoreData(products, setProducts)}

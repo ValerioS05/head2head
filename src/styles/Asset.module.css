@@ -5,9 +5,9 @@
   align-items: center;
   min-height: 120px;
   max-width: 100%;
-  box-shadow: 0 0 5px;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0);
   border-radius: 50px;
+  color: orangered;
 }
 
 .Asset img {
@@ -15,5 +15,5 @@
   height:auto;
   max-height: 200px;
   border-radius: 50px;
-  box-shadow: 0 0 5px;
+  color: orangered;
 }

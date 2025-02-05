@@ -19,3 +19,7 @@
 .SearchBar input::placeholder:focus {
     color: black;
   }
+
+.ProductRow > div{
+  width: 100%;
+}

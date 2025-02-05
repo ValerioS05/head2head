@@ -12,6 +12,8 @@ import Product from "./Product";
 import Comment from "../comments/Comments";
 import CommentsForm from "../comments/CommentsForm";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Asset from "../../components/Asset";
 
 function ProductPage() {
   const { id } = useParams();
@@ -48,18 +50,36 @@ function ProductPage() {
             setProduct={setProduct}
             setComments={setComments}
           />
-        ) : comments.results.length ? (
-          "Comments"
         ) : null}
         {comments.results.length ? (
-          comments.results.map(comment => (
-            <Comment key={comment.id} {...comment}
-            setProduct={setProduct}
-            setComments={setComments}
-            product_id={id} 
-            />
-          ))
-        ) : <span>Comments here</span>}
+          <InfiniteScroll
+            dataLength={comments.results.length}
+            next={async () => {
+              if (!comments.next) return;
+              try {
+                const { data } = await axiosReq.get(comments.next);
+                setComments((prev) => ({
+                  ...data,
+                  results: [...prev.results, ...data.results],
+                }));
+              } catch (err) {
+                console.log(err);
+              }
+            }}
+            hasMore={!!comments.next}
+            loader={<Asset spinner />}
+          >
+            {comments.results.map((comment) => (
+              <Comment
+                key={comment.id}
+                {...comment}
+                setProduct={setProduct}
+                setComments={setComments}
+                product_id={id}
+              />
+            ))}
+          </InfiniteScroll>
+        ) : <span>No Comments for this product.</span>}
       </Col>
     </Row>
   );
