@@ -1,0 +1,43 @@
+.ProfileContainer {
+  width: 100%;
+  text-align: center;
+}
+
+.ProfilePicture {
+  width: 90%;
+  max-width: 300px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 15px aqua;
+  border: 1px solid orangered;
+  margin-bottom: 20px;
+}
+
+.Card {
+    box-shadow: 0 0 15px orangered;
+    background-color: black;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.Username {
+    font-size: 3rem;
+    color: orangered;
+    border-bottom: 1px solid aqua;
+}
+.Text {
+    line-height: 2rem;
+}
+.Favourites {
+    margin-top: 1.5rem;
+}
+.Favourites h5 {
+    font-size: 2rem;
+}
+@media (max-width: 767px) {
+  .ProfilePicture {
+    width: 80%;
+    max-width: 200px;
+  }
+}

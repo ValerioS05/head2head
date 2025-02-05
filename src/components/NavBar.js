@@ -63,7 +63,7 @@ const NavBar = () => {
         to={`/profiles/${currentUser?.profile_id}`}
       >
         {loading ? (
-          <span>Loading...</span>
+          <span>....</span>
         ) : error ? (
           <span>Error</span>
         ) : (

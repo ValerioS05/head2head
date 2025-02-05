@@ -1,60 +1,57 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import useUserProfile from '../../hooks/useUserProfile';
+import { Card, Col, Row, Container } from 'react-bootstrap';
+import Asset from '../../components/Asset';
 import styles from '../../styles/Profile.module.css';
-import ProfileImage from '../../components/ProfileImage';
 
 const Profile = () => {
   const { id } = useParams();
-  const { isStaff, profilePicture, profileData, loading, error } = useUserProfile(id);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div className={styles.error}>Error: {error}</div>;
-  }
-
-
-  if (!profileData) {
-    return <div className={styles.error}>Profile not found.</div>;
-  }
-
-
-  const { owner, bio, location, isOwner, favourites } = profileData;
+  const { isStaff, profilePicture, profileData, loading, error } =
+    useUserProfile(id);
 
   return (
-    <div>
-
-      <div>
-        <ProfileImage 
-          src={profilePicture} 
-          alt="Profile" 
-        />
-        <h1>{owner}'s Profile</h1>
-      </div>
-
-
-      <div >
-
-        <div>
-          <h3>Bio:</h3>
-          <p>{bio}</p>
+    <Container className={styles.ProfileContainer}>
+      {loading ? (
+        <div className="d-flex justify-content-center align-items-center">
+          <Asset spinner />
         </div>
+      ) : error ? (
+        <div>{error}</div>
+      ) : !profileData ? (
+        <div>Profile not found.</div>
+      ) : (
+        <Row className="justify-content-center">
+          <Col>
+            <Card className={styles.Card}>
+              <Card.Body>
+                <div>
+                  <img
+                    src={profilePicture}
+                    alt="Profile"
+                    className={styles.ProfilePicture}
+                  />
+                </div>
+                <div className={styles.Username}>{profileData.owner}</div>
+                <div className={styles.Text}>
+                  <div>{profileData.location}</div>
+                  <div>{profileData.bio}</div>
+                </div>
 
-        <div>
-          <h3>Location:</h3>
-          <p>{location}</p>
-        </div>
-
-
-        <div>
-          <h3>Favourites:</h3>
-          <p>{favourites && favourites.length > 0 ? 'My favourites.' : 'No favourites yet.'}</p>
-        </div>
-      </div>
-    </div>
+                <div className={styles.Favourites}>
+                  <h5>Favourites</h5>
+                  <p>
+                    {profileData.favourites && profileData.favourites.length > 0
+                      ? "My favourites."
+                      : "No favourites yet."}
+                  </p>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      )}
+    </Container>
   );
 };
 

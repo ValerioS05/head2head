@@ -8,16 +8,15 @@
 
 .NavBarLogo {
   border-radius: 20px;
-  box-shadow: 0 0 4px white;
+  box-shadow: 0 0 8px aqua;
   border: 1px solid white;
   padding: 2px 2px;
   transition: box-shadow 0.5s;
 }
 
 .NavBarLogo:hover {
-  box-shadow: 0 0 10px orangered;
+  box-shadow: 0 0 8px orangered;
   transition: box-shadow 0.5s;
-  border: 1px solid orangered;
 }
 
 .NavToggle {

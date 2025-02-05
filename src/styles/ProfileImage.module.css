@@ -1,6 +1,12 @@
 .ProfileImage {
     border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 8px aqua;
     object-fit: cover;
     margin-left: 10px;
+    transition: box-shadow 0.5s;
   }
+
+.ProfileImage:hover {
+  box-shadow: 0 0 8px orangered;
+  transition: box-shadow 0.5s;
+}
