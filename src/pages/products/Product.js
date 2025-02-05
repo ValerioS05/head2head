@@ -108,7 +108,9 @@ const Product = (props) => {
           </div>
 
           <div className={styles.productDetailsContainer}>
-            <Card.Title className={styles.cardTitle}>{name}</Card.Title>
+            <Link to={`/products/${id}`}>
+              <Card.Title className={styles.cardTitle}>{name}</Card.Title>
+            </Link>
             {categoryName && (
               <Card.Text className={styles.cardText}>
                 <strong>Category:</strong> {categoryName}

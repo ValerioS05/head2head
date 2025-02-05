@@ -2,15 +2,15 @@
 .card {
   color: black;
   margin: 10px;
-  border: 5px double black;
   padding:5px;
-  min-height: 97%;
+  box-shadow: 0 0 10px orangered;
 }
 
 .cardTitle {
   color: orangered;
   font-weight: bold;
   font-size: 1.5rem;
+  margin-top: 2rem;
 }
 .profileLink {
   color: black;
@@ -23,7 +23,7 @@
 .cardContent {
   justify-content: space-between;
   align-items: flex-start;
-  gap: 20px;
+  gap: 10px;
   width: 100%;
   margin-bottom: 1rem;
   color: black;
@@ -76,21 +76,22 @@
 
 /* Card image */
 .cardImg {
-  max-width: 300px;
+  max-width: 500px;
   height: auto;
   object-fit: contain;
-  border: 5px double black;
-  box-shadow: 0 0 20px orangered;
+  border: 1px solid orangered;
+  box-shadow: 0 0 2rem rgb(3, 22, 169);
 }
 
 /* Description label and text */
 .descriptionLabel {
-  margin-bottom: 0.5rem;
+  margin-top: auto;
+  margin-bottom: 0.2rem;
   font-weight: bold;
 }
 
 .descriptionText {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .cardTitle, .cardText {
@@ -135,7 +136,7 @@
 }
 
   .cardImg {
-    width:100px;
+    border-radius: 15px;
   }
 /* smaller screens */
 @media (max-width: 768px) {
