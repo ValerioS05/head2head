@@ -15,7 +15,7 @@
 }
 
 .Card {
-    box-shadow: 0 0 15px orangered;
+    box-shadow: 0 0 2rem orangered;
     background-color: black;
     border-radius: 10px;
     margin-top: 20px;
@@ -30,10 +30,15 @@
     line-height: 2rem;
 }
 .Favourites {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
+    background-color: black;
+    border-radius: 10px;
+    padding: 1rem;
 }
 .Favourites h5 {
     font-size: 2rem;
+    color: black;
+    padding: 1rem;
 }
 @media (max-width: 767px) {
   .ProfilePicture {
