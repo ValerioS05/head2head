@@ -5,6 +5,7 @@
   padding:5px;
   box-shadow: 0 0 10px orangered;
   background-color: lightblue;
+  height: auto;
 }
 
 .cardTitle {
@@ -79,11 +80,16 @@
 .cardImg {
   max-width: 500px;
   height: auto;
+  max-height: 150px;
   object-fit: contain;
   border: 1px solid orangered;
   box-shadow: 0 0 2rem rgb(3, 22, 169);
+  transition: 0.4s;
 }
-
+.cardImg:hover {
+  box-shadow: 0 0 2rem orangered;
+  transition: 0.4s;
+}
 /* Description label and text */
 .descriptionLabel {
   margin-top: auto;
@@ -115,6 +121,9 @@
 
 /* Large screen */
 @media (min-width: 1248px) {
+  .card {
+    height: auto;
+  }
   .cardContent {
     display: flex;
     flex-direction: row;

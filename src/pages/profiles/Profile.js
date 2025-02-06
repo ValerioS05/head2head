@@ -6,9 +6,7 @@ import Asset from '../../components/Asset';
 import Product from '../products/Product';
 import styles from '../../styles/Profile.module.css';
 import { axiosReq } from '../../api/axiosDefaults';
-// I need to find out why when i press on the navbar profile i still see the favourites from the other profile.
-// Also i need to modify the useEffect to dont display the "loading favourites"
-// Maybe make a hook instead of the useEffect that is quite large
+
 // I need to find a way to add products to favourites or from here or from the product page(not products "already heavy page").
 // Need to create the edit form for the profile the delete will be only from staff user.
 
@@ -20,7 +18,14 @@ const Profile = () => {
   const [fetchingProducts, setFetchingProducts] = useState(true);
 
   useEffect(() => {
-    if (profileData?.favourites && profileData.favourites.length > 0) {
+    setFavouriteProducts([]);
+    setFetchingProducts(true);
+  }, [id]);
+  
+  useEffect(() => {
+    if (!profileData || !profileData.favourites) return;
+  
+    if (profileData.favourites.length > 0) {
       const fetchProducts = async () => {
         try {
           let url = '/products/';
@@ -33,7 +38,7 @@ const Profile = () => {
             const filteredProducts = response.data.results.filter((product) =>
               profileData.favourites.includes(product.id)
             );
-            
+  
             allProducts = [...allProducts, ...filteredProducts];
             nextPage = response.data.next;
           }
@@ -46,8 +51,13 @@ const Profile = () => {
       };
   
       fetchProducts();
+    } else {
+      setFetchingProducts(false);
     }
   }, [profileData]);
+  
+  
+  
 
   return (
     <Container className={styles.ProfileContainer}>
