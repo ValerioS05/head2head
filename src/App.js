@@ -15,6 +15,8 @@ import useUserProfile from "./hooks/useUserProfile";
 import ProductsEditForm from "./pages/products/ProductsEditForm";
 import Profile from "./pages/profiles/Profile";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
+import UsernameForm from "./pages/profiles/UsernameForm";
+import PasswordForm from "./pages/profiles/PasswordForm";
 
 function App() {
   const currentUser = useCurrentUser(); // Get current user
@@ -46,6 +48,8 @@ function App() {
           <Route exact path="/products/:id/edit" render={() => isStaff ? <ProductsEditForm /> : <Redirect to="/" /> } />
           <Route exact path="/profiles/:id" render={() => <Profile />} />
           <Route exact path="/profiles/:id/edit" render={() =><ProfileEditForm /> } />
+          <Route exact path="/profiles/:id/edit/username" render={() => <UsernameForm /> } />
+          <Route exact path="/profile/:id/edit/password/" render={() => <PasswordForm /> } />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>

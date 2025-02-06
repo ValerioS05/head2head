@@ -5,8 +5,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import { Image } from "react-bootstrap";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import styles from "../../styles/Profile.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -24,6 +25,7 @@ function ProfileEditForm() {
   const imageInput = useRef(null);
   const history = useHistory();
   const { id } = useParams();
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     const handleMount = async () => {
@@ -36,13 +38,17 @@ function ProfileEditForm() {
           profilePicture: profile_picture,
           bio,
         });
-      } catch (err) {
-        console.log("Error fetching profile:", err);
-      }
-    };
+
+        if (currentUser && currentUser.username !== owner) {
+            history.push("/");
+          }
+        } catch (err) {
+          console.log("Error fetching profile:", err);
+        }
+      };
 
     handleMount();
-  }, [id]);
+  }, [id, currentUser, history]);
 
   const handleChange = (event) => {
     setProfileData({
@@ -102,7 +108,6 @@ function ProfileEditForm() {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className={styles.CenterText}>
-                <>
                   <figure>
                     <Image
                       className={`${appStyles.Image}`}
@@ -110,16 +115,6 @@ function ProfileEditForm() {
                       rounded
                     />
                   </figure>
-                  <div>
-                    <Form.Label
-                      className={`${btnStyles.Button} ${styles.Btn}`}
-                      htmlFor="image-upload"
-                    >
-                      Change Image
-                    </Form.Label>
-                  </div>
-                </>
-              
 
               <div className="d-flex justify-content-center mt-2">
                 <Form.File
@@ -162,6 +157,23 @@ function ProfileEditForm() {
                 onChange={handleChange}
               />
             </Form.Group>
+            <div className="text-center mt-3">
+              <Link to={`/profiles/${id}/edit/username`}>
+                <Button
+                  className={`${btnStyles.Button} ${styles.Btn}`}
+                  style={{ marginRight: '10px' }}
+                >
+                  Change Username
+                </Button>
+              </Link>
+              <Link to={`/profile/${id}/edit/password/`}>
+                <Button
+                  className={`${btnStyles.Button} ${styles.Btn}`}
+                >
+                  Change Password
+                </Button>
+              </Link>
+            </div>
           </Container>
         </Col>
       </Row>
