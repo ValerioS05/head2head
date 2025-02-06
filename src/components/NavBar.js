@@ -51,7 +51,7 @@ const NavBar = () => {
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to="/comparisons"
+        to="/comparisons/create"
       >
         <i className="fas fa-exchange-alt"></i>Compare
       </NavLink>
