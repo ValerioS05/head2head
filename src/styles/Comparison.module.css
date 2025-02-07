@@ -1,0 +1,24 @@
+.stickyCompareButtonContainer {
+    position: sticky;
+    bottom: 20px;
+    width: 70%;
+    z-index: 10;
+    margin: 0 auto;
+  }
+  
+  .stickyCompareButton {
+    position: relative;
+    width: 100%;
+    background-color: black;
+    font-size: 1.2rem;
+    color: white;
+    box-shadow: 0 0 10px orangered;
+    border: none;
+    transition: 0.4s;
+  }
+  
+  .stickyCompareButton:hover {
+    background-color: orangered;
+    color: white;
+    transition: 0.4s;
+  }

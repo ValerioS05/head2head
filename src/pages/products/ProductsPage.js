@@ -120,8 +120,8 @@ function ProductsPage({ message, filter = "" }) {
               <option value="">Sort by</option>
               <option value="price">Price (low to high)</option>
               <option value="-price">Price (high to low)</option>
-              <option value="created_at">Date (newest first)</option>
-              <option value="-created_at">Date (oldest first)</option>
+              <option value="created_at">Date (oldest first)</option>
+              <option value="-created_at">Date (newest first)</option>
             </Form.Control>
           </Form>
         </Col>

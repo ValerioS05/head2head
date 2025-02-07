@@ -1,83 +1,107 @@
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
+import React, { useState, useEffect } from "react";
+import { Form, Button, Container, Alert, Row, Col } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { axiosReq } from "../../api/axiosDefaults";
 import styles from "../../styles/Comparison.module.css";
+import Asset from "../../components/Asset";
+import Product from "../products/Product";
 
+// I need to change the layout or the product css to display better and less amount.
+// I need to add validation if the user is logged in or authorized.(I can access the page if im logged out.)
+// I need to create the ComparisonsPage.
+// Need to add the filtering also.
 
-function ComparisonCreateForm() {
-  const [errors, setErrors] = useState({});
-  const [comparisonData, setComparisonData] = useState({
-    product1Id: "",
-    product2Id: "",
-    owner: "",
-    isOwner: false,
-  });
+const ComparisonCreateForm = () => {
+  const [products, setProducts] = useState([]);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [errors, setErrors] = useState(null);
+  const history = useHistory();
 
-  const { product1Id, product2Id, owner, isOwner } = comparisonData;
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const { data } = await axiosReq.get("/products/");
+        setProducts(data.results);
+      } catch (err) {
+        console.log(err);
+        setErrors("Failed to load products. Try again later.");
+      }
+    };
+    fetchProducts();
+  }, []);
 
-  const handleChange = (event) => {
-    setComparisonData({
-      ...comparisonData,
-      [event.target.name]: event.target.value,
-    });
+  const handleSelectProduct = (product) => {
+    const isSelected = selectedProducts.includes(product.id);
+    if (isSelected) {
+      setSelectedProducts(selectedProducts.filter((id) => id !== product.id));
+    } else if (selectedProducts.length < 2) {
+      setSelectedProducts([...selectedProducts, product.id]);
+    }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    if (selectedProducts.length !== 2) {
+      setErrors("You must select exactly two products.");
+      return;
+    }
 
-    const newComparison = {
-      owner,
-      is_owner: isOwner,
-      products: [product1Id, product2Id],
-    };
+    try {
+      const { data } = await axiosReq.post("/comparisons/", {
+        products: selectedProducts,
+      });
+      history.push(`/comparisons/${data.id}`);
+    } catch (err) {
+      console.log(err);
+      setErrors("Failed to create comparison. Please try again.");
+    }
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row>
-        <Col className="py-2 p-0 p-md-2" md={12} lg={12}>
-          <Container
-            className="d-flex flex-column justify-content-center"
-          >
-            <div className="text-center">
-              <Form.Group>
-                <Form.Label>Product 1</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="product1Id"
-                  value={product1Id}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Product 2</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="product2Id"
-                  value={product2Id}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-
-              <Button
-                onClick={() => {}}
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-              >
-                Create Comparison
-              </Button>
-            </div>
-          </Container>
-        </Col>
-      </Row>
-    </Form>
+    <Container className={styles.comparisonFormContainer}>
+      <h2>Create a Comparison</h2>
+      {errors && <Alert variant="danger">{errors}</Alert>}
+      <Form onSubmit={handleSubmit}>
+        <Form.Group>
+          <Form.Label>Select two products to compare.</Form.Label>
+          {products.length === 0 ? (
+            <Asset spinner />
+          ) : (
+            <Row className="d-flex flex-wrap">
+              {products.map((product) => {
+                const isSelected = selectedProducts.includes(product.id);
+                return (
+                  <Col key={product.id} xs={12} sm={6} lg={4} className="mb-3">
+                    <Product
+                      {...product}
+                      productPage={false}
+                    />
+                    <Button
+                      variant={isSelected ? "outline-success" : "success"}
+                      onClick={() => handleSelectProduct(product)}
+                      className="w-100 mt-2" // Need to change variant and style{styles.SelectButton} maybe.
+                    >
+                      {isSelected ? "Deselect" : "Select"} 
+                    </Button>
+                  </Col>// maybe change the deselect with different word? 
+                );
+              })}
+            </Row>
+          )}
+        </Form.Group>
+        {selectedProducts.length === 2 && (
+          <div className={styles.stickyCompareButtonContainer}>
+            <Button
+              type="submit"
+              className={styles.stickyCompareButton}
+            >
+              Compare
+            </Button>
+          </div>
+        )}
+      </Form>
+    </Container>
   );
-}
+};
 
 export default ComparisonCreateForm;

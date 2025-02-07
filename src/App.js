@@ -18,6 +18,9 @@ import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import UsernameForm from "./pages/profiles/UsernameForm";
 import PasswordForm from "./pages/profiles/PasswordForm";
 import ComparisonCreateForm from "./pages/comparison/ComparisonCreateForm";
+import ComparisonDetail from "./pages/comparison/ComparisonDetail";
+
+
 function App() {
   const currentUser = useCurrentUser(); // Get current user
   const { isStaff, loading, error } = useUserProfile(currentUser?.profile_id);
@@ -51,6 +54,7 @@ function App() {
           <Route exact path="/profiles/:id/edit/username" render={() => <UsernameForm /> } />
           <Route exact path="/profiles/:id/edit/password/" render={() => <PasswordForm /> } />
           <Route exact path="/comparisons/create" render={() => <ComparisonCreateForm />} />
+          <Route exact path="/comparisons/:id" render={() => <ComparisonDetail />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>

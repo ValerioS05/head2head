@@ -12,7 +12,7 @@ import styles from "../../styles/Profile.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 
-function ProfileEditForm() {
+const ProfileEditForm = () => {
   const [errors, setErrors] = useState({});
   const [profileData, setProfileData] = useState({
     owner: "",

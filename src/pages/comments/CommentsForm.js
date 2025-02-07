@@ -9,7 +9,7 @@ import ProfileImage from "../../components/ProfileImage";
 import { axiosRes } from "../../api/axiosDefaults";
 import useUserProfile from "../../hooks/useUserProfile";
 
-function CommentsForm({ product, setProduct, setComments, profile_id }) {
+const CommentsForm = ({ product, setProduct, setComments, profile_id }) => {
   const [content, setContent] = useState("");
   const { profilePicture } = useUserProfile(profile_id);
 

@@ -7,8 +7,6 @@ import Product from '../products/Product';
 import styles from '../../styles/Profile.module.css';
 import { axiosReq } from '../../api/axiosDefaults';
 
-// I need to find a way to add products to favourites or from here or from the product page(not products "already heavy page").
-// Need to create the edit form for the profile the delete will be only from staff user.
 
 const Profile = () => {
   const { id } = useParams();

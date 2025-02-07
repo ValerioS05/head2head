@@ -64,7 +64,7 @@ const Home = () => {
                   Explore Products
                 </Button>
               </Link>
-              <Link to="/comparisons">
+              <Link to="/comparisons/create">
                 <Button
                   variant="secondary"
                   size="lg"
