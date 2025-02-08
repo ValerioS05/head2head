@@ -7,8 +7,6 @@ import Asset from "../../components/Asset";
 import Product from "../products/Product";
 
 // I need to change the layout or the product css to display better and less amount.
-// I need to add validation if the user is logged in or authorized.(I can access the page if im logged out.)
-// I need to create the ComparisonsPage.
 // Need to add the filtering also.
 
 const ComparisonCreateForm = () => {
@@ -79,11 +77,11 @@ const ComparisonCreateForm = () => {
                     <Button
                       variant={isSelected ? "outline-success" : "success"}
                       onClick={() => handleSelectProduct(product)}
-                      className="w-100 mt-2" // Need to change variant and style{styles.SelectButton} maybe.
+                      className="w-100 mt-2"
                     >
                       {isSelected ? "Deselect" : "Select"} 
                     </Button>
-                  </Col>// maybe change the deselect with different word? 
+                  </Col>
                 );
               })}
             </Row>

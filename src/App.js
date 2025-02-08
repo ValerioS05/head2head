@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
@@ -19,10 +19,26 @@ import UsernameForm from "./pages/profiles/UsernameForm";
 import PasswordForm from "./pages/profiles/PasswordForm";
 import ComparisonCreateForm from "./pages/comparison/ComparisonCreateForm";
 import ComparisonDetail from "./pages/comparison/ComparisonDetail";
+import Asset from "./components/Asset";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true); // Set loading state
   const currentUser = useCurrentUser(); // Get current user
   const { isStaff } = useUserProfile(currentUser?.profile_id); // Get is staff member
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // 2 seconds delay give time to load
+
+    // Cleanup on unmount
+    return () => clearTimeout(timer);
+  }, []);
+
+  // If loading show asset 
+  if (isLoading) {
+    return <Asset spinner />;
+  }
 
   return (
     <div className={styles.App}>

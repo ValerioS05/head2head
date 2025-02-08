@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import { Image } from "react-bootstrap";
+import { Image, Alert } from "react-bootstrap";
 
 import styles from "../../styles/ProductsForm.module.css";
 import appStyles from "../../App.module.css";
@@ -46,29 +46,19 @@ function ProductsEditForm() {
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const {data} = await axiosReq.get(`/products/${id}/`)
-        const {
-            productName,
-            category,
-            description,
-            price,
-            location,
-            image,
-            keywords,
-            features,
-          } = data;
+        const { data } = await axiosReq.get(`/products/${id}/`);
         setProductData({
-            productName: data.name,
-            category,
-            description,
-            price,
-            location,
-            image: data.image ? `https://res.cloudinary.com/drsvdv8rb/${data.image}` : "",
-            keywords,
-            features,
-        })
+          productName: data.name,
+          category: data.category,
+          description: data.description,
+          price: data.price,
+          location: data.location,
+          image: data.image ? `https://res.cloudinary.com/drsvdv8rb/${data.image}` : "",
+          keywords: data.keywords,
+          features: data.features,
+        });
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     };
 
@@ -111,7 +101,7 @@ function ProductsEditForm() {
     }
 
     try {
-        await axiosReq.put(`/products/${id}/`, formData);
+      await axiosReq.put(`/products/${id}/`, formData);
       history.push(`/products/${id}/`);
     } catch (err) {
       console.log(err);
@@ -131,6 +121,11 @@ function ProductsEditForm() {
           value={productName}
           onChange={handleChange}
         />
+        {errors?.name?.map((message, idx) => (
+          <Alert variant="danger" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
 
       <Form.Group>
@@ -154,6 +149,11 @@ function ProductsEditForm() {
             ))}
           </Form.Control>
         )}
+        {errors?.category?.map((message, idx) => (
+          <Alert variant="danger" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
 
       <Form.Group>
@@ -165,6 +165,11 @@ function ProductsEditForm() {
           value={description}
           onChange={handleChange}
         />
+        {errors?.description?.map((message, idx) => (
+          <Alert variant="danger" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
 
       <Form.Group>
@@ -175,6 +180,11 @@ function ProductsEditForm() {
           value={price}
           onChange={handleChange}
         />
+        {errors?.price?.map((message, idx) => (
+          <Alert variant="danger" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
 
       <Form.Group>
@@ -185,6 +195,11 @@ function ProductsEditForm() {
           value={location}
           onChange={handleChange}
         />
+        {errors?.location?.map((message, idx) => (
+          <Alert variant="danger" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
 
       <Form.Group>
@@ -196,6 +211,11 @@ function ProductsEditForm() {
           value={keywords}
           onChange={handleChange}
         />
+        {errors?.keywords?.map((message, idx) => (
+          <Alert variant="danger" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
 
       <Form.Group>
@@ -207,6 +227,11 @@ function ProductsEditForm() {
           value={features}
           onChange={handleChange}
         />
+        {errors?.features?.map((message, idx) => (
+          <Alert variant="danger" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
     </div>
   );
@@ -219,23 +244,17 @@ function ProductsEditForm() {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className={styles.CenterText}>
-
-                  <figure>
-                    <Image
-                      className={`${appStyles.Image}`}
-                      src={image}
-                      rounded
-                    />
-                  </figure>
-                  <div>
-                    <Form.Label
-                      className={`${btnStyles.Button} ${styles.Btn}`}
-                      htmlFor="image-upload"
-                    >
-                      Change the image
-                    </Form.Label>
-                  </div>
-               
+              <figure>
+                <Image className={`${appStyles.Image}`} src={image} rounded />
+              </figure>
+              <div>
+                <Form.Label
+                  className={`${btnStyles.Button} ${styles.Btn}`}
+                  htmlFor="image-upload"
+                >
+                  Change the image
+                </Form.Label>
+              </div>
 
               <div className="d-flex justify-content-center mt-2">
                 <Form.File
@@ -247,6 +266,7 @@ function ProductsEditForm() {
                 />
               </div>
             </Form.Group>
+
             {productFields}
           </Container>
         </Col>
