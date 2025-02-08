@@ -40,12 +40,12 @@ const ProfileEditForm = () => {
         });
 
         if (currentUser && currentUser.username !== owner) {
-            history.push("/");
-          }
-        } catch (err) {
-          console.log("Error fetching profile:", err);
+          history.push("/");
         }
-      };
+      } catch (err) {
+        console.log("Error fetching profile:", err);
+      }
+    };
 
     handleMount();
   }, [id, currentUser, history]);
@@ -108,13 +108,13 @@ const ProfileEditForm = () => {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className={styles.CenterText}>
-                  <figure>
-                    <Image
-                      className={`${appStyles.Image}`}
-                      src={profilePicture}
-                      rounded
-                    />
-                  </figure>
+              <figure>
+                <Image
+                  className={`${appStyles.Image}`}
+                  src={profilePicture}
+                  rounded
+                />
+              </figure>
 
               <div className="d-flex justify-content-center mt-2">
                 <Form.File
@@ -125,17 +125,12 @@ const ProfileEditForm = () => {
                   className={styles.ImgInput}
                 />
               </div>
+              {errors.profile_picture && (
+                <div className="text-danger">{errors.profile_picture}</div>
+              )}
             </Form.Group>
 
-            <Form.Group>
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="owner"
-                value={owner}
-                onChange={handleChange}
-              />
-            </Form.Group>
+            <div className={styles.OwnerDiv}>{owner}</div>
 
             <Form.Group>
               <Form.Label>Bio</Form.Label>
@@ -145,7 +140,9 @@ const ProfileEditForm = () => {
                 value={bio}
                 onChange={handleChange}
                 rows={6}
+                isInvalid={!!errors.bio}
               />
+              {errors.bio && <div className="text-danger">{errors.bio}</div>}
             </Form.Group>
 
             <Form.Group>
@@ -155,7 +152,11 @@ const ProfileEditForm = () => {
                 name="location"
                 value={location}
                 onChange={handleChange}
+                isInvalid={!!errors.location}
               />
+              {errors.location && (
+                <div className="text-danger">{errors.location}</div>
+              )}
             </Form.Group>
             <div className="text-center mt-3">
               <Link to={`/profiles/${id}/edit/username`}>
@@ -167,9 +168,7 @@ const ProfileEditForm = () => {
                 </Button>
               </Link>
               <Link to={`/profile/${id}/edit/password/`}>
-                <Button
-                  className={`${btnStyles.Button} ${styles.Btn}`}
-                >
+                <Button className={`${btnStyles.Button} ${styles.Btn}`}>
                   Change Password
                 </Button>
               </Link>
@@ -191,6 +190,6 @@ const ProfileEditForm = () => {
       </div>
     </Form>
   );
-}
+};
 
 export default ProfileEditForm;

@@ -40,6 +40,14 @@
     color: black;
     padding: 1rem;
 }
+
+.OwnerDiv {
+    color: orangered;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    border-bottom: 2px solid aqua;
+}
 @media (max-width: 767px) {
   .ProfilePicture {
     width: 80%;
