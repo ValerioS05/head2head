@@ -20,41 +20,109 @@ import PasswordForm from "./pages/profiles/PasswordForm";
 import ComparisonCreateForm from "./pages/comparison/ComparisonCreateForm";
 import ComparisonDetail from "./pages/comparison/ComparisonDetail";
 
-
 function App() {
   const currentUser = useCurrentUser(); // Get current user
-  const { isStaff } = useUserProfile(currentUser?.profile_id);
+  const { isStaff } = useUserProfile(currentUser?.profile_id); // Get is staff member
 
   return (
     <div className={styles.App}>
       <NavBar />
       <Container className={styles.Main}>
         <Switch>
+          {/* Public Routes */}
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
+
+          {/* Product Routes */}
           <Route
             exact
             path="/products"
-            render={() => (
-              <ProductsPage message="No results for your search, try other keywords." />
-            )}
+            render={() =>
+              currentUser ? (
+                <ProductsPage message="No results for your search, try other keywords." />
+              ) : (
+                <Redirect to="/signin" />
+              )
+            }
           />
           <Route
             exact
             path="/product/create"
             render={() =>
-              isStaff ? <ProductCreateForm /> : <Redirect to="/" />
+              currentUser && isStaff ? (
+                <ProductCreateForm />
+              ) : (
+                <Redirect to="/signin" />
+              )
             }
           />
-          <Route exact path="/products/:id" render={() => <ProductPage />} />
-          <Route exact path="/products/:id/edit" render={() => isStaff ? <ProductsEditForm /> : <Redirect to="/" /> } />
-          <Route exact path="/profiles/:id" render={() => <Profile />} />
-          <Route exact path="/profiles/:id/edit" render={() =><ProfileEditForm /> } />
-          <Route exact path="/profiles/:id/edit/username" render={() => <UsernameForm /> } />
-          <Route exact path="/profiles/:id/edit/password/" render={() => <PasswordForm /> } />
-          <Route exact path="/comparisons/create" render={() => <ComparisonCreateForm />} />
-          <Route exact path="/comparisons/:id" render={() => <ComparisonDetail />} />
+          <Route
+            exact
+            path="/products/:id"
+            render={() =>
+              currentUser ? <ProductPage /> : <Redirect to="/signin" />
+            }
+          />
+          <Route
+            exact
+            path="/products/:id/edit"
+            render={() =>
+              currentUser && isStaff ? (
+                <ProductsEditForm />
+              ) : (
+                <Redirect to="/signin" />
+              )
+            }
+          />
+
+          {/* Profile Routes */}
+          <Route
+            exact
+            path="/profiles/:id"
+            render={() =>
+              currentUser ? <Profile /> : <Redirect to="/signin" />
+            }
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit"
+            render={() =>
+              currentUser ? <ProfileEditForm /> : <Redirect to="/signin" />
+            }
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit/username"
+            render={() =>
+              currentUser ? <UsernameForm /> : <Redirect to="/signin" />
+            }
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit/password"
+            render={() =>
+              currentUser ? <PasswordForm /> : <Redirect to="/signin" />
+            }
+          />
+
+          {/* Comparison Routes */}
+          <Route
+            exact
+            path="/comparisons/create"
+            render={() =>
+              currentUser ? <ComparisonCreateForm /> : <Redirect to="/signin" />
+            }
+          />
+          <Route
+            exact
+            path="/comparisons/:id"
+            render={() =>
+              currentUser ? <ComparisonDetail /> : <Redirect to="/signin" />
+            }
+          />
+
+          {/* 404 page */}
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>
