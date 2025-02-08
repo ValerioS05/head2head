@@ -6,15 +6,15 @@ import Asset from '../../components/Asset';
 import Product from '../products/Product';
 import styles from '../../styles/Profile.module.css';
 import { axiosReq } from '../../api/axiosDefaults';
-
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 const Profile = () => {
   const { id } = useParams();
-  const { isStaff, profilePicture, profileData, loading, error } =
-    useUserProfile(id);
+  const { profilePicture, profileData, loading, error } = useUserProfile(id);
 
   const [favouriteProducts, setFavouriteProducts] = useState([]);
   const [fetchingProducts, setFetchingProducts] = useState(true);
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     setFavouriteProducts([]);
@@ -76,9 +76,11 @@ const Profile = () => {
                     className={styles.ProfilePicture}
                   />
                 </div>
-                <Link to={`/profiles/${id}/edit`} className="edit-profile-link">
-                  <i className="fas fa-edit" /> Edit Profile
-                </Link>
+                {currentUser?.profile_id === parseInt(id) && (
+                  <Link to={`/profiles/${id}/edit`} className="edit-profile-link">
+                    <i className="fas fa-edit" /> Edit Profile
+                  </Link>
+                )}
                 <div className={styles.Username}>{profileData.owner}</div>
                 <div className={styles.Text}>
                   <div>{profileData.location}</div>
