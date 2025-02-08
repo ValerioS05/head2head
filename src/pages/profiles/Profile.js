@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useParams , Link } from 'react-router-dom';
-import useUserProfile from '../../hooks/useUserProfile';
-import { Card, Col, Row, Container } from 'react-bootstrap';
-import Asset from '../../components/Asset';
-import Product from '../products/Product';
-import styles from '../../styles/Profile.module.css';
-import { axiosReq } from '../../api/axiosDefaults';
-import { useCurrentUser } from '../../contexts/CurrentUserContext';
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import useUserProfile from "../../hooks/useUserProfile";
+import { Card, Col, Row, Container } from "react-bootstrap";
+import Asset from "../../components/Asset";
+import Product from "../products/Product";
+import styles from "../../styles/Profile.module.css";
+import { axiosReq } from "../../api/axiosDefaults";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const Profile = () => {
   const { id } = useParams();
@@ -27,12 +27,12 @@ const Profile = () => {
     if (profileData.favourites.length > 0) {
       const fetchProducts = async () => {
         try {
-          let url = '/products/';
+          let url = "/products/";
           let allProducts = [];
           let nextPage = url;
           while (nextPage) {
             const response = await axiosReq.get(nextPage, {
-              params: { ids: profileData.favourites.join(',') },
+              params: { ids: profileData.favourites.join(",") },
             });
             const filteredProducts = response.data.results.filter((product) =>
               profileData.favourites.includes(product.id)
@@ -43,7 +43,7 @@ const Profile = () => {
           }
           setFavouriteProducts(allProducts);
         } catch (err) {
-          console.error('Error fetching products:', err);
+          console.error("Error fetching products:", err);
         } finally {
           setFetchingProducts(false);
         }
@@ -77,7 +77,10 @@ const Profile = () => {
                   />
                 </div>
                 {currentUser?.profile_id === parseInt(id) && (
-                  <Link to={`/profiles/${id}/edit`} className="edit-profile-link">
+                  <Link
+                    to={`/profiles/${id}/edit`}
+                    className="edit-profile-link"
+                  >
                     <i className="fas fa-edit" /> Edit Profile
                   </Link>
                 )}
@@ -90,21 +93,26 @@ const Profile = () => {
                 <div className={styles.Favourites}>
                   <h5>My favourites</h5>
                   {fetchingProducts ? (
-                    <div>Loading favourites...</div>
+                    <></>
                   ) : favouriteProducts.length > 0 ? (
                     <Row>
-                      {favouriteProducts.map((product) => {
+                      {favouriteProducts.map((product, index) => {
                         const { description, features, ...productInfo } =
                           product;
                         return (
-                          <Col key={product.id} sm={12} md={6} lg={4}>
+                          <Col
+                            key={`${product.id}-${index}`}
+                            sm={12}
+                            md={6}
+                            lg={4}
+                          >
                             <Product {...productInfo} productPage={false} />
                           </Col>
                         );
                       })}
                     </Row>
                   ) : (
-                    <p>No favourites yet.</p>
+                    <></>
                   )}
                 </div>
               </Card.Body>

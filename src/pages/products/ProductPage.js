@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import styles from "../../styles/ProductPage.module.css";
@@ -14,20 +13,23 @@ import Asset from "../../components/Asset";
 
 function ProductPage() {
   const { id } = useParams();
-  const [product , setProduct] = useState({ results: [] });
+  const [product, setProduct] = useState({ results: [] });
+  const [comments, setComments] = useState({ results: [] });
+  const [loaded, setLoaded] = useState(false);
   const currentUser = useCurrentUser();
   const profile_image = currentUser?.profile_image;
-  const [comments, setComments] = useState({ results: [] });
 
   useEffect(() => {
     const handleMount = async () => {
+      setLoaded(false);
       try {
-        const [{ data: product }, { data: comments}] = await Promise.all([
+        const [{ data: product }, { data: comments }] = await Promise.all([
           axiosReq.get(`/products/${id}`),
-          axiosReq.get(`/comments/?product=${id}`)
+          axiosReq.get(`/comments/?product=${id}`),
         ]);
         setProduct({ results: [product] });
         setComments(comments);
+        setLoaded(true);
       } catch (err) {
         console.log(err);
       }
@@ -35,6 +37,17 @@ function ProductPage() {
 
     handleMount();
   }, [id]);
+
+  if (!loaded) {
+    return (
+      <Row>
+        <Col className={`py-2 p-0 p-lg-2 ${styles.Product}`} lg={12}>
+          <Asset spinner />
+        </Col>
+      </Row>
+    );
+  }
+
   return (
     <Row>
       <Col className={`"py-2 p-0 p-lg-2" lg={12} ${styles.Product}`}>
@@ -76,7 +89,9 @@ function ProductPage() {
               />
             ))}
           </InfiniteScroll>
-        ) : <span>No Comments for this product.</span>}
+        ) : (
+          <span>No Comments for this product. Be the first!</span>
+        )}
       </Col>
     </Row>
   );

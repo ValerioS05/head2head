@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -8,10 +8,20 @@ import styles2 from "../../styles/ProfileImage.module.css";
 import ProfileImage from "../../components/ProfileImage";
 import { axiosRes } from "../../api/axiosDefaults";
 import useUserProfile from "../../hooks/useUserProfile";
+import Asset from "../../components/Asset";
 
 const CommentsForm = ({ product, setProduct, setComments, profile_id }) => {
   const [content, setContent] = useState("");
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { profilePicture } = useUserProfile(profile_id);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setImageLoaded(true);
+    }, 2000); 
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleChange = (event) => {
     setContent(event.target.value);
@@ -46,7 +56,11 @@ const CommentsForm = ({ product, setProduct, setComments, profile_id }) => {
       <Form.Group>
         <InputGroup>
           <Link to={`/profiles/${profile_id}`}>
-            <ProfileImage src={profilePicture} className={styles2.ProfileImage} />
+            {imageLoaded ? (
+              <ProfileImage src={profilePicture} className={styles2.ProfileImage} />
+            ) : (
+              <Asset spinner />
+            )}
           </Link>
           <Form.Control
             className={styles.FormControl}
@@ -54,7 +68,7 @@ const CommentsForm = ({ product, setProduct, setComments, profile_id }) => {
             as="textarea"
             value={content}
             onChange={handleChange}
-            rows={2}
+            rows={4}
           />
         </InputGroup>
       </Form.Group>
@@ -67,6 +81,6 @@ const CommentsForm = ({ product, setProduct, setComments, profile_id }) => {
       </button>
     </Form>
   );
-}
+};
 
 export default CommentsForm;

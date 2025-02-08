@@ -162,7 +162,7 @@ const ProfileEditForm = () => {
               <Link to={`/profiles/${id}/edit/username`}>
                 <Button
                   className={`${btnStyles.Button} ${styles.Btn}`}
-                  style={{ marginRight: '10px' }}
+                  style={{ marginRight: "10px" }}
                 >
                   Change Username
                 </Button>
