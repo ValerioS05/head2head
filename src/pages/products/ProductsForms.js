@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import { Image } from "react-bootstrap";
+import { Image, Alert } from "react-bootstrap";
 
 import Upload from "../../assets/upload.jpeg";
 
@@ -97,6 +97,11 @@ function ProductCreateForm() {
           value={productName}
           onChange={handleChange}
         />
+        {errors?.name?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
 
       <Form.Group>
@@ -120,6 +125,11 @@ function ProductCreateForm() {
             ))}
           </Form.Control>
         )}
+        {errors?.category?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
 
       <Form.Group>
@@ -131,6 +141,11 @@ function ProductCreateForm() {
           value={description}
           onChange={handleChange}
         />
+        {errors?.description?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
 
       <Form.Group>
@@ -141,6 +156,11 @@ function ProductCreateForm() {
           value={price}
           onChange={handleChange}
         />
+        {errors?.price?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
 
       <Form.Group>
@@ -151,6 +171,11 @@ function ProductCreateForm() {
           value={location}
           onChange={handleChange}
         />
+        {errors?.location?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
 
       <Form.Group>
@@ -162,6 +187,11 @@ function ProductCreateForm() {
           value={keywords}
           onChange={handleChange}
         />
+        {errors?.keywords?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
 
       <Form.Group>
@@ -173,6 +203,11 @@ function ProductCreateForm() {
           value={features}
           onChange={handleChange}
         />
+        {errors?.features?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
       </Form.Group>
     </div>
   );
@@ -225,6 +260,12 @@ function ProductCreateForm() {
                 />
               </div>
             </Form.Group>
+            {errors?.image?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
+
             {productFields}
           </Container>
         </Col>

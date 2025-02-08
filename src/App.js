@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
@@ -23,7 +23,7 @@ import ComparisonDetail from "./pages/comparison/ComparisonDetail";
 
 function App() {
   const currentUser = useCurrentUser(); // Get current user
-  const { isStaff, loading, error } = useUserProfile(currentUser?.profile_id);
+  const { isStaff } = useUserProfile(currentUser?.profile_id);
 
   return (
     <div className={styles.App}>
