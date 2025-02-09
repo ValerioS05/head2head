@@ -8,7 +8,7 @@ import { Image, Alert } from "react-bootstrap";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import styles from "../../styles/Profile.module.css";
+import styles from "../../styles/ProfileEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { validateImage } from "../../utils/ValidateImage";

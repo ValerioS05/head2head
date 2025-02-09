@@ -1,0 +1,78 @@
+.Container {
+    min-height: 343px;
+    color: black;
+    text-align: center;
+    box-shadow: 0 0 50px orangered;
+  }
+  
+  .ImgContainer {
+    color: white;
+    cursor: pointer;
+  }
+  
+  .ImgInput {
+    margin-left: 16%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: darkblue;
+  }
+  
+  .ImgInput input {
+    display: none;
+  }
+  
+  /* Targeting all form controls */
+  :global(.form-control) {
+    text-align: center;
+    background-color: black;
+    color: white;
+  }
+  
+  :global(.form-control):focus {
+    border: 1px solid orangered;
+    box-shadow: 0 0 10px aqua;
+  }
+  
+  .Btn {
+    margin: 40px;
+    font-size: 1.5rem;
+    box-shadow: 0 0 15px orangered;
+  }
+  
+  .Btn:hover {
+    background-color: white;
+    box-shadow: 0 0 15px aqua;
+  }
+  
+  figure {
+    height: 300px;
+    width: 300px;
+  }
+  
+  .OwnerDiv {
+    color: orangered;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    border-bottom: 2px solid aqua;
+    margin: 20px 0;
+  }
+  
+  /* Tablets */
+  @media (min-width: 768px) {
+    .Container {
+      width: 60%;
+    }
+  }
+  
+  /* Desktops */
+  @media (min-width: 1024px) {
+    .Container {
+      width: 80%;
+    }
+  
+    figure {
+      height: 350px;
+      width: 350px;
+    }
+  }
+  
