@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-
 import styles from "../../styles/CommentsForm.module.css";
-import styles2 from "../../styles/ProfileImage.module.css";
-import ProfileImage from "../../components/ProfileImage";
 import { axiosRes } from "../../api/axiosDefaults";
-import useUserProfile from "../../hooks/useUserProfile";
-import Asset from "../../components/Asset";
 
-const CommentsForm = ({ product, setProduct, setComments, profile_id }) => {
+const CommentsForm = ({ product, setProduct, setComments}) => {
   const [content, setContent] = useState("");
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const { profilePicture } = useUserProfile(profile_id);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setImageLoaded(true);
     }, 2000); 
 
     return () => clearTimeout(timer);
@@ -29,6 +22,9 @@ const CommentsForm = ({ product, setProduct, setComments, profile_id }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    setIsSubmitting(true);
+
     try {
       const { data } = await axiosRes.post("/comments/", {
         content,
@@ -46,8 +42,11 @@ const CommentsForm = ({ product, setProduct, setComments, profile_id }) => {
       }));
 
       setContent("");
+
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -55,13 +54,6 @@ const CommentsForm = ({ product, setProduct, setComments, profile_id }) => {
     <Form className={`${styles.Form} mt-2`} onSubmit={handleSubmit}>
       <Form.Group>
         <InputGroup>
-          <Link to={`/profiles/${profile_id}`}>
-            {imageLoaded ? (
-              <ProfileImage src={profilePicture} className={styles2.ProfileImage} />
-            ) : (
-              <Asset spinner />
-            )}
-          </Link>
           <Form.Control
             className={styles.FormControl}
             placeholder="Write a comment..."
@@ -74,10 +66,10 @@ const CommentsForm = ({ product, setProduct, setComments, profile_id }) => {
       </Form.Group>
       <button
         className={`${styles.Button} d-block ml-auto`}
-        disabled={!content.trim()}
+        disabled={!content.trim() || isSubmitting}
         type="submit"
       >
-        Post
+        {isSubmitting ? "Posting..." : "Post"}
       </button>
     </Form>
   );

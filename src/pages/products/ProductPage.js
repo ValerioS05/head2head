@@ -11,7 +11,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Asset from "../../components/Asset";
 
-function ProductPage() {
+const ProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({ results: [] });
   const [comments, setComments] = useState({ results: [] });
@@ -90,11 +90,13 @@ function ProductPage() {
             ))}
           </InfiniteScroll>
         ) : (
-          <span>No Comments for this product. Be the first!</span>
+          <p className={styles.NoComments}>
+            No Comments for this product. Be the first!
+          </p>
         )}
       </Col>
     </Row>
   );
-}
+};
 
 export default ProductPage;

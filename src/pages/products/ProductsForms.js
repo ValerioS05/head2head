@@ -19,7 +19,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 
 import { validateImage } from "../../utils/ValidateImage";
 
-function ProductCreateForm() {
+const ProductCreateForm = () => {
   const [errors, setErrors] = useState({});
   const [productData, setProductData] = useState({
     productName: "",

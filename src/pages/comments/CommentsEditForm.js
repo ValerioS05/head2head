@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-
 import Form from "react-bootstrap/Form";
 import { axiosRes } from "../../api/axiosDefaults";
-
 import styles from "../../styles/CommentsForm.module.css";
 
 const CommentEditForm = (props) => {
-  const { id, content, setShowEditForm, setComments ,product_id } = props;
+  const { id, content, setShowEditForm, setComments, product_id } = props;
 
   const [formContent, setFormContent] = useState(content);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (event) => {
     setFormContent(event.target.value);
@@ -16,11 +15,14 @@ const CommentEditForm = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
+
     try {
       await axiosRes.put(`/comments/${id}/`, {
         content: formContent.trim(),
         product: product_id,
       });
+
       setComments((prevComments) => ({
         ...prevComments,
         results: prevComments.results.map((comment) => {
@@ -35,6 +37,8 @@ const CommentEditForm = (props) => {
       setShowEditForm(false);
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -55,18 +59,18 @@ const CommentEditForm = (props) => {
           onClick={() => setShowEditForm(false)}
           type="button"
         >
-          cancel
+          Cancel
         </button>
         <button
           className={styles.Button}
-          disabled={!content.trim()}
+          disabled={!formContent.trim() || isSubmitting}
           type="submit"
         >
-          save
+          {isSubmitting ? "Saving..." : "Save"}
         </button>
       </div>
     </Form>
   );
-}
+};
 
 export default CommentEditForm;

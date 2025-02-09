@@ -23,16 +23,20 @@ function ProductsPage({ message, filter = "" }) {
     error: categoriesError,
   } = useCategories();
 
-  // Fetch products when filter or query changes
   useEffect(() => {
+    let isMounted = true;
+
     const fetchProducts = async () => {
       try {
         const sortQuery = sortOption ? `&ordering=${sortOption}` : '';
         const { data } = await axiosReq.get(
           `/products/?${filter}search=${query}&category=${selectedCategory}${sortQuery}`
         );
-        setProducts(data);
-        setLoaded(true);
+
+        if (isMounted) {
+          setProducts(data);
+          setLoaded(true);
+        }
       } catch (err) {
         console.log("Error fetching products", err);
       }
@@ -46,6 +50,7 @@ function ProductsPage({ message, filter = "" }) {
 
     return () => {
       clearTimeout(timer);
+      isMounted = false;
     };
   }, [filter, query, selectedCategory, sortOption]);
 

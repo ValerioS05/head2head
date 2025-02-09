@@ -1,10 +1,8 @@
-.Form {
-  margin: 10px;
-}
+
 
 .FormControl {
   border: 1px solid orangered;
-  max-width: 90%;
+  max-width: 100%;
   margin: 0 10px;
   box-shadow: 0 0 5px orangered;
 }

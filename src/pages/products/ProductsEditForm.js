@@ -14,8 +14,9 @@ import Asset from "../../components/Asset";
 import useCategories from "../../hooks/useCategories";
 import { useHistory, useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
+import { validateImage } from "../../utils/ValidateImage";
 
-function ProductsEditForm() {
+const ProductsEditForm = () => {
   const [errors, setErrors] = useState({});
   const [productData, setProductData] = useState({
     productName: "",
@@ -27,6 +28,9 @@ function ProductsEditForm() {
     keywords: "",
     features: "",
   });
+
+  const [imageError, setImageError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     productName,
@@ -53,7 +57,9 @@ function ProductsEditForm() {
           description: data.description,
           price: data.price,
           location: data.location,
-          image: data.image ? `https://res.cloudinary.com/drsvdv8rb/${data.image}` : "",
+          image: data.image
+            ? `https://res.cloudinary.com/drsvdv8rb/${data.image}`
+            : "",
           keywords: data.keywords,
           features: data.features,
         });
@@ -73,12 +79,20 @@ function ProductsEditForm() {
   };
 
   const handleChangeImage = (event) => {
-    if (event.target.files.length) {
-      URL.revokeObjectURL(image);
-      setProductData({
-        ...productData,
-        image: URL.createObjectURL(event.target.files[0]),
-      });
+    const file = event.target.files[0];
+
+    if (file) {
+      const validationError = validateImage(file);
+      if (validationError) {
+        setImageError(validationError);
+      } else {
+        setImageError(null);
+        URL.revokeObjectURL(image);
+        setProductData({
+          ...productData,
+          image: URL.createObjectURL(file),
+        });
+      }
     }
   };
 
@@ -86,8 +100,12 @@ function ProductsEditForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData();
+    if (imageError) {
+      return;
+    }
+    setIsSubmitting(true);
 
+    const formData = new FormData();
     formData.append("name", productName);
     formData.append("category", category);
     formData.append("description", description);
@@ -108,6 +126,8 @@ function ProductsEditForm() {
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -255,7 +275,7 @@ function ProductsEditForm() {
                   Change the image
                 </Form.Label>
               </div>
-
+              {imageError && <Alert variant="danger">{imageError}</Alert>}
               <div className="d-flex justify-content-center mt-2">
                 <Form.File
                   id="image-upload"
@@ -279,12 +299,16 @@ function ProductsEditForm() {
         >
           Cancel
         </Button>
-        <Button className={`${btnStyles.Button} ${styles.Btn}`} type="submit">
-          Save
+        <Button
+          className={`${btnStyles.Button} ${styles.Btn}`}
+          type="submit"
+          disabled={isSubmitting || imageError }
+        >
+          {isSubmitting ? "Saving..." : "Save"}
         </Button>
       </div>
     </Form>
   );
-}
+};
 
 export default ProductsEditForm;
