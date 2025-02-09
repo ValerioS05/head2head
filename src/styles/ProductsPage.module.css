@@ -1,3 +1,9 @@
+.Content {
+  background-color: black;
+}
+.ProductRow {
+  background-color: black;
+}
 .SearchIcon {
   position: absolute;
   font-size: 1.2rem;

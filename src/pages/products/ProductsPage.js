@@ -24,19 +24,14 @@ function ProductsPage({ message, filter = "" }) {
   } = useCategories();
 
   useEffect(() => {
-    let isMounted = true;
-
     const fetchProducts = async () => {
       try {
         const sortQuery = sortOption ? `&ordering=${sortOption}` : '';
         const { data } = await axiosReq.get(
           `/products/?${filter}search=${query}&category=${selectedCategory}${sortQuery}`
         );
-
-        if (isMounted) {
-          setProducts(data);
-          setLoaded(true);
-        }
+        setProducts(data);
+        setLoaded(true);
       } catch (err) {
         console.log("Error fetching products", err);
       }
@@ -50,7 +45,6 @@ function ProductsPage({ message, filter = "" }) {
 
     return () => {
       clearTimeout(timer);
-      isMounted = false;
     };
   }, [filter, query, selectedCategory, sortOption]);
 

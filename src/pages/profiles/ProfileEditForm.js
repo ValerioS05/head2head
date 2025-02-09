@@ -4,13 +4,14 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import { Image } from "react-bootstrap";
+import { Image, Alert } from "react-bootstrap";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import styles from "../../styles/Profile.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
+import { validateImage } from "../../utils/ValidateImage";
 
 const ProfileEditForm = () => {
   const [errors, setErrors] = useState({});
@@ -21,6 +22,7 @@ const ProfileEditForm = () => {
     profilePicture: "",
   });
 
+  const [imageError, setImageError] = useState(null);
   const { owner, location, profilePicture, bio } = profileData;
   const imageInput = useRef(null);
   const history = useHistory();
@@ -58,13 +60,20 @@ const ProfileEditForm = () => {
   };
 
   const handleChangeImage = (event) => {
-    if (event.target.files.length) {
-      const file = event.target.files[0];
-      const previewUrl = URL.createObjectURL(file);
-      setProfileData({
-        ...profileData,
-        profilePicture: previewUrl,
-      });
+    const file = event.target.files[0];
+
+    if (file) {
+      const validationError = validateImage(file);
+      if (validationError) {
+        setImageError(validationError);
+      } else {
+        setImageError(null);
+        URL.revokeObjectURL(profilePicture);
+        setProfileData({
+          ...profileData,
+          profilePicture: URL.createObjectURL(file),
+        });
+      }
     }
   };
 
@@ -115,7 +124,15 @@ const ProfileEditForm = () => {
                   rounded
                 />
               </figure>
-
+              <div>
+                <Form.Label
+                  className={`${btnStyles.Button} ${styles.Btn}`}
+                  htmlFor="image-upload"
+                >
+                  Change Image
+                </Form.Label>
+              </div>
+              {imageError && <Alert variant="danger">{imageError}</Alert>}
               <div className="d-flex justify-content-center mt-2">
                 <Form.File
                   id="image-upload"
@@ -184,7 +201,11 @@ const ProfileEditForm = () => {
         >
           Cancel
         </Button>
-        <Button className={`${btnStyles.Button} ${styles.Btn}`} type="submit">
+        <Button
+          className={`${btnStyles.Button} ${styles.Btn}`}
+          type="submit"
+          disabled={imageError}
+        >
           Save
         </Button>
       </div>
