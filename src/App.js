@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // 2 seconds delay give time to load
+    }, 1000); // 1 seconds delay give time to load
 
     // Cleanup on unmount
     return () => clearTimeout(timer);

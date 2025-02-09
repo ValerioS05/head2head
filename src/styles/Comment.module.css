@@ -5,8 +5,11 @@
   max-width: 80%;
   border-radius: 10px;
   padding: 5px;
+  text-align: center;
 }
-
+.Comment p {
+  word-break: break-all;
+}
 .Owner {
   font-weight: bold;
   color: white;
@@ -19,7 +22,6 @@
 }
 
 .Edit {
-  color: orangered;
   padding-top: 0.1rem;
   border: 1px solid orangered;
   border-radius: 50%;
@@ -27,4 +29,14 @@
   margin-top: 5px;
 }
 
+.Edit i {
+  color: orangered
+}
 
+.UnauthorizedAlert {
+  color: orangered;
+  width: 60%;
+  margin: 0 auto;
+  border-radius: 50px;
+  text-align: center;
+}

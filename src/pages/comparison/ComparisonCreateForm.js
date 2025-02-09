@@ -8,6 +8,7 @@ import Product from "../products/Product";
 
 // I need to change the layout or the product css to display better and less amount.
 // Need to add the filtering also.
+// Need to add fedback during selection.
 
 const ComparisonCreateForm = () => {
   const [products, setProducts] = useState([]);

@@ -5,7 +5,6 @@ import ProfileImage from "../../components/ProfileImage";
 import styles from "../../styles/Comment.module.css";
 import CommentsEditForm from "./CommentsEditForm";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-
 import { EditMenu } from "../../components/EditMenu";
 import { axiosRes } from "../../api/axiosDefaults";
 import useUserProfile from "../../hooks/useUserProfile";
@@ -27,8 +26,15 @@ const Comment = (props) => {
   const { isStaff } = useUserProfile(currentUser?.profile_id);
   const is_owner = currentUser?.username === owner;
   const [showEditForm, setShowEditForm] = useState(false);
+  const [unauthorizedAction, setUnauthorizedAction] = useState(false); // state for unauthorized actions
 
   const handleDelete = async () => {
+    if (!(is_owner || isStaff)) {
+      setUnauthorizedAction(true); 
+      setTimeout(() => setUnauthorizedAction(false), 3000);
+      return;
+    }
+
     try {
       await axiosRes.delete(`/comments/${id}/`);
       setProduct((prevProduct) => ({
@@ -44,7 +50,23 @@ const Comment = (props) => {
         ...prevComments,
         results: prevComments.results.filter((comment) => comment.id !== id),
       }));
-    } catch (err) {}
+    } catch (err) {
+    }
+  };
+
+  const handleEdit = () => {
+    if (!(is_owner || isStaff)) {
+      setUnauthorizedAction(true); 
+      setTimeout(() => setUnauthorizedAction(false), 3000);
+      return;
+    }
+
+    if (!is_owner && isStaff) {
+      setUnauthorizedAction(true); 
+      setTimeout(() => setUnauthorizedAction(false), 3000); // Reset alert after 3 seconds
+      return;
+    }
+    setShowEditForm(true);
   };
 
   return (
@@ -60,6 +82,13 @@ const Comment = (props) => {
         <Media.Body className="align-self-center ml-2">
           <span className={styles.Owner}>{owner}</span>
           <span className={styles.Date}>{created_at}</span>
+
+          {unauthorizedAction && (
+            <div className={styles.UnauthorizedAlert}>
+              <p>You are not authorized to perform this action.</p>
+            </div>
+          )}
+
           {showEditForm ? (
             <CommentsEditForm
               id={id}
@@ -74,10 +103,11 @@ const Comment = (props) => {
             <p>{content}</p>
           )}
         </Media.Body>
+
         {(is_owner || isStaff) && !showEditForm && (
           <div className={styles.Edit}>
             <EditMenu
-              handleEdit={() => setShowEditForm(true)}
+              handleEdit={handleEdit}
               handleDelete={handleDelete}
             />
           </div>

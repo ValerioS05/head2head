@@ -49,7 +49,7 @@ const ComparisonDetail = () => {
           <h2 className={styles.title}>Product Comparison</h2>
           <Row>
             {products.map((product) => (
-              <Col key={product.id} md={6}>
+              <Col key={product.id} md={6} lg={6} sm={6} xs={6}>
                 <Product {...product} productPage={false} />
               </Col>
             ))}

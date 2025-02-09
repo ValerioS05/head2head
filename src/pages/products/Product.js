@@ -83,7 +83,7 @@ const Product = (props) => {
             height={40}
             className={styles.profileImage}
           />
-          {owner}
+          <span>{owner}</span>
         </Link>
         <div className={styles.EditMenu}>
           {!loadingCurrentUser && isCurrentUserStaff && productPage && (
