@@ -17,6 +17,8 @@ import useCategories from "../../hooks/useCategories";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 
+import { validateImage } from "../../utils/ValidateImage";
+
 function ProductCreateForm() {
   const [errors, setErrors] = useState({});
   const [productData, setProductData] = useState({
@@ -29,6 +31,7 @@ function ProductCreateForm() {
     keywords: "",
     features: "",
   });
+  const [isImageValid, setIsImageValid] = useState(true); // Track image validity
 
   const {
     productName,
@@ -53,11 +56,28 @@ function ProductCreateForm() {
 
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
+      const file = event.target.files[0];
+
+      const validationError = validateImage(file);
+      if (validationError) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          image: [validationError],
+        }));
+        setIsImageValid(false);
+        return;
+      }
+
       URL.revokeObjectURL(image);
       setProductData({
         ...productData,
-        image: URL.createObjectURL(event.target.files[0]),
+        image: URL.createObjectURL(file),
       });
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        image: [],
+      }));
+      setIsImageValid(true);
     }
   };
 
@@ -261,7 +281,7 @@ function ProductCreateForm() {
               </div>
             </Form.Group>
             {errors?.image?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <Alert variant="danger" key={idx}>
                 {message}
               </Alert>
             ))}
@@ -278,7 +298,11 @@ function ProductCreateForm() {
         >
           Cancel
         </Button>
-        <Button className={`${btnStyles.Button} ${styles.Btn}`} type="submit">
+        <Button
+          className={`${btnStyles.Button} ${styles.Btn}`}
+          type="submit"
+          disabled={!isImageValid}
+        >
           Create
         </Button>
       </div>

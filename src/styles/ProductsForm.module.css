@@ -6,12 +6,18 @@
 }
 .ImgContainer {
   color: white;
+  cursor:pointer;
 }
 .ImgInput {
   margin-left: 16%;
   margin-top: 10px;
   margin-bottom: 10px;
   color:darkblue;
+  
+}
+
+.ImgInput input {
+  display: none;
 }
 
 /* Targeting all form controls to align text in the center */
@@ -35,6 +41,10 @@
   background-color: white;
   box-shadow: 0 0 15px aqua;
 }
+figure {
+  height: 300px;
+  width: 300px;
+}
 /* Tablets */
 @media (min-width: 768px) {
   .Container {
@@ -46,5 +56,10 @@
 @media (min-width: 1024px) {
   .Container {
     width: 80%;
+  }
+
+  figure {
+    height: 350px;
+    width: 350px;
   }
 }
