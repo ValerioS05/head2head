@@ -13,7 +13,12 @@ import styles from "../../styles/ProfileEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { validateImage } from "../../utils/ValidateImage";
-
+// Profile form
+/* the profile form is displayed exactly as the profile 
+The form contains not all the props to be changed directly in the page
+The username and password (Most important details) are handled in the respective forms.
+The use can click on the buttons to be redirected to the username or password form.
+*/
 const ProfileEditForm = () => {
   const [errors, setErrors] = useState({});
   const [profileData, setProfileData] = useState({

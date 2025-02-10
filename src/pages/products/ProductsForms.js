@@ -19,6 +19,8 @@ import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 
 import { validateImage } from "../../utils/ValidateImage";
+// Create product form
+// handles the creation of a product with validation over images and some of the input.
 
 const ProductCreateForm = () => {
   const [errors, setErrors] = useState({});

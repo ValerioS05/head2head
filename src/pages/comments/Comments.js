@@ -8,7 +8,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { EditMenu } from "../../components/EditMenu";
 import { axiosRes } from "../../api/axiosDefaults";
 import useUserProfile from "../../hooks/useUserProfile";
-
+// Comment component
 const Comment = (props) => {
   const {
     profile_id,
@@ -21,13 +21,19 @@ const Comment = (props) => {
     setComments,
     product_id,
   } = props;
-
+  // getting the user profile/ state/ role
   const currentUser = useCurrentUser();
   const { isStaff } = useUserProfile(currentUser?.profile_id);
   const is_owner = currentUser?.username === owner;
+  // state to manage visibility of the form
   const [showEditForm, setShowEditForm] = useState(false);
-  const [unauthorizedAction, setUnauthorizedAction] = useState(false); // state for unauthorized actions
-
+  // state for unauthorized actions
+  const [unauthorizedAction, setUnauthorizedAction] = useState(false);
+  /*
+    In here the delete function checks for owner status/role
+    before giving access to the functionality.
+    The comments is fetched by id and its directly related to the product
+  */
   const handleDelete = async () => {
     if (!(is_owner || isStaff)) {
       setUnauthorizedAction(true);
@@ -54,7 +60,7 @@ const Comment = (props) => {
       alert("There was an error deleting the comment. Please try again later.");
     }
   };
-
+  // Same as for the edit form reguarding authorization.
   const handleEdit = () => {
     if (!(is_owner || isStaff)) {
       setUnauthorizedAction(true);
@@ -69,7 +75,7 @@ const Comment = (props) => {
     }
     setShowEditForm(true);
   };
-
+// renders the comment and the edit
   return (
     <div className={styles.Comment}>
       <Media>

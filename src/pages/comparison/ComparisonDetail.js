@@ -8,8 +8,12 @@ import Product from "../products/Product";
 import styles from "../../styles/Comparison.module.css";
 import Asset from "../../components/Asset";
 
-// Need to display better on mobile.
-// maybe inside a row instead of a column.
+/* 
+Display a comparison between two products 
+Is displayed in two columns fetching the 2 selected products
+The components fetches the id of the products inside the comparison object
+The product's ids have been set to get all the details of the product
+*/
 
 const ComparisonDetail = () => {
   const { id } = useParams();
@@ -45,7 +49,7 @@ const ComparisonDetail = () => {
       if (loading) return <Asset spinner />;
       if (error) throw new Error(error);
       if (!comparison) throw new Error("No comparison found.");
-
+// Renders two rows in any device displaying the fetched comparison
       return (
         <Container className={styles.container}>
           <h2 className={styles.title}>Product Comparison</h2>

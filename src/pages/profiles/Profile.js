@@ -10,7 +10,11 @@ import Product from "../products/Product";
 import styles from "../../styles/Profile.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-
+// Profile component
+/* In here we have the Profile component that displays the details of the user
+ to note is that the favourites logic have been implemented for display only purpouses
+ the addition or deletion is not and will not be implemented in the near future.
+*/
 const Profile = () => {
   const { id } = useParams();
   const { profilePicture, profileData, loading, error } = useUserProfile(id);

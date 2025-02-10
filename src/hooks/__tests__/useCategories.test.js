@@ -5,7 +5,7 @@ import useCategories from "../useCategories";
 // Testing the fetching of the categories with a test component.
 const TestComponent = () => {
   const { categories, loading, error } = useCategories();
-
+// Mimicking the categories fetching
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
   if (categories.length > 0) {

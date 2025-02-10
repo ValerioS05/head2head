@@ -15,7 +15,8 @@ import useCategories from "../../hooks/useCategories";
 import { useHistory, useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { validateImage } from "../../utils/ValidateImage";
-
+// Product edit form
+// We have same props of the create form handling the change with a put call with axios.
 const ProductsEditForm = () => {
   const [errors, setErrors] = useState({});
   const [productData, setProductData] = useState({

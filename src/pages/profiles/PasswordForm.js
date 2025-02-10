@@ -13,7 +13,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
-
+// form (taken from the Moments walktrough)
 const PasswordForm = () => {
   const history = useHistory();
   const { id } = useParams();

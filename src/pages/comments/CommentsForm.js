@@ -3,7 +3,8 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import styles from "../../styles/CommentsForm.module.css";
 import { axiosRes } from "../../api/axiosDefaults";
-
+// Form to create the comment 
+// Strictly related to product
 const CommentsForm = ({ product, setProduct, setComments }) => {
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -46,7 +47,7 @@ const CommentsForm = ({ product, setProduct, setComments }) => {
       setIsSubmitting(false);
     }
   };
-
+// Renders the form and submit is disabled when submitting.
   return (
     <Form className={`${styles.Form} mt-2`} onSubmit={handleSubmit}>
       <Form.Group>

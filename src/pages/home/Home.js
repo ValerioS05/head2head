@@ -7,7 +7,14 @@ import { Link } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Styles from "../../styles/Home.module.css";
 import defaultImage from "../../assets/defaulth2h.jpg";
-
+// Home page 
+/* The home page is quite simple 
+  is rendered based on the current user state
+  if logged in shows the product and comparison links
+  if logged out shows the signup.
+  To note that the sign in button for already sign up users is 
+  displayed in the navbar component.
+*/
 const Home = () => {
   const currentUser = useCurrentUser();
 

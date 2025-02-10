@@ -5,7 +5,7 @@ import Alert from "react-bootstrap/Alert";
 
 import { axiosReq } from "../api/axiosDefaults";
 import styles from "../styles/VoteForm.module.css";
-
+// Allows user to leave a vote/rating on a product
 const VoteForm = ({
   productId,
   existingVote,
@@ -52,7 +52,7 @@ const VoteForm = ({
       setIsSubmitting(false);
     }
   };
-
+//Renders the form and displays the start or star depending on the value
   return (
     <Form onSubmit={handleSubmit} className={styles.voteForm}>
       <div className={styles.labelContainer}>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
+// Handles the clicks that the user does to behave accordinlgy
 const useClickOutsideToogle = () => {
   const [expanded, setExpanded] = useState(false);
   const ref = useRef(null);

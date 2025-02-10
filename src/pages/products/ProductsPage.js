@@ -12,7 +12,15 @@ import styles from "../../styles/ProductsPage.module.css";
 import useCategories from "../../hooks/useCategories";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/FetchNext";
-
+// Products page
+/*
+  In this component we have multiple products displayed in a grid depending on the width of the screen
+  3 column for large 2 for medium 1 for mobile
+  We have multiple functionalities :
+  Redirecting to the Product
+  Filtering, sorting and Searching.
+  Everything is achieved using the product props.
+*/
 function ProductsPage({ message, filter = "" }) {
   const [products, setProducts] = useState({ results: [] });
   const [loaded, setLoaded] = useState(false);

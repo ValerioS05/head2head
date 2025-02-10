@@ -7,7 +7,7 @@ import {
   removeTokenTimestamp,
   shouldRefreshToken,
 } from "../utils/tokenTimeStamp";
-
+// User Context (mainly taken from the moments walktrough)
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
 

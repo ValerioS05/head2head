@@ -11,7 +11,7 @@ import VoteForm from "../../components/VoteForm";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import styles from "../../styles/Product.module.css";
 import { EditMenu } from "../../components/EditMenu";
-
+// Product component
 const Product = (props) => {
   const {
     id,
@@ -30,12 +30,12 @@ const Product = (props) => {
     vote_id,
     productPage,
   } = props;
-
+// Set up steate for the product and average rating
   const [product, setProduct] = useState({
     ...props,
     average_rating: average_rating || 0,
   });
-
+ // Fetching all the datas needed in the component(user/role/state, categories  )
   const currentUser = useCurrentUser();
   const { isStaff: isCurrentUserStaff, loading: loadingCurrentUser } =
     useUserProfile(currentUser?.profile_id);
@@ -43,11 +43,11 @@ const Product = (props) => {
   const { categories } = useCategories();
   const categoryName = categories.find((cat) => cat.id === category)?.name;
   const history = useHistory();
-
+// handle redirection to edit form
   const handleEdit = () => {
     history.push(`/products/${id}/edit`);
   };
-
+// handle delete with axios
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/products/${id}/`);
@@ -56,7 +56,7 @@ const Product = (props) => {
       // console.log(err);
     }
   };
-
+// Function to getch updates
   const fetchUpdatedProduct = async () => {
     try {
       const { data } = await axiosReq.get(`/products/${id}/`);
@@ -65,7 +65,7 @@ const Product = (props) => {
       console.error("Error fetching updated product:", err);
     }
   };
-
+// Effect to update the average rating on change
   useEffect(() => {
     if (props.average_rating) {
       setProduct((prevProduct) => ({
@@ -74,7 +74,8 @@ const Product = (props) => {
       }));
     }
   }, [props.average_rating]);
-
+// renders the product with edit form and profile of the user
+// only staff members are able to access the edit menu icon
   return (
     <Card className={styles.card}>
       <Media className="align-items-center justify-content-between">

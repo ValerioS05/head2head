@@ -1,7 +1,7 @@
 import React from "react";
 import NoResults from "../assets/nores.jpg.jpg";
 import Asset from "./Asset";
-
+// 404 page
 const NotFound = () => {
   return (
     <div>

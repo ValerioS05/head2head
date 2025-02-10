@@ -14,7 +14,10 @@ import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import useUserProfile from "../hooks/useUserProfile";
 import { removeTokenTimestamp } from "../utils/tokenTimeStamp";
-
+/*
+NavBar component using the current user and useUserProfile to display
+and add functionalities related to user state.
+*/
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
@@ -22,7 +25,7 @@ const NavBar = () => {
   const { isStaff, profilePicture, loading, error } = useUserProfile(
     currentUser?.profile_id
   );
-
+// Handle sign out remove token
   const handleSignOut = async () => {
     try {
       await axios.post("dj-rest-auth/logout/");
@@ -32,7 +35,7 @@ const NavBar = () => {
       // console.log(err);
     }
   };
-
+// Add icon to get to the product create form
   const addProductIcon = isStaff && (
     <NavLink
       className={styles.NavLink}
@@ -42,7 +45,7 @@ const NavBar = () => {
       <i className="fas fa-plus-square"></i>Add product
     </NavLink>
   );
-
+// Add icons related to the user state logged in/out
   const loggedInIcons = (
     <>
       <NavLink
@@ -76,7 +79,7 @@ const NavBar = () => {
       </NavLink>
     </>
   );
-
+// Display different icon when the user is logged out redirecting the user to the sign forms
   const loggedOutIcons = (
     <>
       <NavLink
@@ -95,7 +98,7 @@ const NavBar = () => {
       </NavLink>
     </>
   );
-
+// Renders the navbar 
   return (
     <Navbar
       expanded={expanded}

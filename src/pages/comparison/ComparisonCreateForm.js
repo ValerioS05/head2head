@@ -14,7 +14,10 @@ import styles from "../../styles/Comparison.module.css";
 import useCategories from "../../hooks/useCategories";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/FetchNext";
-
+// Creating a comparison form
+/*This form displays all the products that we can select
+its also possible to filter and sort products by query to make it easir for the user
+*/
 function ComparisonCreateForm() {
   const [products, setProducts] = useState({ results: [] });
   const [selectedProducts, setSelectedProducts] = useState([]);
@@ -34,6 +37,7 @@ function ComparisonCreateForm() {
   } = useCategories();
 
   // Fetch products when filter, query, or sort options change
+  // The change has a timer to let the use have the time to type and dont refetch at every key stroke
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -75,7 +79,8 @@ function ComparisonCreateForm() {
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
   };
-
+// Function to make sure the user is only able to select 2 items
+// Displays feedbacks once the user try for more.
   const handleSelectProduct = (product) => {
     const isSelected = selectedProducts.includes(product.id);
 
@@ -123,7 +128,8 @@ function ComparisonCreateForm() {
       return () => clearTimeout(timer);
     }
   }, [errors]);
-
+// Renders the full component/form 
+// Button is disabled on submission to prevent extra submissions.
   return (
     <Container className={styles.comparisonFormContainer}>
       <h2>Create a Comparison</h2>
@@ -217,6 +223,7 @@ function ComparisonCreateForm() {
                       lg={4}
                       className="mb-3"
                     >
+                        {/* undefined doesnt show the props for better layout */}
                       <Product
                         {...product}
                         description={undefined}
@@ -245,7 +252,7 @@ function ComparisonCreateForm() {
           <Asset spinner />
         </Container>
       )}
-
+    {/* shows the compare button only when 2 products are selected */}
       {selectedProducts.length === 2 && (
         <div className={styles.stickyCompareButtonContainer}>
           <Button

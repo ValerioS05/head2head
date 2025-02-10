@@ -10,9 +10,12 @@ import CommentsForm from "../comments/CommentsForm";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Asset from "../../components/Asset";
-
+// Product page
+// Displays a single product, accessible by clicking on the product picture or the name of the product.
+// In this component we have the comments displayed as well.
 const ProductPage = () => {
-  const { id } = useParams();
+  // Set product and comments datas
+  const { id } = useParams(); // url parameter
   const [product, setProduct] = useState({ results: [] });
   const [comments, setComments] = useState({ results: [] });
   const [loaded, setLoaded] = useState(false);

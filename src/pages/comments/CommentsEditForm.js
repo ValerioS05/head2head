@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { axiosRes } from "../../api/axiosDefaults";
 import styles from "../../styles/CommentsForm.module.css";
-
+// Comments edit form 
 const CommentEditForm = (props) => {
   const { id, content, setShowEditForm, setComments, product_id } = props;
 
@@ -41,7 +41,8 @@ const CommentEditForm = (props) => {
       setIsSubmitting(false);
     }
   };
-
+// renders the comment edit form the save button is disabled when submitting
+// to avoid multiple submissions
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="pr-1">
