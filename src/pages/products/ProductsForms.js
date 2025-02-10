@@ -4,8 +4,8 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import Image from 'react-bootstrap/Image';
-import Alert from 'react-bootstrap/Alert';
+import Image from "react-bootstrap/Image";
+import Alert from "react-bootstrap/Alert";
 
 import Upload from "../../assets/upload.jpeg";
 
@@ -309,6 +309,6 @@ const ProductCreateForm = () => {
       </div>
     </Form>
   );
-}
+};
 
 export default ProductCreateForm;

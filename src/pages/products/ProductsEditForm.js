@@ -64,7 +64,7 @@ const ProductsEditForm = () => {
           features: data.features,
         });
       } catch (err) {
-       // console.log(err);
+        // console.log(err);
       }
     };
 
@@ -302,7 +302,7 @@ const ProductsEditForm = () => {
         <Button
           className={`${btnStyles.Button} ${styles.Btn}`}
           type="submit"
-          disabled={isSubmitting || imageError }
+          disabled={isSubmitting || imageError}
         >
           {isSubmitting ? "Saving..." : "Save"}
         </Button>

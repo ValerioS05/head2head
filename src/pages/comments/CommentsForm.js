@@ -4,14 +4,12 @@ import InputGroup from "react-bootstrap/InputGroup";
 import styles from "../../styles/CommentsForm.module.css";
 import { axiosRes } from "../../api/axiosDefaults";
 
-const CommentsForm = ({ product, setProduct, setComments}) => {
+const CommentsForm = ({ product, setProduct, setComments }) => {
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-
   useEffect(() => {
-    const timer = setTimeout(() => {
-    }, 2000); 
+    const timer = setTimeout(() => {}, 2000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -42,7 +40,6 @@ const CommentsForm = ({ product, setProduct, setComments}) => {
       }));
 
       setContent("");
-
     } catch (err) {
       // console.log(err);
     } finally {

@@ -1,8 +1,12 @@
+import React from "react";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useHistory } from "react-router-dom";
-import { removeTokenTimestamp, shouldRefreshToken } from "../utils/tokenTimeStamp";
+import {
+  removeTokenTimestamp,
+  shouldRefreshToken,
+} from "../utils/tokenTimeStamp";
 
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
@@ -40,7 +44,7 @@ export const CurrentUserProvider = ({ children }) => {
               }
               return null;
             });
-            removeTokenTimestamp()
+            removeTokenTimestamp();
             return config;
           }
         }
@@ -64,7 +68,7 @@ export const CurrentUserProvider = ({ children }) => {
               }
               return null;
             });
-            removeTokenTimestamp()
+            removeTokenTimestamp();
           }
           return axios(err.config);
         }

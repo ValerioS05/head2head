@@ -30,7 +30,7 @@ const Comment = (props) => {
 
   const handleDelete = async () => {
     if (!(is_owner || isStaff)) {
-      setUnauthorizedAction(true); 
+      setUnauthorizedAction(true);
       setTimeout(() => setUnauthorizedAction(false), 3000);
       return;
     }
@@ -51,18 +51,19 @@ const Comment = (props) => {
         results: prevComments.results.filter((comment) => comment.id !== id),
       }));
     } catch (err) {
+      alert("There was an error deleting the comment. Please try again later.");
     }
   };
 
   const handleEdit = () => {
     if (!(is_owner || isStaff)) {
-      setUnauthorizedAction(true); 
+      setUnauthorizedAction(true);
       setTimeout(() => setUnauthorizedAction(false), 3000);
       return;
     }
 
     if (!is_owner && isStaff) {
-      setUnauthorizedAction(true); 
+      setUnauthorizedAction(true);
       setTimeout(() => setUnauthorizedAction(false), 3000); // Reset alert after 3 seconds
       return;
     }
@@ -106,10 +107,7 @@ const Comment = (props) => {
 
         {(is_owner || isStaff) && !showEditForm && (
           <div className={styles.Edit}>
-            <EditMenu
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-            />
+            <EditMenu handleEdit={handleEdit} handleDelete={handleDelete} />
           </div>
         )}
       </Media>

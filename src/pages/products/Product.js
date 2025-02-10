@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import Card from 'react-bootstrap/Card';
-import Media from 'react-bootstrap/Media';
+import Card from "react-bootstrap/Card";
+import Media from "react-bootstrap/Media";
 import { Link, useHistory } from "react-router-dom";
 import ProfileImage from "../../components/ProfileImage";
 import useCloudinaryImageUrl from "../../hooks/useCloudinaryImageUrl";
@@ -88,10 +88,7 @@ const Product = (props) => {
         </Link>
         <div className={styles.EditMenu}>
           {!loadingCurrentUser && isCurrentUserStaff && productPage && (
-            <EditMenu
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-           />
+            <EditMenu handleEdit={handleEdit} handleDelete={handleDelete} />
           )}
         </div>
       </Media>

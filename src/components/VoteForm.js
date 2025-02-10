@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 
 import { axiosReq } from "../api/axiosDefaults";
 import styles from "../styles/VoteForm.module.css";

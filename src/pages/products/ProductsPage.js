@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
 import appStyles from "../../App.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
 import Product from "./Product";
@@ -29,7 +29,7 @@ function ProductsPage({ message, filter = "" }) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const sortQuery = sortOption ? `&ordering=${sortOption}` : '';
+        const sortQuery = sortOption ? `&ordering=${sortOption}` : "";
         const { data } = await axiosReq.get(
           `/products/?${filter}search=${query}&category=${selectedCategory}${sortQuery}`
         );

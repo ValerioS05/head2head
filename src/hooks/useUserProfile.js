@@ -39,7 +39,7 @@ const useUserProfile = (profileId) => {
           }
         }
       } else {
-        setError('No profile found.');
+        setError("No profile found.");
         setLoading(false);
       }
     };
@@ -48,7 +48,7 @@ const useUserProfile = (profileId) => {
       loadProfile();
     }
 
-// Cleanup function
+    // Cleanup function
     return () => {
       isMounted = false;
     };

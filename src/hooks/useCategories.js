@@ -7,13 +7,13 @@ const useCategories = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-// Hook to fetch categories when the compoennt mounts
+  // Hook to fetch categories when the compoennt mounts
   useEffect(() => {
     let isMounted = true; // Check if component is still mounted
 
     const fetchCategories = async () => {
       try {
-        const response = await axiosRes.get("/categories/"); // api request 
+        const response = await axiosRes.get("/categories/"); // api request
         if (isMounted) {
           setCategories(response.data.results);
         }

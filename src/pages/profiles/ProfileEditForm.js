@@ -4,8 +4,8 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import Image from 'react-bootstrap/Image';
-import Alert from 'react-bootstrap/Alert';
+import Image from "react-bootstrap/Image";
+import Alert from "react-bootstrap/Alert";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
@@ -103,7 +103,7 @@ const ProfileEditForm = () => {
       history.push(`/profiles/${id}/`);
       window.location.reload();
     } catch (err) {
-    //   console.log("Error updating profile:", err);
+      //   console.log("Error updating profile:", err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }

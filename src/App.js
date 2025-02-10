@@ -36,7 +36,7 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // If loading show asset 
+  // If loading show asset
   if (isLoading) {
     return <Asset spinner />;
   }
