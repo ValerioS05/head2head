@@ -151,9 +151,10 @@ const ProfileEditForm = () => {
             <div className={styles.OwnerDiv}>{owner}</div>
 
             <Form.Group>
-              <Form.Label>Bio</Form.Label>
+              <Form.Label htmlFor="bio">Bio</Form.Label>
               <Form.Control
                 as="textarea"
+                id="bio"
                 name="bio"
                 value={bio}
                 onChange={handleChange}
@@ -164,9 +165,10 @@ const ProfileEditForm = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Location</Form.Label>
+              <Form.Label htmlFor="location">Location</Form.Label>
               <Form.Control
                 as="textarea"
+                id="location"
                 name="location"
                 value={location}
                 onChange={handleChange}

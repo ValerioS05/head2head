@@ -150,7 +150,9 @@ const ProductsEditForm = () => {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label htmlFor="category">Category</Form.Label>
+        <Form.Label htmlFor="category">
+          Category
+        </Form.Label>
         {loading ? (
           <Asset loading message="Loading categories..." />
         ) : error ? (
