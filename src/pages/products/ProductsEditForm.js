@@ -134,9 +134,10 @@ const ProductsEditForm = () => {
   const productFields = (
     <div>
       <Form.Group>
-        <Form.Label>Product Name</Form.Label>
+        <Form.Label htmlFor="productName">Product Name</Form.Label>
         <Form.Control
           type="text"
+          id="productName"
           name="productName"
           value={productName}
           onChange={handleChange}
@@ -149,7 +150,7 @@ const ProductsEditForm = () => {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Category</Form.Label>
+        <Form.Label htmlFor="category">Category</Form.Label>
         {loading ? (
           <Asset loading message="Loading categories..." />
         ) : error ? (
@@ -157,6 +158,7 @@ const ProductsEditForm = () => {
         ) : (
           <Form.Control
             as="select"
+            id="category"
             name="category"
             value={category}
             onChange={handleChange}
@@ -177,10 +179,11 @@ const ProductsEditForm = () => {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Description</Form.Label>
+        <Form.Label htmlFor="description">Description</Form.Label>
         <Form.Control
           as="textarea"
           rows={6}
+          id="description"
           name="description"
           value={description}
           onChange={handleChange}
@@ -193,9 +196,10 @@ const ProductsEditForm = () => {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Price</Form.Label>
+        <Form.Label htmlFor="price">Price</Form.Label>
         <Form.Control
           type="number"
+          id="price"
           name="price"
           value={price}
           onChange={handleChange}
@@ -208,9 +212,10 @@ const ProductsEditForm = () => {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Location</Form.Label>
+        <Form.Label htmlFor="location">Location</Form.Label>
         <Form.Control
           type="text"
+          id="location"
           name="location"
           value={location}
           onChange={handleChange}
@@ -223,10 +228,11 @@ const ProductsEditForm = () => {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Keywords</Form.Label>
+        <Form.Label htmlFor="keywords">Keywords</Form.Label>
         <Form.Control
           as="textarea"
           rows={3}
+          id="keywords"
           name="keywords"
           value={keywords}
           onChange={handleChange}
@@ -239,10 +245,11 @@ const ProductsEditForm = () => {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Features</Form.Label>
+        <Form.Label htmlFor="features">Features</Form.Label>
         <Form.Control
           as="textarea"
           rows={3}
+          id="features"
           name="features"
           value={features}
           onChange={handleChange}
