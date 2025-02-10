@@ -31,7 +31,7 @@ const ProductPage = () => {
         setComments(comments);
         setLoaded(true);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 
@@ -73,7 +73,7 @@ const ProductPage = () => {
                   results: [...prev.results, ...data.results],
                 }));
               } catch (err) {
-                console.log(err);
+                // console.log(err);
               }
             }}
             hasMore={!!comments.next}

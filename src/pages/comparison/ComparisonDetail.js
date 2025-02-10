@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Container, Row, Col } from "react-bootstrap";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Product from "../products/Product";
 import styles from "../../styles/Comparison.module.css";
 import Asset from "../../components/Asset";

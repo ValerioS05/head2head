@@ -20,6 +20,7 @@ import PasswordForm from "./pages/profiles/PasswordForm";
 import ComparisonCreateForm from "./pages/comparison/ComparisonCreateForm";
 import ComparisonDetail from "./pages/comparison/ComparisonDetail";
 import Asset from "./components/Asset";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true); // Set loading state
@@ -139,7 +140,7 @@ function App() {
           />
 
           {/* 404 page */}
-          <Route render={() => <p>Page not found!</p>} />
+          <Route render={() => <NotFound />} />
         </Switch>
       </Container>
     </div>

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import useUserProfile from "../../hooks/useUserProfile";
-import { Card, Col, Row, Container } from "react-bootstrap";
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
 import Asset from "../../components/Asset";
 import Product from "../products/Product";
 import styles from "../../styles/Profile.module.css";

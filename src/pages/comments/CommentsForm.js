@@ -44,7 +44,7 @@ const CommentsForm = ({ product, setProduct, setComments}) => {
       setContent("");
 
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     } finally {
       setIsSubmitting(false);
     }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Card, Media } from "react-bootstrap";
+import Card from 'react-bootstrap/Card';
+import Media from 'react-bootstrap/Media';
 import { Link, useHistory } from "react-router-dom";
 import ProfileImage from "../../components/ProfileImage";
 import useCloudinaryImageUrl from "../../hooks/useCloudinaryImageUrl";
@@ -52,7 +53,7 @@ const Product = (props) => {
       await axiosRes.delete(`/products/${id}/`);
       history.push("/products/");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

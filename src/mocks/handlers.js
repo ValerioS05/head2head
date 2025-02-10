@@ -23,7 +23,6 @@ export const handlers = [
 
   // Mock handler for categories
   rest.get(`${baseURL}categories/`, (req, res, ctx) => {
-    console.log("Intercepted categories request...");
     return res(
       ctx.status(200),
       ctx.json({

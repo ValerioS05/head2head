@@ -64,7 +64,7 @@ const ProductsEditForm = () => {
           features: data.features,
         });
       } catch (err) {
-        console.log(err);
+       // console.log(err);
       }
     };
 
@@ -122,7 +122,7 @@ const ProductsEditForm = () => {
       await axiosReq.put(`/products/${id}/`, formData);
       history.push(`/products/${id}/`);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }

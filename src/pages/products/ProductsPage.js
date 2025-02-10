@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Container, Form } from "react-bootstrap";
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
 import appStyles from "../../App.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
 import Product from "./Product";
@@ -33,7 +36,7 @@ function ProductsPage({ message, filter = "" }) {
         setProducts(data);
         setLoaded(true);
       } catch (err) {
-        console.log("Error fetching products", err);
+        // console.log("Error fetching products", err);
       }
     };
 

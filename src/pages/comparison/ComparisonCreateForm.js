@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Container, Form, Button, Alert } from "react-bootstrap";
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import Product from "../products/Product";
@@ -44,7 +49,7 @@ function ComparisonCreateForm() {
         setProducts(data);
         setLoaded(true);
       } catch (err) {
-        console.log("Error fetching products", err);
+        // console.log("Error fetching products", err);
       }
     };
 
@@ -102,7 +107,7 @@ function ComparisonCreateForm() {
       });
       history.push(`/comparisons/${data.id}`);
     } catch (err) {
-      console.log(err);
+    //   console.log(err);
       setErrors("Failed to create comparison. Please try again.");
     } finally {
       setIsSubmitting(false);
