@@ -9,6 +9,8 @@
   - [Plan](#plan)
   - [User Stories](#user-stories)
   - [Flow and Wireframes](#flow-and-wireframes)
+  - [Head2Head Design](#head2head-design)
+    - [Color Palette](#color-palette)
 ## Project Goal
 - This project has been designed to help Users Compare a range of products and share their ideas on the web app.
   - From the user stories the first thought of the first person questioned about a comparison site idea told me "I would like to leave my thoughts on the products that I just compared. So the site has followed that idea since the start and hopefully achieved the goal that was set.
@@ -73,4 +75,30 @@
   |![Comparison page wireframe](/readmeImg/compwire.png)|Comparison page|The comparison page is quite simple. Two products are shown in two different column , the two columns are responsive depending on the screen size but it always displays two columns side by side.|
   |![Profile page wireframe](/readmeImg/profwire.png)|Profile page|The profile page here displays the profile details, a profile picture ,a bio and the user location. (Check the wireframe to learn about the favourites)Edit icon changed position during development, at the start the idea was to insert it at the top right corner as the product and the comment. When displayed there something was not feeling right due to not beeing simmetric to the page so I moved the profile edit icon under the image. Now it seems more organized even beeing quite a simple page.|
   |![Profile Edit form wireframe](/readmeImg/proforwire.png)|Edit Profile page|The profile edit page follows the same pattern as the profile page with the only difference that the details are forms. We also have the change username/password buttons that redirect to the respective forms.|
+
+## Head2Head Design
+- I wanted this app to have a defined design from the start. So everything started with the design of the logo and the creation of the Hero Image(the hero image has also been used as a default image where it was needed.).  
+  |||
+  |--|--|
+  |![Logo](/readmeImg/logo.png)|This is the logo that I used. We can see it in the title (Browser bar.) and in the Navbar.|
+  |![Hero Image](/readmeImg/hero.png)|This is the hero image of the app, we can see it in the home page at first impact resembles 2 heads in different direction and color , giving a meaning of different opinions(to stay on theme with a comparison site.).|
+### Color Palette
+- For the app I opted to use a similar pattern shown in the hero image colour palette.
+- I used: 
+  - 1. Aqua
+  - 2. Orangered
+  - 3. White
+  - 4. Black
+  - Some different color were used for example on the navbar where the actual name of the page would turn blue. Green on select buttons in the comparison page. Red and Yellow for feedbacks to the user(For example in forms or non authorized actions.).
+    - Here is an example of rendered items and the colours used.
+      |||
+      |-|-|
+      |![Colour Palette](/readmeImg/palette.png)|In this picture we can see at the top in the navbar when the cursor hovers the navlinks the link turns blue and the icon orangered to give a visual feeback. Also the active page link turns orangered. All the navlinks are displayed on white over black to give a great contrast. The product components are shown on a white card with a box shadow orangered. Inside the product we have text on black and name of the product on orange red to give important to the name that is also a link.  At the bottom of the picture we can see a part of a feedback with black text and a red background to give meaning to the feedback(Non possible action). The select button is on a green/black palette to differenciate the products page from the comparison create page.The select buttons revert the color palette when selected to give the user a visual feedback that the product is selected.|
+      |![Colour Feedback](/readmeImg/feedback.png)|Here is an example of another feedback the color is not red because the message is a warning on an authorized action.|
+  - 5. The main body of the app is on a dark theme. Initially it was on a white theme, during the development of the project the strain on my eyes was very strong due to the brightness coming out of any page. So after this I opted to revert the main body to a black colour that solved my issue and hopefully for everyone else. Also the black main body give a good contrast on the white cards of the product components enhancing the view.
+- Checks were made on the pages with [ContrastChecker](https://contrastchecker.com/).
+  - Home page: ![Home Page check](/readmeImg/homepalcheck.png)
+  - Product page: ![Product page check](/readmeImg/prodpalcheck.png)
+  - Comparison page: ![Comparison page check](/readmeImg/compalcheck.png)
+
 
