@@ -1,11 +1,13 @@
 # Head2Head Readme
 - This is the Head2Head Readme set to explain and walk you through this project and it's developement.  
  ![Responsive mock home page](/readmeImg/mock.png)
+ Thanks to [ui.dev device mock](https://ui.dev/amiresponsive).
 ## Readme map 
 - [Head2Head Readme](#head2head-readme)
   - [Readme map](#readme-map)
   - [Project Goal](#project-goal)
   - [Plan](#plan)
+  - [User Stories](#user-stories)
   - [Flow and Wireframes](#flow-and-wireframes)
 ## Project Goal
 - This project has been designed to help Users Compare a range of products and share their ideas on the web app.
@@ -29,7 +31,35 @@
     - For the creation of the app we needed first an API built based on what we needed to fulfill the user stories.
     - This one was the first real step into the creation of Head2Head.
       - Check the [drf-api-head2head Readme](https://github.com/ValerioS05/drf-api-head2head/blob/main/README.md)
-      - Check the [drf-api-head2head Repo](https://github.com/ValerioS05/drf-api-head2head)  
+      - Check the [drf-api-head2head Repo](https://github.com/ValerioS05/drf-api-head2head)
+## User Stories
+- In here I will explain how the Head2Head was planned in an Agile development in GitHub issue through user stories.
+- The first thing that I did was to go around asking people what they would like or what not in a comparison site.
+- I created some notes following their ideas and my ideas and I group them by themes.  
+ ![User Stories Notes](/readmeImg/notes.png)  
+
+- Second step was to organize them in a Kanban board inside my repository.  
+
+- Next I created Epics that group all the user stories by theme. The epics are labelled by priority and their content has been organized with the MoSCoW method. 
+ ![Epics Priority](/readmeImg/prio.png)
+
+- Each Epic has User stories that got broke down to single objects and a priority was given to them as well.
+ ![Signel user story](/readmeImg/userst1.png)  
+
+- Every single user story was added to the backlog - User stories spring as a starting point.
+- During the developement, the user stories with prio 0 (highest) were selected first and moved to the In progress and once completed were moved again to the Done section.
+- A final column was added for the Wont Have section
+  - This section contains user stories that were tought initially but not implemented at the end due to the scope of the project or not usefull functionality. This section also contains future feature.
+  - ![Future Feature](/readmeImg/future.png)  
+- For tje non achieve User stories comments were made inside the respective object.
+- [Link to the board](https://github.com/users/ValerioS05/projects/3/views/1) See the user stories in their final state.
+- ![User stories Kanban board](/readmeImg/userst.png)
+- The process that I followed was
+ 1. Document user stories.
+ 2. Create a board to track and organize them.
+ 3. Create an API to handle what would be necessary to fulfill the user stories in the front end side.
+ 4. Create a initial idea of the flow and a mockup of the final app through wireframes.
+ 
 ## Flow and Wireframes
   |FlowChart and Wireframes|Page Name|Description|
   |--|--|--|
