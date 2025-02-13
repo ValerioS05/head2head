@@ -11,6 +11,8 @@
   - [Flow and Wireframes](#flow-and-wireframes)
   - [Head2Head Design](#head2head-design)
     - [Color Palette](#color-palette)
+    - [Fonts](#fonts)
+    - [Responsiveness](#responsiveness)
 ## Project Goal
 - This project has been designed to help Users Compare a range of products and share their ideas on the web app.
   - From the user stories the first thought of the first person questioned about a comparison site idea told me "I would like to leave my thoughts on the products that I just compared. So the site has followed that idea since the start and hopefully achieved the goal that was set.
@@ -90,15 +92,39 @@
   - 3. White
   - 4. Black
   - Some different color were used for example on the navbar where the actual name of the page would turn blue. Green on select buttons in the comparison page. Red and Yellow for feedbacks to the user(For example in forms or non authorized actions.).
+   
     - Here is an example of rendered items and the colours used.
       |||
       |-|-|
       |![Colour Palette](/readmeImg/palette.png)|In this picture we can see at the top in the navbar when the cursor hovers the navlinks the link turns blue and the icon orangered to give a visual feeback. Also the active page link turns orangered. All the navlinks are displayed on white over black to give a great contrast. The product components are shown on a white card with a box shadow orangered. Inside the product we have text on black and name of the product on orange red to give important to the name that is also a link.  At the bottom of the picture we can see a part of a feedback with black text and a red background to give meaning to the feedback(Non possible action). The select button is on a green/black palette to differenciate the products page from the comparison create page.The select buttons revert the color palette when selected to give the user a visual feedback that the product is selected.|
       |![Colour Feedback](/readmeImg/feedback.png)|Here is an example of another feedback the color is not red because the message is a warning on an authorized action.|
-  - 5. The main body of the app is on a dark theme. Initially it was on a white theme, during the development of the project the strain on my eyes was very strong due to the brightness coming out of any page. So after this I opted to revert the main body to a black colour that solved my issue and hopefully for everyone else. Also the black main body give a good contrast on the white cards of the product components enhancing the view.
+  - 5. The main body of the app is on a dark theme. Initially it was on a white theme, during the development of the project the strain on my eyes was very strong due to the brightness coming out of any page. So after this I opted to revert the main body to a black colour that solved my issue and hopefully for everyone else. Also the black main body give a good contrast on the white cards of the product components enhancing the view.  
+  
 - Checks were made on the pages with [ContrastChecker](https://contrastchecker.com/).
   - Home page: ![Home Page check](/readmeImg/homepalcheck.png)
   - Product page: ![Product page check](/readmeImg/prodpalcheck.png)
   - Comparison page: ![Comparison page check](/readmeImg/compalcheck.png)
 
+### Fonts
+- For the fonts I mainly used "Lato", sans-serif for the entire App. 
+- For the headings from h1 to h6 the font was set to "Merriweather". 
+- This two fonts were choosen reasoning on a balance between modern readability  and classic elegance.
+  - Lato is clean modern and readable making a perfect fit for the main body. This ensure a smooth reading experience.
+  - Merriweather is elegant giving the headings a more refined look.
+- The fonts were taken from [Google fonts](https://fonts.google.com/).
+  |Lato |Merrywather |
+  |--|--|
+  |![Lato font](/readmeImg/lato.png)|![Merryweather font](/readmeImg/merry.png)|
 
+### Responsiveness
+- Head2Head is a responsive app, it is created on mobile first approach due to the high usage of mobiles over other devices.
+  - The design is optimazed for smaller screens ensuring a good experience on mobile devices. With the help of media queries and bootstrap classes to help adapt layouts over every page.
+  - The layout is flexible using a grid system for larger screen and a 1 column layout for smaller devices.
+- For mobile devices a toggler for the navbar was implemented where the user will not be presented with the full navbar but with a toggler that will display it in a dropdown ensuring readability and a good UX without overwhelming the UI.
+-  Typography scaling is based on viewport width using rem where needed ensuring that any device has the chance to display a good quality text.
+-  Images are set to scale depending on the page and the width of the device ensuring no distortion.
+-  This ensurers that every user has the chance to experience the app in all devices.
+    |Small width| Larger Width|
+    |--|--|
+    |![mobile width](/readmeImg/resp.png)|![larger width](/readmeImg/resp1.png)|  
+    |![grid system](/readmeImg/grid.png)|In here we can see the product cards displayed in a grid for larger widths.|
