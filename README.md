@@ -13,6 +13,7 @@
     - [Color Palette](#color-palette)
     - [Fonts](#fonts)
     - [Responsiveness](#responsiveness)
+  - [Features](#features)
 ## Project Goal
 - This project has been designed to help Users Compare a range of products and share their ideas on the web app.
   - From the user stories the first thought of the first person questioned about a comparison site idea told me "I would like to leave my thoughts on the products that I just compared. So the site has followed that idea since the start and hopefully achieved the goal that was set.
@@ -118,8 +119,8 @@
 
 ### Responsiveness
 - Head2Head is a responsive app, it is created on mobile first approach due to the high usage of mobiles over other devices.
-  - The design is optimazed for smaller screens ensuring a good experience on mobile devices. With the help of media queries and bootstrap classes to help adapt layouts over every page.
-  - The layout is flexible using a grid system for larger screen and a 1 column layout for smaller devices.
+   The design is optimazed for smaller screens ensuring a good experience on mobile devices. With the help of media queries and bootstrap classes to help adapt layouts over every page.
+   The layout is flexible using a grid system for larger screen and a 1 column layout for smaller devices.
 - For mobile devices a toggler for the navbar was implemented where the user will not be presented with the full navbar but with a toggler that will display it in a dropdown ensuring readability and a good UX without overwhelming the UI.
 -  Typography scaling is based on viewport width using rem where needed ensuring that any device has the chance to display a good quality text.
 -  Images are set to scale depending on the page and the width of the device ensuring no distortion.
@@ -127,4 +128,17 @@
     |Small width| Larger Width|
     |--|--|
     |![mobile width](/readmeImg/resp.png)|![larger width](/readmeImg/resp1.png)|  
-    |![grid system](/readmeImg/grid.png)|In here we can see the product cards displayed in a grid for larger widths.|
+    |![Column layout](/readmeImg/col.png)|![grid system](/readmeImg/grid.png)|
+
+    In here we can see the product cards displayed in a grid for larger widths. In the pictures above we can get a glimpse of the navbar not being displayed fully in the mobile version and the column display over a row display using flexbox properties.
+
+## Features
+Heead2Heead has many features to show off, the general feature is that we are able to compare different products, create products objects, vote, comment on them, profiles and so on. Here is a list of features that the app offers.
+|Feature|Description|
+|--|--|
+|![Hero image](/readmeImg/hero.png)|The hero image gives a good definition and meaning to the home page and is repeated for default images.|
+|![Logo](/readmeImg/logo.png)|The logo was used for both the navbar and the browser bar close to the title displaying a similar pattern of the hero image: two heads this time facing eachother that combines in heart giving the meaning of sharing similar ideas and friendly enviroment. The logo in the navbar acts also a redirection to the home page even though an existing home page navlink exist.|
+|![Conditional rendering](/readmeImg/cond.png)![Conditional rendering 2](/readmeImg/cond1.png)|The app understands when a user is allowed or not to do certain actions confirming the user state(logged in/ logged out / staff users or non), this simplify the user experience to be directed and guided through the app even beeing a first timer. Here is an example of the home page recognizing the user state for a non logged user(1) vs a logged in user(2)|
+|![Personalized Welcome](/readmeImg/merry.png)|The app offers a personalized welcome getting the name of the user displayed at first impact. Giving a sense of both personalization and a succesfull log in feedback.|
+|![Navbar](/readmeImg/navexp.png)![Toggle Navbar](/readmeImg/nav.png)|The navbar one of the featurees that the user will use most. We have two examples here, the first image shows the navbar at full capacity where the user can see all the navlinks ,the logo and the personal profile picture. If a user is a staff member we have displayed the + add product where a product can be created. In the second image we can see the navbar shown as a toogler in smaller screens, the user can tap on it to expand it as a dropdown for a better UX and not overwhelming UI. The navbar recognize the active page and changes the icon color to an orangered to give the user a sense of position.|
+|![Icons 1](/readmeImg/i1.png) ![Icons 2](/readmeImg/i2.png)![Icons 3](/readmeImg/i3.png)![Icons 4](/readmeImg/i4.png)|The use of icons was implemented to add an additional visual feedback to the user. In the images we can see the pencil icon used to define edit options and is used for all the edit options used, a calendar icon displayed with a date, and a bin icon to define the deletion of items. In the navbar we have the home icon, the product icon displayed as a open box, the compare icon with two reverse arrows to stay in pattern with the hero image reverse faces and a sign out icon.|
