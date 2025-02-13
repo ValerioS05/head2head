@@ -14,6 +14,19 @@
     - [Fonts](#fonts)
     - [Responsiveness](#responsiveness)
   - [Features](#features)
+  - [Future features](#future-features)
+  - [CRUD features](#crud-features)
+  - [Reusable components](#reusable-components)
+  - [Hooks](#hooks)
+  - [Utils](#utils)
+  - [Testing](#testing)
+    - [Automate testing](#automate-testing)
+    - [Manual testing](#manual-testing)
+  - [Bugs and Fixes](#bugs-and-fixes)
+  - [Libraries, Frameworks and Languages.](#libraries-frameworks-and-languages)
+  - [Deployment](#deployment)
+  - [Credits](#credits)
+ 
 ## Project Goal
 - This project has been designed to help Users Compare a range of products and share their ideas on the web app.
   - From the user stories the first thought of the first person questioned about a comparison site idea told me "I would like to leave my thoughts on the products that I just compared. So the site has followed that idea since the start and hopefully achieved the goal that was set.
@@ -37,6 +50,7 @@
     - This one was the first real step into the creation of Head2Head.
       - Check the [drf-api-head2head Readme](https://github.com/ValerioS05/drf-api-head2head/blob/main/README.md)
       - Check the [drf-api-head2head Repo](https://github.com/ValerioS05/drf-api-head2head)
+ 
 ## User Stories
 - In here I will explain how the Head2Head was planned in an Agile development in GitHub issue through user stories.
 - The first thing that I did was to go around asking people what they would like or what not in a comparison site.
@@ -85,6 +99,7 @@
   |--|--|
   |![Logo](/readmeImg/logo.png)|This is the logo that I used. We can see it in the title (Browser bar.) and in the Navbar.|
   |![Hero Image](/readmeImg/hero.png)|This is the hero image of the app, we can see it in the home page at first impact resembles 2 heads in different direction and color , giving a meaning of different opinions(to stay on theme with a comparison site.).|
+
 ### Color Palette
 - For the app I opted to use a similar pattern shown in the hero image colour palette.
 - I used: 
@@ -142,3 +157,218 @@ Heead2Heead has many features to show off, the general feature is that we are ab
 |![Personalized Welcome](/readmeImg/merry.png)|The app offers a personalized welcome getting the name of the user displayed at first impact. Giving a sense of both personalization and a succesfull log in feedback.|
 |![Navbar](/readmeImg/navexp.png)![Toggle Navbar](/readmeImg/nav.png)|The navbar one of the featurees that the user will use most. We have two examples here, the first image shows the navbar at full capacity where the user can see all the navlinks ,the logo and the personal profile picture. If a user is a staff member we have displayed the + add product where a product can be created. In the second image we can see the navbar shown as a toogler in smaller screens, the user can tap on it to expand it as a dropdown for a better UX and not overwhelming UI. The navbar recognize the active page and changes the icon color to an orangered to give the user a sense of position.|
 |![Icons 1](/readmeImg/i1.png) ![Icons 2](/readmeImg/i2.png)![Icons 3](/readmeImg/i3.png)![Icons 4](/readmeImg/i4.png)![Icons 5](/readmeImg/i5.png)|The use of icons was implemented to add an additional visual feedback to the user. In the images we can see the pencil icon used to define edit options and is used for all the edit options used, a calendar icon displayed with a date, and a bin icon to define the deletion of items. In the navbar we have the home icon, the product icon displayed as a open box, the compare icon with two reverse arrows to stay in pattern with the hero image reverse faces and a sign out/in icon. When the user is not logged in we have the sign up icon displayed in the navbar.|
+|![Sign in page](/readmeImg/signin.png)![Sign up](/readmeImg/signup.png)|In here we have the sign up and sign in forms to give the user the chance to create or login to their own account. The sign up page redirects the user after a successfull account creation to the sign in page to make easy the access to the app. After a successfull login the app redirect you to the home page to start navigatin through the app.|
+|![Search bar](/readmeImg/search.png)|In here we have a sample of the search/sort/filter bar. This feature allow the user to easily sort, search and filter products based on their needs, like by price, date, simple text or group by categories. The search is easy to use and a timer has been installed to make sure the user has time to type and dont refresh the page at every key stroke.|
+|![Drop down menus](/readmeImg/dropdown.png)|In this sample we have a glimpse of a dropdown menu, no one likes clutter so the dropdown menus allows the user to select to edit or delete just by clicking on the edit menu icon.|
+|![Vote form](/readmeImg/vote.png)|The product component only in the product page allows the user to leave a vote in that specifi product. Once the vote is submitted the average rating is displayed dinamically. The user can also revote on the product if their idea changed overtime.|
+|![Comment section](/readmeImg/comment.png)|What is a comparison site if you can't share your idea with others? The product page give the chance to the user to leave comments. The comment is displayed with an edit menu in case the user wants to change or delete the comment. We can also see that in the top left corner of the comment is displayed the user profile picture that redirect the user to that specific profile.|
+|![Profile page](/readmeImg/profile.png)|Even though the profile is not a very important part of this project, Head2Head provide the user a profile page that is connected to product owners or comment owners, the profile can be edited and an important part is that the user can change the credentials to log to app (Username and Password) by the edit profile icon.|
+- An important feature that sometimes pass without being noticed is the infinite scroll, when the app gets overpopulated by comments or products the app respond logging only the visible amount of comments and product until the user scrolls down to see more.
+
+
+## Future features
+For this web app I would like to add as many features as I could. Some of the ideas that I have a the moment are:
+- Advanced comparison view, where the actual properties are highlighted when displayed side by side.
+- The chance to share comparisons with other users or in comments instances.
+- Price tracking and alerts, like notifications when something similar of a favourite product gets added.
+- Favourite, for the favourites mostly the logic has already been set up initially and it would be great to personalize a profile with the preferred products.
+- Reccomendations based on parsonal votes, like when a user leave a rating for a product ,similar products appear in a list of reccomendations.
+- Purchases, a real time basket and a purchase functionality for products , mimicking a real life purchase with the ability to compare before getting a product.
+- Social features like badges and and rewards for most active users.
+- More active feedbacks, visual feedbacks for any action of the users and use of modals to keep the user entertained and more aware.
+- Data insights like trend analysis or general score of a product based on popularity and features and the product history.
+- Exclusive deals that change overtime.
+- AI powered comparison feedback, sometimes we are just too tired of reading let the AI read and show us the result.
+- Product battle of the week. All the users share their ideas on two specific products during a certain week and highlight the product winner for the full successive week.
+- Multi currency support, not everyone has pounds or euros.
+- Multi language app, also not everyone speaks english.
+Ther could be much more to add but these are the main ideas that could be implemented in the near future or in the long term.
+
+## CRUD features
+- Head2Head offers multiple CRUD functionalities for the usual user and for staff users.
+- Create: Users can create profiles, comments and comparisons. Staff users can also create products via the conditionally rendere add product icon that redirect to the actual form.
+- Read: Every user can read any of the object created. We can see every product, comments average votes and comparisons. We can see when products and comments are created and by who. 
+- Update: usual user can update the votes , comments and their own profiles. Staff users can also update products in case is needed.
+- Delete: A regular user can delete their comments if their are not happy with it. Staff users can delete products if needed and also unwanted comments acting like a mod.
+- All this make the app quite interactive and help keep the data up to date.
+
+## Reusable components
+For this project I created some reusable components to avoid cluttering the code too much. 
+|||
+|--|--|
+|![Spinner](/readmeImg/spinner.png)|The spinner (Asset.js) is been used for waiting times. Instead of seeing the pictures getting loaded one by one or rendered async, I used the spinner to make sure most of the data is loaded before displaying everything. I also used the spinner for the infinite scroll following the same logic.|
+|![profile pic](/readmeImg/profilepic.png)| The profile picture(ProfileImage.js) component has been the most used component it is displayed in every single page of the app. It displays a standard rounded profile pic visible always in the navbar and in the top left corner of products and comments. This helped to follow the same pattern throughout the entire app.|
+|![Edit menu](/readmeImg/)|The dropdown edit menu (EditMenu.js) also has been used for all the edit menus (except for the profile edit icon) we can find it in every comment and for staff users in every product. We can see the edit menus always displayed on the top right corner following always the same pattern.|
+|![Product component](/readmeImg/product.png)|The product (Product.js) component is the most used component for every card in both the products pages and the comparison pages. Is always the same component but is displayed differently depending on the active page. For example we can see it full displayed in the product page with all its properties at the hand of the user or just a sample of it in the products page or comparison create page.The product component contains multiple properties that define and make original every single component.|
+|![Not found component](/readmeImg/notf.png)|This component has been used to be reactive on a 404 response. It displays a picture that still is in theme with the hero image (Two people and a question mark) and a feedback underneath it explaining what is going on depending on the page.|
+|![Vote form](/readmeImg/vote.png)|The vote form it is displayed under every product in the product page only. It allows the user to leave a vote on the displayed product and it is dinamically connected to the average rating.|
+|![Comment component](/readmeImg/comment.png)|The comment component has multiple instances under each product in the product page. It is used everytime a comment is posted.|
+
+## Hooks
+During the development I found myself inserting the same code over and over for certain pages. The use of hooks helped me to reuse some of this logic to simplify the code and also the simplify the development of the project.
+- 1. useCategories.js : This hook fetches the categories I mostly used it in couple with the product, every single product could have different categories. It has been used for sorting the category utility also.
+- 2. useCloudinaryImageUrl.js : This hook helped to get the right URL for certain images where needed due to some issue retrieving the right URL to display the wanted image.
+- 3. useRedirect.js: This hooks was used to redirect the user based on its status (Logged in or logged out).
+- 4. UseUserProfile.js: This hook was used to retrieve the full user profile (not currentUser but connected to it), to fetch the full profile properties like the profile picture the username or if is a staff user. (Was also set to retrieve the favourites but this functionality was not implemented at the end due to the scope of the project.).
+- 5. useClickOutsideToggle.js: This hook was taken from the Moments walkthrough, it helps with the logic of the toggle navbar once is expanded.
+
+## Utils
+- FetchNext.js: this util has been used to get the data from the backend when needed. (Taken from the Moments walkthrough.)
+- tokenTimeStamp.js: This util as well was taken from the walkthrough it was used to handle the token for the user, for example at the moment of the logout.
+- ValidateImage.js: This util was used to handle image validation. Due to some issues from the backend where the Cloudinary default validation was not enough. I used this to check if the file was an image and the size of it(1Mb in this case.).
+
+
+## Testing
+
+### Automate testing
+- Navbar test: This test was taken from the walkthough moments. 
+The test consinst in rendering the NavBar component inside a router since the component constains navigation links.
+It checks the "Sign In presence inside the document. The test ensures that the component loads correctly and confirm the presence of the link when a user is not logged in. A second test is present to confirm that the sign in and sign up buttons, mimicking a logout and it ensure that the log out action updates the UI correctly.
+
+- useCategories test: This test mimick the usage of the useCategory hook on a component. Calling the useCategory we handle different states like the loading , the error, and the success. If loading is true it returns Loading... If loading is error it return an error message. If category is loaded it returns the name of the category. This test ensures that the categories are correctly fetched. I choose to test this hook for the vaste usage of it and the importance of displaying and retrieving categories and last but not least the loading state helps the user understand what is going on and what is happening at that moment.
+
+- useUserProfile test: As for the categories the user profile is one of the main parts of this project. It is connected to products, comments, votes and comparisons so a test for this was due.
+ I created a test  fetching a user and a profile object with its properties. Inside a test component I simulated the fetching of a profile by ID. Using the same pattern as for the categories we get 3 states, loading, error and success. When loading it returns loading.. , when error it displays the error and when success it returns the profile owner matching the ID. This test ensures that the useUserProfile fetches correctly the datas.
+
+Some help building this tests arrived from this guide: [Click here to see the page](https://www.gyata.ai/nodejs/jest-writing-test-suites-and-test-cases).
+
+### Manual testing
+- Home page:
+  |Test| Response|
+  |--|--|
+  |Test Sign in /Sign out|Tried to sign in and sign out multiple times, text is rendered correctly depending on the user state and the usern name. Navlinks are displayed correctly following the same pattern.|
+  |Sign up button|The button correctly redirects to the sign up page.|
+  |Explore products / Compare products|Correctly react on hover and correctly direct to the right page.|
+  |Username on welcome|Correctly render the username of the logged in user.|
+- NavBar:
+  |Test| Response|
+  |--|--|
+  |Links|Each of the links correctly display the active page and react to cursor hover. Toggle function correctly and is responsive. Each button redirect to the correct page. Add product icon correctly redirect to the Product create form. Logo correctly redirect to home page.|
+  |Sign In /Sign up forms|Correctly renders feedbacks on wrongly inserted credentials. Correctly create a user and login successfully. Bottom link correctly redirect to the right page.|
+- Products page:
+  |Test| Response|
+  |--|--|  
+  |Search/Sort/Filter|Each of the utilities works as expected fetching the right datas, the search bar waits until the user finished typing.|
+  |Product Component|Each of the products contains the right details (Owners name a profile picture, images and the rest.) Each link(Image and name) Correctly direct to the right pages.|
+- Product page:
+  |Test| Response|
+  |--|--|
+  |Product|As previously mentioned the product is displayed correctly and works as expected, Edit icon is shown only to staff users.|
+  |Edit icon|Correctly display the icon to staff users. When clicked shows a dropdown menu that works as expected and correctly direct to right pages.|
+  |Vote form|Correctly renders from 1 to 5 select oprions. Submit button is disable until submission is made. Once submitted the average rating correctly adjust to match the value/es. Once a vote is submitted from the same user the vote is update and not duplicated. A user cannot submit a null vote.|
+  |Comment section|Correctly display the form (Text area). Once submitting a post the button is disabled until submission is done. Once submitted the comment is displayed properly in descending order (from last submitted to first). Edit icon in the comment works as expected.A comment is deleted once the bin icon is clicked. Profile picture in each comment is displayed correctly with the right user. Each profile picture redirect to the correct profile page.|
+- Product create/edit page:
+  |Test| Response|
+  |--|--|
+  |Image input|Correctly select only image files, and feedback is displayed when image doesn't meet standards. When image is not valid the submit button is disabled to prevent submission. Each of the form correctly display warning feedback and prevents submission when data is invalid. Correctly creates a product when all the form is valid. Cancel button correctly redirect.Submit button correctly redirects.Price form correctly accept only numbers.|
+- Comparison create page:
+  |Test| Response|
+  |--|--|
+  |Selection|When 1 product is selected correctly render clicked/tapped button. When 2 products are selected correctly renders the compare button. Compare button correctly create comparison and redirect to comparison page. When 3 or more products are being selected alert is displayed correctly and disapper after certain time. A correct comparison can be submitted properly.|
+- Comparison page:
+  |Test| Response|
+  |--|--|
+  |Comparison|The page correctly display the two selected products.|
+- Profile Page:
+  |Test| Response|
+  |--|--|
+  |Profile|Correct display the right profiles and its details (Image, location and bio.) and edit icon if the user is the owner of the profile. Image is set to default if user didn't change profile picture. To note some of the profiles contains the favourites are the bottom of the page. This is only to showcase a future feature and favourites are displayed correctly.|
+- Profile Edit page:
+  |Test| Response|
+  |--|--|
+  |Form|Correctly display preexisting datas. Correctly updates details. All four buttons are displayed and works correctly (Change username/password, save and cancel.)|
+- Change password/Username:
+  |Test| Response|
+  |--|--|
+  |Forms|Both forms update credentials correctly and the user object reflects changes through the profile.|
+- 404 page:
+  |URL| When non existing url is inserted the 404 page correctly display the right component.| 
+- Responsiveness:
+  |||
+  |--|--|
+  |All pages|The app correctly responds on Dev Tools mimicking different devices and widths using preselected devices and the tools provided.|
+  |![Dev Tools devices](/readmeImg/responsive.png)|In here is displayed all the devices that the app has been tested on using dev tools.|
+- LightHouse:
+  |||
+  |--|--|
+  |![Light house 1](/readmeImg/lighhouse.png)![Light house 2](/readmeImg/ligh1.png)|Using lighthouse from Dev Tools The average rating is quite good. Some improvement could be made over third party cookies and the images server by Cloudinary. Also a part that needs improvement is the loading time and the amount of requests to the backend. In general the app is quite quick loading but it can be improved a lot. An issue that was solved was the missing connection between labels and forms in the form pages, the issue was addressed and solved using the right mesure.|
+- EsLint:
+  Every file was passed through EsLint and some warnings were found but not critical error or breaking points.
+  Some of this warning were about unused vars, missing or non needed semicolons, spacing and length of few lines of code. Also some indentation was modified due to the use of 2 spaces instead of 4.
+- W3C JigSaw validator CSS:
+  Every CSS file has been passed through this validator. An issue was found due to this validator not recognizing the :global in some of the forms.
+  For this I followd this guide on how override global rules. [Follow the link to see the page.](https://inprod.dev/blog/2020-04-07-global-css-modules/) , [CSS modules DOC](https://github.com/css-modules/css-modules).
+  ![CSS validation result](/readmeImg/css.png)  
+
+No major issues found from manual testing, but more visual feedback would be an improvement for user experience.
+
+## Bugs and Fixes
+
+
+## Libraries, Frameworks and Languages.
+  - [React](https://react.dev/) - Was the foundation of the frontend use to build Components in a modular fashion being dynamic and interactive.
+ 
+  - [React-Router](https://reactrouter.com/home) Used for dynamic routing so users can navigate between the present pages inside the application and provide usefull tools like the useParams hook.
+  - [React Bootstrap ](https://react-bootstrap.github.io/)for styling and organizing the UI. Reduces the need of writing CSS and ensures in this case that the app and its layout is mobile friendly and responsive.
+  - [React Infinite scroll](https://www.npmjs.com/package/react-infinite-scroll-component) for handling infinite scrolling. Reduces initial loading time by getting only what is needed at the moment.
+  - [FontAwesome](https://docs.fontawesome.com/) for the icons used in this project.
+  - [Axios](https://axios-http.com/docs/intro) for making HTTP requests to the backend. Allowing GET,POST,PUT and delete requests to interact and connect to the backend side.
+  - [React testing library](https://testing-library.com/docs/react-testing-library/intro/) for testing the project component and requests.
+  - [Google Fonts](https://fonts.google.com/) for the fonts used in this project.
+  - [JWT Decode](https://www.npmjs.com/package/jwt-decode) used to decode the JWTokens.
+ Languages:
+  - Javascript
+  - JSX 
+  - CSS
+  - CSS modules
+  - Python for the backend(Backend built with DRF).
+
+  Initially the project was developed using GitPod and finished using VSCode.
+
+## Deployment
+- Fork:
+  - Steps to Fork a Repository on GitHub:  
+    Go to GitHub  
+    Open GitHub and log in to your account.  
+    Find the Repository  
+    Navigate to the repository you want to fork.  
+    Click the "Fork" dropdown on the top right corner of the repository page click the " Create a new Fork" button.   
+    Once redirect to the Create a new Fork page click on "Create Fork".  
+
+- Clone:
+  - Steps to Clone a repository on GitHub:  
+    Go to GitHub  
+    Open GitHub and log in to your account.  
+    Find the Repository  
+    Navigate to the repository you want to clone.  
+    Above the list of files click on "Code" dropdown.  
+    Copy the URL of the repository using HTTPS.  
+    Open Bash and change the working directory to the location wanted to be the cloned directory.  
+    Type git clone and paste the URL copied before.  
+    Press enter to create your local clone.  
+
+To learn more about cloning [Click here.](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)  
+
+- Deployment:
+  - Steps to Deploy your repository on Heroku:  
+    Log in to Heroku.  
+    Select create new app in top right corner of the page.  
+    Enter a name for your app(preference for a name similar to your backend app if you have one).  
+    Select the region(Europe in my case).  
+    Click on create app.  
+    Select the deploy menu.  
+    Select GitHub from the menu.  
+    Once in the menu you need to select the repository that you want to deploy in the search bar and confirm it.  
+    Once selected make sure you select main branch.  
+    Under it you can find the manul deploy and submit the deployment.  
+    Well done!  
+    To note you can use the automatic deploy if you like to enable auto deployment everytime you push your code to GitHub.  
+    If you are using a backend app on Heroku  
+    Remember to add to the config vars the URL provided for this app for authentication.
+    Remember to hide your confidentials inside an env.py file and add it to the gitignore file before pushing and deploy your backend.
+
+
+
+
+
+## Credits
