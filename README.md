@@ -329,6 +329,8 @@ No major issues found from manual testing, but more visual feedback would be an 
   - A bug is about the mobile version of the app. When I try to log or do any action in the mobile version (Using a real mobile device) the app is always signing me out. This issue was passed after confronting the tutoring team and the assesting team. I can say that the app works as expected in every other device like tablets and desktops , also I tried to use IOS devices and Android. No other issues were encountered. The issue arises from the cross domain requests, probably due to the fact that this project works with 2 different domains.(Separate backend and frontend.)
   - Even though I'm retrieving the images from Cloudinary I still have the request made in HTTP instead of HTTPS and this throws warnings for the image.
   - Third party cookie, This warning are shown mainly in the products page and comparsion create page. They are shown due to Cloudinary and the use of currentUser.
+ - Problem in the Profile Edit form. 
+   - When I try to submit the form without changing the image. The form send the image as undefined. Unfortunately I don't have enough time to solve this issue and I would solve it checking the url of the picture that is already displayed. Or another solution could be handling the image separately from the form.
  
 ## Libraries, Frameworks and Languages.
   - [React](https://react.dev/) - Was the foundation of the frontend use to build Components in a modular fashion being dynamic and interactive.
