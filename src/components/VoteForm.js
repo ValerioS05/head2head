@@ -26,7 +26,7 @@ const VoteForm = ({
     event.preventDefault();
     setIsSubmitting(true);
     setErrors({});
-    setVoteSubmitted(false);  // Reset the confirmation message on new submit
+    setVoteSubmitted(false); // Reset the confirmation message on new submit
 
     // Check if a rating was selected
     if (!vote) {
@@ -71,7 +71,7 @@ const VoteForm = ({
   return (
     <Form onSubmit={handleSubmit} className={styles.voteForm}>
       <div className={styles.labelContainer}>
-        <Form.Label>Rate this product</Form.Label>
+        <Form.Label htmlFor="vote">Rate this product</Form.Label>
       </div>
 
       {Object.entries(errors).map(([field, messages]) =>
@@ -83,9 +83,7 @@ const VoteForm = ({
       )}
 
       {voteSubmitted && (
-        <Alert variant="success">
-          Your vote has been submitted!
-        </Alert>
+        <Alert variant="success">Your vote has been submitted!</Alert>
       )}
 
       <Form.Group className={styles.formGroup}>
@@ -95,6 +93,7 @@ const VoteForm = ({
           onChange={handleChange}
           disabled={isSubmitting}
           className={styles.Vote}
+          id="vote"
         >
           <option value="">Select rating</option>
           {[1, 2, 3, 4, 5].map((num) => (

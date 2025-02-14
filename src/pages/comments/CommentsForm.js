@@ -52,6 +52,7 @@ const CommentsForm = ({ product, setProduct, setComments }) => {
     <Form className={`${styles.Form} mt-2`} onSubmit={handleSubmit}>
       <Form.Group>
         <InputGroup>
+          <Form.Label htmlFor="content"></Form.Label>
           <Form.Control
             className={styles.FormControl}
             placeholder="Write a comment..."
@@ -59,6 +60,7 @@ const CommentsForm = ({ product, setProduct, setComments }) => {
             value={content}
             onChange={handleChange}
             rows={4}
+            id="content"
           />
         </InputGroup>
       </Form.Group>
