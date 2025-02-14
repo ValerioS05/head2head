@@ -192,7 +192,7 @@ const ProfileEditForm = () => {
                   Change Username
                 </Button>
               </Link>
-              <Link to={`/profile/${id}/edit/password/`}>
+              <Link to={`/profiles/${id}/edit/password/`}>
                 <Button className={`${btnStyles.Button} ${styles.Btn}`}>
                   Change Password
                 </Button>
