@@ -23,9 +23,11 @@
     - [Automate testing](#automate-testing)
     - [Manual testing](#manual-testing)
   - [Bugs and Fixes](#bugs-and-fixes)
+    - [Non fixed / known bugs:](#non-fixed--known-bugs)
   - [Libraries, Frameworks and Languages.](#libraries-frameworks-and-languages)
   - [Deployment](#deployment)
   - [Credits](#credits)
+- [**Special thanks**.](#special-thanks)
  
 ## Project Goal
 - This project has been designed to help Users Compare a range of products and share their ideas on the web app.
@@ -198,7 +200,7 @@ For this project I created some reusable components to avoid cluttering the code
 |--|--|
 |![Spinner](/readmeImg/spinner.png)|The spinner (Asset.js) is been used for waiting times. Instead of seeing the pictures getting loaded one by one or rendered async, I used the spinner to make sure most of the data is loaded before displaying everything. I also used the spinner for the infinite scroll following the same logic.|
 |![profile pic](/readmeImg/profilepic.png)| The profile picture(ProfileImage.js) component has been the most used component it is displayed in every single page of the app. It displays a standard rounded profile pic visible always in the navbar and in the top left corner of products and comments. This helped to follow the same pattern throughout the entire app.|
-|![Edit menu](/readmeImg/)|The dropdown edit menu (EditMenu.js) also has been used for all the edit menus (except for the profile edit icon) we can find it in every comment and for staff users in every product. We can see the edit menus always displayed on the top right corner following always the same pattern.|
+|![Edit menu](/readmeImg/editmenu.png)|The dropdown edit menu (EditMenu.js) also has been used for all the edit menus (except for the profile edit icon) we can find it in every comment and for staff users in every product. We can see the edit menus always displayed on the top right corner following always the same pattern.|
 |![Product component](/readmeImg/product.png)|The product (Product.js) component is the most used component for every card in both the products pages and the comparison pages. Is always the same component but is displayed differently depending on the active page. For example we can see it full displayed in the product page with all its properties at the hand of the user or just a sample of it in the products page or comparison create page.The product component contains multiple properties that define and make original every single component.|
 |![Not found component](/readmeImg/notf.png)|This component has been used to be reactive on a 404 response. It displays a picture that still is in theme with the hero image (Two people and a question mark) and a feedback underneath it explaining what is going on depending on the page.|
 |![Vote form](/readmeImg/vote.png)|The vote form it is displayed under every product in the product page only. It allows the user to leave a vote on the displayed product and it is dinamically connected to the average rating.|
@@ -303,8 +305,31 @@ Some help building this tests arrived from this guide: [Click here to see the pa
 No major issues found from manual testing, but more visual feedback would be an improvement for user experience.
 
 ## Bugs and Fixes
-
-
+  1. Retrieving images URL from backend. 
+     - When I was retrieving images for the products I was having problem retrieving the right URL, I solved this problem creating the useCloudirnaryImageUrl.js hook that helped fetching the right url modifing and replacing the actual path.
+  2. Multiple submissions
+     - A problem encountered was that the user was able to submit multiple objects clicking multiple times the submit button , for example I was able to submit as many comparisons as I could during the submitting time. What I did is disabling the submit button until the submission was completed.
+  3. Retrieving the profile details.
+    - During the development of this project I was not able to fetch properly the Profile details of a user and it was creating a time waste for me slowing down the developement process. What I did was creating another hook to fetch the user profile in full, and it solved the issue permitting me to continue the creation of this app.
+  4. Every comment under every product.
+    - An issue that was easy to spot at first impact was that once the comments were created every product would display the comments made for another product. I understood that the problem was how I was fetching the comments from the backend and I followed the axios request just written. See below how the issue was solved.
+    - ![Fixed issue with comments retrieving](/readmeImg/fix.png)
+  5. Big images breaking the server.
+    -  A issue that I got was the images upload/update. When I tried to insert a test image (5Mb and 10Mb size) the server would just not respond for few seconds and the problem was that Cloudinary was not accepting the two images and in return the server would just stop. I fixed this problem giving a maximum size for the images and now it is smooth (The limit now is 1Mb also to dont overwhelm the site when loading.)
+  6. Infinite loop.
+    - During the development of the product page component I was setting wrong the dependency array in the useEffct() this was cousing an infinite loop that blocked the server. What was appening was that the useEffect was triggering api calls at every re-render like when loading or any of the value set in the array would change. I fixed the issue passing only the needed value in this case the "id" and everything was working as expected.
+  7. Average rating updating only after refresh.
+    - When a user would leave a vote on a product the average rating was set correctly but not displayed until the page was rendered again. To fix this issue a made sure that the app would listen to the form submission and when a submission happens the average rating is fetched with the updated value. This also helped to give a visual response to the user once the vote is submitted.
+  8. Undefined values.
+    - In some part of the app like in the products page where the loading time takes a bit longer , the api response was not avalilable straight away and the component was rendered before the datas were fully loaded. To solve this issue I used optional chaining and a loading state.
+      Even though the response is still a bit slow a gave time to the app to load correctly the items and display them correctly with defined values.
+  9. Many other issues that were found during the developement of this app were about typos in the requests to the api and wrong syntaxes. All these issues were addressed properly.
+### Non fixed / known bugs:
+  - I still have some 401 responses when the page loads for the first time due to the currentUser context.
+  - A bug is about the mobile version of the app. When I try to log or do any action in the mobile version (Using a real mobile device) the app is always signing me out. This issue was passed after confronting the tutoring team and the assesting team. I can say that the app works as expected in every other device like tablets and desktops , also I tried to use IOS devices and Android. No other issues were encountered. The issue arises from the cross domain requests, probably due to the fact that this project works with 2 different domains.(Separate backend and frontend.)
+  - Even though I'm retrieving the images from Cloudinary I still have the request made in HTTP instead of HTTPS and this throws warnings for the image.
+  - Third party cookie, This warning are shown mainly in the products page and comparsion create page. They are shown due to Cloudinary and the use of currentUser.
+ 
 ## Libraries, Frameworks and Languages.
   - [React](https://react.dev/) - Was the foundation of the frontend use to build Components in a modular fashion being dynamic and interactive.
  
@@ -315,7 +340,8 @@ No major issues found from manual testing, but more visual feedback would be an 
   - [Axios](https://axios-http.com/docs/intro) for making HTTP requests to the backend. Allowing GET,POST,PUT and delete requests to interact and connect to the backend side.
   - [React testing library](https://testing-library.com/docs/react-testing-library/intro/) for testing the project component and requests.
   - [Google Fonts](https://fonts.google.com/) for the fonts used in this project.
-  - [JWT Decode](https://www.npmjs.com/package/jwt-decode) used to decode the JWTokens.
+  - [JWT Decode](https://www.npmjs.com/package/jwt-decode) used to decode the JWTokens.  
+ 
  Languages:
   - Javascript
   - JSX 
@@ -367,8 +393,26 @@ To learn more about cloning [Click here.](https://docs.github.com/en/repositorie
     Remember to add to the config vars the URL provided for this app for authentication.
     Remember to hide your confidentials inside an env.py file and add it to the gitignore file before pushing and deploy your backend.
 
+- A note to add is that when you use this repository you need to change the settings for your axios defaults reflecting your own API.
 
 
 
 
 ## Credits
+- Images were taken from the [Unspalsh](https://unsplash.com/)
+- Logo was made with [Canva](https://unsplash.com/)
+- Wireframes were made with [Wireframe.cc](https://wireframe.cc/)
+- Flowchart was made with [Lucid.app](https://lucid.app/)
+- Devices mock was made from [ui.dev](https://ui.dev/amiresponsive)
+- Some of the code for this app was taken from the Moments walkthrough for example the clickOutSideToggle, part of the navBar and all the logic behing the currentUserContext, sign forms , spinner asset...
+- Font from [Google fonts](https://fonts.google.com/)
+- Icons from [FontAwesome](https://fontawesome.com/)
+- Help with dummy data was gotten from a friend (Dont have a way to credit her.)
+- GitPod was used initially as development enviroment.
+- VSCode was used to finish developing as enviroment.
+- Heroku for hosting backend and frontend
+- Cloudinary for storing the images.
+
+# **Special thanks**.
+I also would like to thanks the code institute support team that helped me in a very hard moment of my life, after the sudden passing away of one of my family members I didn't have time and mental power to continue developing for that certain period. The support received helped to atleast reach the end of this project and that wouldn't have been possible without their help and support. 
+Thank you so much and wish all the best.
