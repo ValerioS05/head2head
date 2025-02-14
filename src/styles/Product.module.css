@@ -127,12 +127,13 @@
 @media (min-width: 1248px) {
   .card {
     height: auto;
+    min-height: 360px;
   }
   .cardContent {
     display: flex;
     flex-direction: row;
     justify-content:space-between;
-    align-items:first baseline;
+    align-items:flex-start;
     width: auto;
     margin-bottom: 1rem;
   }

@@ -29,3 +29,13 @@
 .ProductRow > div{
   width: 100%;
 }
+
+
+@media (min-width: 1248px) {
+  .ProductRow [class*="cardImg"] {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit:cover;
+  }
+}
+
