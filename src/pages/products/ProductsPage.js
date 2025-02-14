@@ -86,7 +86,9 @@ function ProductsPage({ message, filter = "" }) {
             className={styles.SearchBar}
             onSubmit={(event) => event.preventDefault()}
           >
+            <Form.Label htmlFor="searchInput">Search</Form.Label>
             <Form.Control
+              id="searchInput"
               type="text"
               placeholder="Search"
               value={query}
@@ -97,7 +99,9 @@ function ProductsPage({ message, filter = "" }) {
 
         <Col xs={12} sm={12} md={4} lg={4}>
           <Form className={styles.SearchBar}>
+            <Form.Label htmlFor="categorySelect">Category</Form.Label>
             <Form.Control
+              id="categorySelect"
               as="select"
               value={selectedCategory}
               onChange={handleCategoryChange}
@@ -121,7 +125,9 @@ function ProductsPage({ message, filter = "" }) {
 
         <Col xs={12} sm={12} md={4} lg={4}>
           <Form className={styles.SearchBar}>
+            <Form.Label htmlFor="sortSelect">Sort by</Form.Label>
             <Form.Control
+              id="sortSelect"
               as="select"
               value={sortOption}
               onChange={handleSortChange}

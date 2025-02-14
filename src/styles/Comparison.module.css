@@ -16,10 +16,17 @@ h2 {
 
 .SearchBar {
   width: 100%;
+  text-align: center;
 }
+
+.SearchBar label {
+  display: none;
+}
+
 .SearchBar input::placeholder {
   color: white;
 }
+
 .SearchBar input::placeholder:focus {
   color: black;
 }
@@ -27,6 +34,7 @@ h2 {
 .ProductRow > div {
   width: 100%;
 }
+
 .stickyCompareButtonContainer {
   position: sticky;
   bottom: 20px;
@@ -53,22 +61,21 @@ h2 {
 }
 
 .stickyAlert {
-    position: fixed;
-    bottom: 80px;
-    left: 25%;
-    z-index: 10; 
-    border-radius: 50px;
-    border: 1px solid orangered;
-    text-align: center;
-    width: 50%;
-    color: black;
+  position: fixed;
+  bottom: 80px;
+  left: 25%;
+  z-index: 10;
+  border-radius: 50px;
+  border: 1px solid orangered;
+  text-align: center;
+  width: 50%;
+  color: black;
+}
 
+@media (min-width: 1248px) {
+  .ProductRow [class*="cardImg"] {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
   }
-
-  @media (min-width: 1248px) {
-    .ProductRow [class*="cardImg"] {
-      max-width: 100px;
-      max-height: 100px;
-      object-fit:cover;
-    }
-  }
+}

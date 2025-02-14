@@ -79,8 +79,8 @@ function ComparisonCreateForm() {
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
   };
-// Function to make sure the user is only able to select 2 items
-// Displays feedbacks once the user try for more.
+  // Function to make sure the user is only able to select 2 items
+  // Displays feedbacks once the user try for more.
   const handleSelectProduct = (product) => {
     const isSelected = selectedProducts.includes(product.id);
 
@@ -128,8 +128,8 @@ function ComparisonCreateForm() {
       return () => clearTimeout(timer);
     }
   }, [errors]);
-// Renders the full component/form 
-// Button is disabled on submission to prevent extra submissions.
+  // Renders the full component/form
+  // Button is disabled on submission to prevent extra submissions.
   return (
     <Container className={styles.comparisonFormContainer}>
       <h2>Create a Comparison</h2>
@@ -151,53 +151,65 @@ function ComparisonCreateForm() {
             className={styles.SearchBar}
             onSubmit={(event) => event.preventDefault()}
           >
-            <Form.Control
-              type="text"
-              placeholder="Search"
-              value={query}
-              onChange={handleSearchChange}
-            />
+            <Form.Group>
+              <Form.Label htmlFor="searchInput">Search</Form.Label>
+              <Form.Control
+                id="searchInput"
+                type="text"
+                placeholder="Search"
+                value={query}
+                onChange={handleSearchChange}
+              />
+            </Form.Group>
           </Form>
         </Col>
 
         <Col xs={12} sm={12} md={4} lg={4}>
           <Form className={styles.SearchBar}>
-            <Form.Control
-              as="select"
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-              aria-label="Category filter"
-            >
-              <option value="">All Categories</option>
-              {categoriesLoading ? (
-                <option>Loading categories...</option>
-              ) : categoriesError ? (
-                <option>Error loading categories</option>
-              ) : (
-                categories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))
-              )}
-            </Form.Control>
+            <Form.Group>
+              <Form.Label htmlFor="categorySelect">Category</Form.Label>
+              <Form.Control
+                as="select"
+                id="categorySelect"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                aria-label="Category filter"
+              >
+                <option value="">All Categories</option>
+                {categoriesLoading ? (
+                  <option>Loading categories...</option>
+                ) : categoriesError ? (
+                  <option>Error loading categories</option>
+                ) : (
+                  categories.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))
+                )}
+              </Form.Control>
+            </Form.Group>
           </Form>
         </Col>
 
         <Col xs={12} sm={12} md={4} lg={4}>
           <Form className={styles.SearchBar}>
-            <Form.Control
-              as="select"
-              value={sortOption}
-              onChange={handleSortChange}
-              aria-label="Sort by"
-            >
-              <option value="">Sort by</option>
-              <option value="price">Price (low to high)</option>
-              <option value="-price">Price (high to low)</option>
-              <option value="created_at">Date (oldest first)</option>
-              <option value="-created_at">Date (newest first)</option>
-            </Form.Control>
+            <Form.Group>
+              <Form.Label htmlFor="sortSelect">Sort by</Form.Label>
+              <Form.Control
+                as="select"
+                id="sortSelect"
+                value={sortOption}
+                onChange={handleSortChange}
+                aria-label="Sort by"
+              >
+                <option value="">Sort by</option>
+                <option value="price">Price (low to high)</option>
+                <option value="-price">Price (high to low)</option>
+                <option value="created_at">Date (oldest first)</option>
+                <option value="-created_at">Date (newest first)</option>
+              </Form.Control>
+            </Form.Group>
           </Form>
         </Col>
       </Row>
@@ -223,7 +235,7 @@ function ComparisonCreateForm() {
                       lg={4}
                       className="mb-3"
                     >
-                        {/* undefined doesnt show the props for better layout */}
+                      {/* undefined doesnt show the props for better layout */}
                       <Product
                         {...product}
                         description={undefined}
@@ -252,7 +264,7 @@ function ComparisonCreateForm() {
           <Asset spinner />
         </Container>
       )}
-    {/* shows the compare button only when 2 products are selected */}
+      {/* shows the compare button only when 2 products are selected */}
       {selectedProducts.length === 2 && (
         <div className={styles.stickyCompareButtonContainer}>
           <Button
