@@ -5,6 +5,7 @@ import Alert from "react-bootstrap/Alert";
 
 import { axiosReq } from "../api/axiosDefaults";
 import styles from "../styles/VoteForm.module.css";
+
 // Allows user to leave a vote/rating on a product
 const VoteForm = ({
   productId,
@@ -15,6 +16,7 @@ const VoteForm = ({
   const [vote, setVote] = useState(existingVote || "");
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [voteSubmitted, setVoteSubmitted] = useState(false);
 
   const handleChange = (event) => {
     setVote(event.target.value);
@@ -24,11 +26,14 @@ const VoteForm = ({
     event.preventDefault();
     setIsSubmitting(true);
     setErrors({});
+    setVoteSubmitted(false);  // Reset the confirmation message on new submit
 
     // Check if a rating was selected
     if (!vote) {
       setErrors({ general: ["Please select a rating."] });
       setIsSubmitting(false);
+      // Set a timeout to clear the error message after 3 seconds
+      setTimeout(() => setErrors({}), 3000);
       return;
     }
 
@@ -40,6 +45,14 @@ const VoteForm = ({
 
       // fetch updated product
       await fetchUpdatedProduct();
+
+      // Set confirmation message
+      setVoteSubmitted(true);
+
+      // Reset the confirmation message after 3 seconds
+      setTimeout(() => {
+        setVoteSubmitted(false);
+      }, 3000); // Alert disappears after 3 seconds
     } catch (err) {
       if (err.response?.data) {
         setErrors(err.response.data);
@@ -48,11 +61,13 @@ const VoteForm = ({
           general: ["There was an error while submitting your vote."],
         });
       }
+      // Set a timeout to clear the error message after 3 seconds
+      setTimeout(() => setErrors({}), 3000);
     } finally {
       setIsSubmitting(false);
     }
   };
-//Renders the form and displays the start or star depending on the value
+
   return (
     <Form onSubmit={handleSubmit} className={styles.voteForm}>
       <div className={styles.labelContainer}>
@@ -65,6 +80,12 @@ const VoteForm = ({
             {message}
           </Alert>
         ))
+      )}
+
+      {voteSubmitted && (
+        <Alert variant="success">
+          Your vote has been submitted!
+        </Alert>
       )}
 
       <Form.Group className={styles.formGroup}>
